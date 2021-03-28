@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "选择盘点仓库",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-toast": "/uview-ui/components/u-toast/u-toast"
+  }
+}

@@ -1,0 +1,694 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path" : "pages/login/login",
+			"style" :                                                                                    
+			{
+				"navigationBarTitleText": "",
+				"navigationStyle":"custom"
+			}
+			
+		},
+        {
+            "path" : "pages/home/home",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "首页",
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人中心",
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/queryManagement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "查询管理",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FE8702",
+				"navigationBarTextStyle":"white",
+				"onReachBottomDistance":50
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/userInfo/userInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的店铺",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FE8702",
+				"navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/connectUs/connectUs",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "联系我们",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FE8702",
+				"navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/KCdetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "库存成本详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/HISdetail",
+            "style" :                                                                                    
+            {
+				"navigationBarTitleText": "在库商品数详情",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FE8702",
+				"navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/BYdetail",
+            "style" :                                                                                    
+            {
+				"navigationBarTitleText": "超期限定",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#FE8702",
+				"navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/storeList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "店铺列表",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/goodDetail/goodDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/brandList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesBilling/salesBilling",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "销售开单",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesBilling/customerList/customerList",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "客户",
+               "enablePullDownRefresh": false,
+               "navigationBarBackgroundColor":"#FE8702",
+               "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesBilling/customerList/addCustomer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加客户",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesBilling/goodsList/goodsList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择商品",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/goodsInStorage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品入库",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/brandList/brandList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择品牌",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/typeList/typeList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择类别",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/finenessList/finenessList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品成色",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/goodsSource/goodsSource",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择来源",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/Warehouse/Warehouse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "仓库",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/goodsInStorage/Employees/Employees",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "员工",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesReport/salesReport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "销售报表",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+				"onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesReport/saleAmount/saleAmount",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "销售数据详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesReport/profitAmount/profitAmount",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "利润数据详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/salesReport/orderDetail/orderDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "销售单详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/consSaleClosings/consSaleClosings",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "寄卖结款",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/consSaleClosings/bulkClosings/bulkClosings",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "批量结款",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+				"onReachBottomDistance":50
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/consSaleClosings/bulkClosings/bulkDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "批量结款",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/consSaleClosings/bulkClosings/Payment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "结款",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/history/history",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "历史记录",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+				"onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/goodDetail/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品预定",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/bookingManagement/bookingManagement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预定管理",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/inventoryCounting/inventoryCounting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "库存盘点",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+				"onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/inventoryCounting/Inventory/Inventory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "库存盘点",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+                "onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/inventoryCounting/addInventory/addInventory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择盘点仓库",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/inventoryCounting/addWarehouse/addWarehouse",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "仓库添加",
+               "enablePullDownRefresh": false,
+               "navigationBarBackgroundColor":"#FE8702",
+               "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/ShippingManagement/ShippingManagement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发货管理",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+				"onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/ShippingManagement/management/management",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发货商品管理",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+				"onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/CustomerManagement/CustomerManagement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "客户管理",
+                "enablePullDownRefresh": true,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+                "onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/RoleManagement/RoleManagement",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "角色管理",
+               "enablePullDownRefresh": false,
+               "navigationBarBackgroundColor":"#FE8702",
+               "navigationBarTextStyle":"white",
+               "onReachBottomDistance": 50
+            }
+        }
+		,{
+            "path" : "pages/mine/RoleManagement/addRole/addRole",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "创建新角色",
+               "enablePullDownRefresh": false,
+               "navigationBarBackgroundColor":"#FE8702",
+               "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/EmployeeManagement/EmployeeManagement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "员工管理",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white",
+                "onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/EmployeeManagement/addEmployee/addEmployee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "员工添加",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/WarehouseManagement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "仓库管理",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/addWarehouse/addWarehouse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "仓库添加",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/Recording/Recording",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "移库记录",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/MoveTheLibrary/MoveTheLibrary",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "移库",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/MoveTheLibrary/nextStep",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "移库商品确认",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/MoveTheLibrary/Confirm",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "移库商品确认",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/Recording/wareHouse/wareHouse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择仓库",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/WarehouseManagement/Recording/Employees/Employees",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择操作人",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        },
+		{
+		    "path" : "pages/home/bookingManagement/Employees/Employees",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择销售员",
+		        "enablePullDownRefresh": false,
+		        "navigationBarBackgroundColor":"#FE8702",
+		        "navigationBarTextStyle":"white"
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/mine/editPwd/editPwd",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改密码",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/helpCenter/helpCenter",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "帮助中心",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/helpCenter/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/imgDetail/imgDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/queryManagement/storeList/storeList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "店铺选择",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+        ,{
+            "path" : "pages/login/register",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "登记入驻",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor":"#FE8702",
+                "navigationBarTextStyle":"white"
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	    "color": "#909399",
+	    "selectedColor": "#FE8702",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [{
+	        "pagePath": "pages/home/home",
+			"iconPath": "static/uiImg/homeicon.png",
+			"selectedIconPath": "static/uiImg/homeiconsel.png",
+	        "text": "首页"
+	    }, {
+	        "pagePath": "pages/mine/mine",
+			"iconPath": "static/uiImg/mineicon.png",
+			"selectedIconPath": "static/uiImg/mineiconsel.png",
+	        "text": "我的"
+	    }]
+	}
+}

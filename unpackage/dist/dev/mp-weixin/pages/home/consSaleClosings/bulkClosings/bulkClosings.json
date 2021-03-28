@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "批量结款",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "u-sticky": "/uview-ui/components/u-sticky/u-sticky",
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "good-list": "/components/good-list/good-list",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "u-mask": "/uview-ui/components/u-mask/u-mask",
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

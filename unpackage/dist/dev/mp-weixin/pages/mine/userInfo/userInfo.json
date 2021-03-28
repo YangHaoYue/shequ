@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "我的店铺",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
+    "u-switch": "/uview-ui/components/u-switch/u-switch",
+    "u-toast": "/uview-ui/components/u-toast/u-toast",
+    "u-select": "/uview-ui/components/u-select/u-select",
+    "u-picker": "/uview-ui/components/u-picker/u-picker"
+  }
+}

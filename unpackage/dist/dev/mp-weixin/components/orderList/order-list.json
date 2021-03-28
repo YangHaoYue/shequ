@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "u-image": "/uview-ui/components/u-image/u-image"
+  },
+  "component": true
+}

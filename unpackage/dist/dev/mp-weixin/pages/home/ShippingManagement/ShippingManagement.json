@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "发货管理",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "inventory-list": "/components/inventory-list/inventory-list",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "u-mask": "/uview-ui/components/u-mask/u-mask"
+  }
+}
