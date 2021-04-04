@@ -2028,13 +2028,15 @@ var tui = {
           // sizeArrayText:""
         },
         success: function success(res) {
+          console.log(res);
           if (res.data.code == 2000) {
             tui.toast(res.data.msg);
           }
           var d = JSON.parse(res.data.replace(/\ufeff/g, "") || "{}");
+          console.log(d);
           if (d.code % 100 == 0) {
             //返回图片地址
-            var fileObj = d.data;
+            var fileObj = d;
             resolve(fileObj);
           } else {
             tui.toast(res.msg);
@@ -10737,7 +10739,7 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
-/***/ 654:
+/***/ 656:
 /*!*********************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/province.js ***!
   \*********************************************************************************************/
@@ -10749,7 +10751,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 655:
+/***/ 657:
 /*!*****************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/city.js ***!
   \*****************************************************************************************/
@@ -10761,7 +10763,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 656:
+/***/ 658:
 /*!*****************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/area.js ***!
   \*****************************************************************************************/
@@ -10773,7 +10775,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 767:
+/***/ 769:
 /*!****************************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/async-validator.js ***!
   \****************************************************************************************************/
@@ -12136,11 +12138,11 @@ Schema.warning = warning;
 Schema.messages = messages;var _default =
 
 Schema;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 768)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 770)))
 
 /***/ }),
 
-/***/ 768:
+/***/ 770:
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -12171,7 +12173,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 769);
+        if (!path) path = __webpack_require__(/*! path */ 771);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -12185,7 +12187,7 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 769:
+/***/ 771:
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
@@ -12495,7 +12497,7 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 768)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 770)))
 
 /***/ })
 

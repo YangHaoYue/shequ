@@ -94,16 +94,16 @@ var components
 try {
   components = {
     inventoryList: function() {
-      return __webpack_require__.e(/*! import() | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then(__webpack_require__.bind(null, /*! @/components/inventory-list/inventory-list.vue */ 720))
+      return __webpack_require__.e(/*! import() | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then(__webpack_require__.bind(null, /*! @/components/inventory-list/inventory-list.vue */ 729))
     },
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 471))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 614))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 616))
     },
     uMask: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 621))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 623))
     }
   }
 } catch (e) {
@@ -160,7 +160,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var inventoryList = function inventoryList() {__webpack_require__.e(/*! require.ensure | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then((function () {return resolve(__webpack_require__(/*! @/components/inventory-list/inventory-list.vue */ 720));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var inventoryList = function inventoryList() {__webpack_require__.e(/*! require.ensure | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then((function () {return resolve(__webpack_require__(/*! @/components/inventory-list/inventory-list.vue */ 729));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 

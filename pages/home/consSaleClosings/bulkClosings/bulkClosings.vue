@@ -24,6 +24,8 @@
 		<!-- 底部tab -->
 		<view class="cu-tabbar-height"></view>
 		<u-button class="saveBtn u-type-warning-bg" type="warning" :disabled="isBtn" @click="nextTip">下一步</u-button>
+		
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -34,7 +36,7 @@
 			goodList
 		},
 		onLoad(e) {
-			/* this.customer_id=e.customer_id; */
+			this.customer_id=e.customer_id;
 			this.getInfo();
 		},
 		computed: {
@@ -52,7 +54,7 @@
 		},
 		data() {
 			return {
-				customer_id:665,
+				customer_id:'',
 				customer_name:'',
 				info:'',
 				/* 列表 */
@@ -88,6 +90,11 @@
 						}
 						if(this.page >= this.last_page) this.status = 'nomore';
 						else this.status = 'loadmore';
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error"
+						})
 					}
 				})
 			},

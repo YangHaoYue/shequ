@@ -101,6 +101,12 @@ try {
     uToast: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 485))
     },
+    uModal: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-modal/u-modal */ "uview-ui/components/u-modal/u-modal").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-modal/u-modal.vue */ 682))
+    },
+    uInput: function() {
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 463))
+    },
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 471))
     }
@@ -128,6 +134,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   var g0 = _vm.http.resourceUrl()
   var g1 = _vm.img_delivery ? _vm.http.resourceUrl() : null
+
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      _vm.show = true
+    }
+  }
+
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -229,6 +242,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   onLoad: function onLoad(e) {
@@ -271,8 +292,11 @@ var _default =
       { name: '销售途径', value: '' },
       { name: '配送方式', value: '' },
       { name: '销售时间', value: '' },
-      { name: '备注', value: '' }] };
+      { name: '备注', value: '' }],
 
+      /* 成本价格 */
+      show: false,
+      costPrice: '' };
 
   },
   methods: {
@@ -334,22 +358,42 @@ var _default =
     toSetting: function toSetting() {
       uni.navigateTo({ url: "/pages/home/salesBilling/salesBilling?order_id=".concat(this.order_id) });
     },
+    /* 编辑订单成本价 */
+    editOrderCostPrice: function editOrderCostPrice() {var _this3 = this;
+      this.http.post('/api/v1/OrderLog/editOrderCostPrice', {
+        order_id: this.order_id,
+        cost_price: this.costPrice }).
+      then(function (res) {
+        if (res.code === 1000) {
+          _this3.$refs.uToast.show({
+            title: res.msg,
+            type: "success" });
+
+          _this3.getInfo();
+        } else {
+          _this3.$refs.uToast.show({
+            title: res.msg,
+            type: "error" });
+
+        }
+      });
+    },
     /* 取消订单 */
-    cancelOrder: function cancelOrder() {var _this3 = this;
+    cancelOrder: function cancelOrder() {var _this4 = this;
       this.http.modal('提示', '是否取消订单？', true, function (e) {
         if (e) {
-          _this3.http.get('/api/v1/Order/cancelOrder', {
-            order_id: _this3.order_id }).
+          _this4.http.get('/api/v1/Order/cancelOrder', {
+            order_id: _this4.order_id }).
           then(function (res) {
             if (res.code == 1000) {
               uni.$emit('back');
-              _this3.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "success",
                 back: true });
 
             } else {
-              _this3.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "error" });
 

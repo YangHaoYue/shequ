@@ -180,6 +180,9 @@
 				uni.$off('back')
 			});
 		},
+		onPullDownRefresh() {
+			this.clearGoodList();
+		},
 		data() {
 			return {
 				scrollHeight: 1000,
@@ -302,7 +305,7 @@
 					time_up:this.popupList[3].selected.toString()||2,
 					type_from:this.popupList[4].selected.toString()||6,
 					type_condition:this.popupList[5].selected.toString()||3,
-					type_sell:this.popupList[6].selected.toString()||2,
+					type_sell:this.popupList[6].selected.toString()||-1,
 					store_house_id:this.fromList[0].id,
 					customer_id:this.fromList[1].id,
 					sto_user_id:this.fromList[2].id,
@@ -350,6 +353,7 @@
 				this.last_page=1;
 				this.goodList=[];
 				this.getInfo();
+				uni.stopPullDownRefresh();
 			},
 			/* 选择店铺 */
 			chooseStore(e){

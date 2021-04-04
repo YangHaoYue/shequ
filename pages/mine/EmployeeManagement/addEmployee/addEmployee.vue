@@ -52,12 +52,12 @@
 						this.list[0].value=res.data.name;
 						this.list[1].value=res.data.username;
 						this.list[3].list.map(v=>{
-							if(v.id==res.data.sex)
+							if(v.value==res.data.sex)
 							this.list[3].value=v.label;
 						})
 						this.list[3].id=res.data.sex;
 						this.list[4].list.map(v=>{
-							if(v.id==res.data.status)
+							if(v.value==res.data.status)
 							this.list[4].value=v.label;
 						})
 						this.list[4].id=res.data.status;

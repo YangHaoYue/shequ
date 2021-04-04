@@ -35,7 +35,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "查询管理",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
 				"navigationBarBackgroundColor":"#FE8702",
 				"navigationBarTextStyle":"white",
 				"onReachBottomDistance":50
@@ -256,7 +256,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "销售报表",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
                 "navigationBarBackgroundColor":"#FE8702",
                 "navigationBarTextStyle":"white",
 				"onReachBottomDistance": 50
@@ -301,7 +301,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "寄卖结款",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
                 "navigationBarBackgroundColor":"#FE8702",
                 "navigationBarTextStyle":"white"
             }
@@ -346,7 +346,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "历史记录",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
                 "navigationBarBackgroundColor":"#FE8702",
                 "navigationBarTextStyle":"white",
 				"onReachBottomDistance": 50
@@ -369,7 +369,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "预定管理",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
                 "navigationBarBackgroundColor":"#FE8702",
                 "navigationBarTextStyle":"white"
             }
@@ -380,7 +380,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "库存盘点",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
                 "navigationBarBackgroundColor":"#FE8702",
                 "navigationBarTextStyle":"white",
 				"onReachBottomDistance": 50
@@ -426,7 +426,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "发货管理",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
                 "navigationBarBackgroundColor":"#FE8702",
                 "navigationBarTextStyle":"white",
 				"onReachBottomDistance": 50

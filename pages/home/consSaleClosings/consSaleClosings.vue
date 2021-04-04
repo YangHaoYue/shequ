@@ -117,6 +117,9 @@
 				uni.$off('back')
 			})
 		},
+		onPullDownRefresh() {
+			this.clearGoodList();
+		},
 		onReachBottom() {
 			if(this.page >= this.last_page) return ;
 			this.status = 'loading';
@@ -239,6 +242,7 @@
 				this.goodList=[];
 				this.status='loading';
 				this.getInfo();
+				uni.stopPullDownRefresh();
 			},
 			/* 排序 */
 			changeScreen(item){

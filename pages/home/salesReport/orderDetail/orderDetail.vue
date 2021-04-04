@@ -45,11 +45,19 @@
 				<view class="text-black">{{item.value}}</view>
 			</view>
 		</block>
+		
 		<u-toast ref="uToast"></u-toast>
+		
+		<u-modal v-model="show" title="请输入成本价" :show-cancel-button="true" confirm-text="确认修改" confirm-color="#FE8702" @confirm="editOrderCostPrice">
+			<view class="slot-content u-p-15">
+				<u-input border placeholder="请输入成本价" type="number" :focus="true" v-model="costPrice"></u-input>
+			</view>
+		</u-modal>
 		
 		<!-- 底部导航栏 -->
 		<view class="cu-tabbar-height" v-if="status==0"></view>
 		<view class="addTabBtn bg-white u-flex u-row-right u-text-center u-p-10" v-if="status==0">
+			<u-button class="u-m-10" size="mini" plain type="warning" @click="show = true">修改成本价</u-button>
 			<u-button class="u-m-10" size="mini" plain type="warning" @click="print">打印订单</u-button>
 			<u-button class="u-m-10" size="mini" plain type="warning" @click="toSetting">修改订单</u-button>
 			<u-button class="u-m-10" size="mini" plain type="warning" @click="cancelOrder">取消订单</u-button>
@@ -101,6 +109,9 @@
 					{name:'销售时间',value:''},
 					{name:'备注',value:''},
 				],
+				/* 成本价格 */
+				show:false,
+				costPrice:''
 			}
 		},
 		methods: {
@@ -161,6 +172,26 @@
 			/* 编译 */
 			toSetting(){
 				uni.navigateTo({url: `/pages/home/salesBilling/salesBilling?order_id=${this.order_id}`});
+			},
+			/* 编辑订单成本价 */
+			editOrderCostPrice(){
+				this.http.post('/api/v1/OrderLog/editOrderCostPrice',{
+					order_id:this.order_id,
+					cost_price:this.costPrice
+				}).then((res)=>{
+					if(res.code===1000){
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"success"
+						});
+						this.getInfo();
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error"
+						})
+					}
+				})
 			},
 			/* 取消订单 */
 			cancelOrder(){

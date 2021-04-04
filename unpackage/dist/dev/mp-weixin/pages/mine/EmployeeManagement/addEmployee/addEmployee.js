@@ -208,12 +208,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
           _this.list[0].value = res.data.name;
           _this.list[1].value = res.data.username;
           _this.list[3].list.map(function (v) {
-            if (v.id == res.data.sex)
+            if (v.value == res.data.sex)
             _this.list[3].value = v.label;
           });
           _this.list[3].id = res.data.sex;
           _this.list[4].list.map(function (v) {
-            if (v.id == res.data.status)
+            if (v.value == res.data.status)
             _this.list[4].value = v.label;
           });
           _this.list[4].id = res.data.status;

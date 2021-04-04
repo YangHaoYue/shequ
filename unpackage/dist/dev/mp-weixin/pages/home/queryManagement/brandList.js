@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uIndexList: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-list/u-index-list */ "uview-ui/components/u-index-list/u-index-list").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-list/u-index-list.vue */ 687))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-list/u-index-list */ "uview-ui/components/u-index-list/u-index-list").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-list/u-index-list.vue */ 689))
     },
     uIndexAnchor: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-anchor/u-index-anchor */ "uview-ui/components/u-index-anchor/u-index-anchor").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-anchor/u-index-anchor.vue */ 694))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-anchor/u-index-anchor */ "uview-ui/components/u-index-anchor/u-index-anchor").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-anchor/u-index-anchor.vue */ 696))
     }
   }
 } catch (e) {
@@ -187,6 +187,15 @@ var _default =
       this.http.get('/api/v1/Common/getIndexBrands').then(function (res) {
         if (res.code == 1000) {
           _this.indexList = res.data;
+          /* let pindex = 0;
+                                      let common=this.indexList.filter((v,index)=>{
+                                      	if(v.name === "common"){
+                                      		pindex = index;
+                                      		return true
+                                      	}
+                                      })
+                                      this.indexList.splice(pindex,1);
+                                      this.indexList.unshift(common); */
         }
       });
     },

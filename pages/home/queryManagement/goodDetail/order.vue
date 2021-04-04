@@ -84,6 +84,8 @@
 					good_id:this.goodId
 				}).then((res)=>{
 					if(res.code==1000){
+						this.fromList[3].value=res.data.seller_arr.seller_name;
+						this.fromList[3].id=res.data.seller_arr.seller_id;
 					}
 				})
 			},

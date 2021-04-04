@@ -26,6 +26,9 @@
 		onShow() {
 			this.clearGoodList();
 		},
+		onPullDownRefresh() {
+			this.clearGoodList();
+		},
 		onReachBottom() {
 			if(this.page >= this.last_page) return ;
 			this.status = 'loading';
@@ -95,6 +98,7 @@
 				this.list=[];
 				this.status='loading';
 				this.getInfo();
+				uni.stopPullDownRefresh();
 			},
 			end(e){
 				this.http.get('/api/v1/StockCheck/closeCheck',{

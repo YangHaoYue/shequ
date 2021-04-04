@@ -162,6 +162,9 @@
 				uni.$off('back')
 			})
 		},
+		onPullDownRefresh() {
+			this.clearGoodList();
+		},
 		data() {
 			return {
 				scrollHeight:0,
@@ -323,6 +326,7 @@
 				this.orderList=[];
 				this.status='loading';
 				this.getInfo();
+				uni.stopPullDownRefresh();
 			},
 			debounce(status){
 				this.$u.throttle(this.changeScreen(status),500)

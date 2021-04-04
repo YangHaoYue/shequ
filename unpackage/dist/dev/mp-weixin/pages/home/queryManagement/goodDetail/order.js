@@ -253,11 +253,13 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    getInfo: function getInfo() {
+    getInfo: function getInfo() {var _this2 = this;
       this.http.post('/api/v1/BookOrder/getGoodForBook', {
         good_id: this.goodId }).
       then(function (res) {
         if (res.code == 1000) {
+          _this2.fromList[3].value = res.data.seller_arr.seller_name;
+          _this2.fromList[3].id = res.data.seller_arr.seller_id;
         }
       });
     },
@@ -266,7 +268,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(e);
       this.$set(this.fromList[e.index], 'value', e.value);
     },
-    submit: function submit() {var _this2 = this;
+    submit: function submit() {var _this3 = this;
       this.http.post('/api/v1/BookOrder/book', {
         good_id: this.goodId,
         customer_id: this.fromList[0].id,
@@ -276,13 +278,13 @@ __webpack_require__.r(__webpack_exports__);
         book_remark: this.textarea }).
       then(function (res) {
         if (res.code == 1000) {
-          _this2.$refs.uToast.show({
+          _this3.$refs.uToast.show({
             title: res.msg,
             type: "success",
             back: true });
 
         } else {
-          _this2.$refs.uToast.show({
+          _this3.$refs.uToast.show({
             title: res.msg,
             type: "error" });
 

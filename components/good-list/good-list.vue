@@ -1,9 +1,13 @@
 <template>
 	<view>
 		<view class="bg-white u-p-20 u-flex u-col-top" :class="index==0?'':'solid-top'" @tap="navigateTo">
-			<!-- <view style="width: 199rpx;height: 199rpx;background-size: 100% 100%;" :style="'background-image: url('+item.pic+');'"></view> -->
+			<view style="width: 199rpx;height: 199rpx;background-size: 100% 100%;" :style="'background-image: url('+http.resourceUrl()+item.pic+');'">
+				<view v-if="item.type_sell===1" class="imageType">已下架</view>
+				<view v-if="item.type_sell===2" class="imageType">已预定</view>
+				<view v-if="item.type_sell===3" class="imageType">已售罄</view>
+			</view>
 			<!-- <image :src="item.pic" mode="aspectFill" style="width: 199rpx;height: 199rpx;"></image> -->
-			<u-image :src="http.resourceUrl()+item.pic" width="199rpx" height="199rpx" :fade="false" :lazy-load="false" mode="scaleToFill"></u-image>
+			<!-- <u-image :src="http.resourceUrl()+item.pic" width="199rpx" height="199rpx" :fade="false" :lazy-load="false" mode="scaleToFill"></u-image> -->
 			<view class="u-m-l-20 flex" style="flex-direction: column;width: 490rpx;">
 				<view class="u-line-1 text-bold text-black u-font-30 u-m-b-10">{{item.title||item.good_name}}</view>
 				<view class="u-line-1  u-font-22 u-m-b-10" style="color: #000000;" @tap.stop="copy">{{item.store_no}}</view>
@@ -55,5 +59,14 @@
 </script>
 
 <style>
-
+	.imageType{
+		text-align: center;
+		/* opacity: 0.3; */
+		background-color:rgba(1,0,0,0.4);
+		color: #FFFFFF;
+		padding: 10rpx 0;
+		font-size: 24rpx;
+		line-height: 1;
+		margin-top: 155rpx;
+	}
 </style>

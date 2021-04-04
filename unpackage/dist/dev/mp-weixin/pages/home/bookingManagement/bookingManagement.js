@@ -126,25 +126,28 @@ try {
       return __webpack_require__.e(/*! import() | components/form-list/form-list */ "components/form-list/form-list").then(__webpack_require__.bind(null, /*! @/components/form-list/form-list.vue */ 590))
     },
     uGap: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 600))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 602))
     },
     goodList: function() {
       return __webpack_require__.e(/*! import() | components/good-list/good-list */ "components/good-list/good-list").then(__webpack_require__.bind(null, /*! @/components/good-list/good-list.vue */ 595))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 666))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 668))
+    },
+    uCheckbox: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-checkbox/u-checkbox */ "uview-ui/components/u-checkbox/u-checkbox").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-checkbox/u-checkbox.vue */ 722))
     },
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 471))
     },
     uEmpty: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-empty/u-empty */ "uview-ui/components/u-empty/u-empty").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 607))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-empty/u-empty */ "uview-ui/components/u-empty/u-empty").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 609))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 614))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 616))
     },
     uMask: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 621))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 623))
     },
     uToast: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 485))
@@ -321,6 +324,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
 {
   components: {
     goodList: goodList,
@@ -345,9 +357,22 @@ __webpack_require__.r(__webpack_exports__);
       uni.$off('chooseEmployees1');
     });
   },
+  computed: {
+    isShowTab: function isShowTab() {
+      return this.book_order_ids.length === 0 ? false : true;
+    },
+    checkedAll: function checkedAll() {
+      return this.goodList.every(function (v) {return v.checked === true;});
+    } },
+
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.clearGoodList();
+  },
   data: function data() {
     return {
       scrollHeight: 0,
+      /* 合并开单数组 */
+      book_order_ids: [],
       /* 搜索值 */
       keyword: '',
       /* 顶部导航栏 */
@@ -434,6 +459,12 @@ __webpack_require__.r(__webpack_exports__);
               _this4.goodList.push(v);
             });
           }
+          _this4.goodList.map(function (v) {
+            if (!v.hasOwnProperty('checked')) {
+              _this4.$set(v, 'checked', false);
+            }
+          });
+          console.log(_this4.goodList);
           if (_this4.page >= _this4.last_page) _this4.status = 'nomore';else
           _this4.status = 'loadmore';
           _this4.show = false;
@@ -457,6 +488,7 @@ __webpack_require__.r(__webpack_exports__);
       this.goodList = [];
       this.status = 'loading';
       this.getInfo();
+      uni.stopPullDownRefresh();
     },
     /* 排序 */
     changeScreen: function changeScreen(item) {
@@ -515,11 +547,44 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, '#FE8702');
     },
+    /* 合并开单全选 */
+    bookAll: function bookAll(e) {
+      if (e.value) {
+        var list = [];
+        this.goodList.forEach(function (v) {
+          v.checked = true;
+          list.push(v.id);
+        });
+        this.book_order_ids = list;
+      } else {
+        this.goodList.forEach(function (v) {
+          v.checked = false;
+        });
+        this.book_order_ids = [];
+      }
+    },
+    /* 选择合并的订单 */
+    book: function book(e, book_order_id) {
+      if (e.value) {
+        this.book_order_ids.push(book_order_id);
+      } else {
+        var index = this.book_order_ids.indexOf(book_order_id);
+        this.book_order_ids.splice(index, 1);
+      }
+    },
+    /* 合并开单 */
+    bookOrders: function bookOrders() {var _this7 = this;
+      this.http.modal('警告', '前往开单后，这些预定记录将立即更改为已开单，是否前往？', true, function (e) {
+        if (e) {
+          uni.navigateTo({ url: '/pages/home/salesBilling/salesBilling?book_order_ids=' + JSON.stringify(_this7.book_order_ids) });
+        }
+      }, '#FE8702');
+    },
     /* 开单 */
     open: function open(id) {
       this.http.modal('警告', '前往开单后，此预定记录将立即更改为已开单，是否前往？', true, function (e) {
         if (e) {
-          uni.navigateTo({ url: "/pages/home/salesBilling/salesBilling?book_order_id=".concat(id) });
+          uni.navigateTo({ url: '/pages/home/salesBilling/salesBilling?book_order_ids=' + JSON.stringify([id]) });
         }
       }, '#FE8702');
     } } };exports.default = _default;

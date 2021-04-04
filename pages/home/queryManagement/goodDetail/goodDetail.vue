@@ -16,10 +16,9 @@
 		</view>
 		<view class="u-p-30 u-m-l-20 u-m-r-20 u-flex u-row-around">
 			<block v-for="(item,k) in priceList" :key="k">
-				<view>
-					<view class="u-text-center u-flex" v-if="item.price">
-						<text class="u-font-20">￥</text>
-						<view class="u-font-28 text-black text-bold">{{item.price}}</view>
+				<view class="u-text-center u-flex-1">
+					<view class="u-text-center flex align-center" v-if="item.price">
+						<view class="u-font-28 text-black text-bold" style="margin: 0 auto;"><text class="u-font-20">￥</text>{{item.price}}</view>
 						<!-- <u-count-to :start-val="0" :end-val="item.price" :decimals="2" :duration="1500" font-size="28" color="#333333"></u-count-to> -->
 					</view>
 					<view v-else class="u-text-center">---</view>
@@ -90,7 +89,10 @@
 			</view>
 			<!-- 视频 -->
 			<view class="u-p-30 solid-bottom" v-if="videoResource">
-				<view class="u-flex u-m-b-10 u-flex-1" style="color: #A5A5A5;">视频</view>
+				<view class="u-flex u-row-between">
+					<view class="u-flex u-m-b-10 u-flex-1" style="color: #A5A5A5;">视频</view>
+					<view class="text-yellow text-sm" @click="uploadVideo">一键下载到手机</view>
+				</view>
 				<view class="u-flex u-flex-wrap u-row-left">
 					<video :src="videoResource" style="width: 100%;" objectFit="cover"></video>
 				</view>
@@ -249,7 +251,8 @@
 					{name:'共享价',price:''},
 					{name:'同行价',price:''},
 					{name:'销售价',price:''},
-					{name:'专柜价',price:''}
+					{name:'专柜价',price:''},
+					{name:'成本价',price:''}
 				],
 				/* 导航栏 */
 				currentIndex:0,
@@ -355,6 +358,7 @@
 						this.priceList[1].price=res.data.peer_price;
 						this.priceList[2].price=res.data.sell_price;
 						this.priceList[3].price=res.data.counter_price;
+						this.priceList[4].price=res.data.cost_price;
 						
 						this.tagList=res.data.care;
 						this.attachmentList=res.data.annex;
@@ -461,6 +465,42 @@
 						}
 					})
 				})
+			},
+			/* 视频下载保存相册 */
+			uploadVideo() {
+				uni.showLoading();
+				const downloadTask = uni.downloadFile({
+					// 视频路径 测试视频demo时长有1分钟
+					url: this.videoResource, 
+					success: res => {
+						if (res.statusCode === 200) {
+							// 视频保存到手机相册
+							uni.saveImageToPhotosAlbum({
+								filePath: res.tempFilePath,
+								success: function() {
+									uni.hideLoading();
+									uni.showToast({
+										title: '保存成功',
+										icon: 'none'
+									});
+								},
+								fail: function() {
+									uni.hideLoading();
+									uni.showToast({
+										title: '保存失败，请稍后重试',
+										icon: 'none'
+									});
+								}
+							});
+						}
+					}
+				});
+				// 下载进度监听
+				downloadTask.onProgressUpdate(res => {
+					console.log('下载进度' + res.progress);
+					console.log('已经下载的数据长度' + res.totalBytesWritten);
+					console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
+				});
 			},
 			/* 联系我 */
 			makePhonecall(){

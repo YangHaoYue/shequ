@@ -28,7 +28,16 @@
 			getInfo(){
 				this.http.get('/api/v1/Common/getIndexBrands').then((res)=>{
 					if(res.code==1000){
-						this.indexList=res.data
+						this.indexList=res.data;
+						/* let pindex = 0;
+						let common=this.indexList.filter((v,index)=>{
+							if(v.name === "common"){
+								pindex = index;
+								return true
+							}
+						})
+						this.indexList.splice(pindex,1);
+						this.indexList.unshift(common); */
 					}
 				})
 			},

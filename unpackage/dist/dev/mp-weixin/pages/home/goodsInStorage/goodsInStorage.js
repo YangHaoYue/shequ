@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uUpload: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-upload/u-upload.vue */ 701))
+      return Promise.all(/*! import() | uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-upload/u-upload.vue */ 703))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 666))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 668))
     },
     uInput: function() {
       return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 463))
@@ -364,11 +364,14 @@ __webpack_require__.r(__webpack_exports__);
       });
       return data;
     },
+    counterPrice: function counterPrice() {
+      return this.fromList[9].value ? '专柜价' + this.fromList[9].value : '';
+    },
     descAll: function descAll() {
       var data = '';
       data = this.fromList[1].value + this.fromList[2].value +
       this.fromList[3].value + this.attachmentTitle + this.tagTitle +
-      '专柜价' + this.fromList[9].value + '我们现在好价' + this.fromList[8].value;
+      this.counterPrice + '我们现在好价' + this.fromList[8].value;
 
       return data;
     } },
@@ -572,7 +575,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     onListChange: function onListChange(lists) {
       console.log('onListChange', lists);
-      console.log(lists[0].response);
       this.lists = lists;
     },
     onscListChange: function onscListChange(lists) {
@@ -590,7 +592,15 @@ __webpack_require__.r(__webpack_exports__);
           console.log(res);
           _this5.videoList = res.tempFiles;
           _this5.http.uploadFile('/api/v1/Common/fileUploader', res.tempFiles[0].tempFilePath, 'video').then(function (data) {
-            _this5.resource = data.path;
+            if (data.code == 1000) {
+              _this5.$refs.uToast.show({
+                title: '上传成功',
+                type: "success" });
+
+              _this5.resource = data.data.path;
+              console.log(data);
+              console.log(_this5.resource);
+            }
           });
         } });
 

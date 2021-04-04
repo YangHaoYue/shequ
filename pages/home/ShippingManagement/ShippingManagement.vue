@@ -22,6 +22,9 @@
 		onLoad() {
 			this.getInfo();
 		},
+		onPullDownRefresh() {
+			this.clearGoodList();
+		},
 		onReachBottom() {
 			if(this.page >= this.last_page) return ;
 			this.status = 'loading';
@@ -76,6 +79,16 @@
 						{title:'未发货',value:e.delivery_data.total_undelivered,url:'/pages/home/ShippingManagement/management/management?type=1&id='+e.id,colorchange:true},
 					]
 				}
+			},
+			/* 初始化数据 */
+			clearGoodList(){
+				this.show=false;
+				this.page=1;
+				this.last_page=1;
+				this.list=[];
+				this.status='loading';
+				this.getInfo();
+				uni.stopPullDownRefresh();
 			},
 			nvigate(id){
 				uni.navigateTo({url: '/pages/home/ShippingManagement/management/management?type=0&id='+id});

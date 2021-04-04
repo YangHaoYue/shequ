@@ -102,7 +102,7 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 534))
     },
     uUpload: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-upload/u-upload.vue */ 701))
+      return Promise.all(/*! import() | uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-upload/u-upload.vue */ 703))
     },
     uIcon: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 478))
@@ -114,19 +114,19 @@ try {
       return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 463))
     },
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 673))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 675))
     },
     uGap: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 600))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 602))
     },
     uToast: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 485))
     },
     uSelect: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-select/u-select */ "uview-ui/components/u-select/u-select").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-select/u-select.vue */ 628))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-select/u-select */ "uview-ui/components/u-select/u-select").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-select/u-select.vue */ 630))
     },
     uCalendar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-calendar/u-calendar */ "uview-ui/components/u-calendar/u-calendar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-calendar/u-calendar.vue */ 635))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-calendar/u-calendar */ "uview-ui/components/u-calendar/u-calendar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-calendar/u-calendar.vue */ 637))
     }
   }
 } catch (e) {
@@ -330,7 +330,7 @@ __webpack_require__.r(__webpack_exports__);
 var _default =
 {
   onLoad: function onLoad(e) {
-    this.book_order_id = e.book_order_id || 0;
+    this.book_order_ids = JSON.parse(e.book_order_ids);
     this.good_id = e.good_id || 0;
     this.order_id = e.order_id || 0;
     var ti = new Date();
@@ -340,7 +340,6 @@ var _default =
   },
   onShow: function onShow() {var _this = this;
     uni.$on('chooseCustomer', function (data) {
-      console.log(data);
       _this.customer = data.item;
       _this.getIntegralByCustomerId(data.item.id);
       uni.$off('chooseCustomer');
@@ -377,7 +376,7 @@ var _default =
 
   data: function data() {
     return {
-      book_order_id: '',
+      book_order_ids: [],
       good_id: '',
       order_id: '',
 
@@ -438,8 +437,8 @@ var _default =
   },
   methods: {
     getInfo: function getInfo() {var _this2 = this;
-      this.http.get('/api/v1/Order/getPreOrderInfo', {
-        book_order_id: this.book_order_id || 0,
+      this.http.post('/api/v1/Order/getPreOrderInfo', {
+        book_order_ids: this.book_order_ids || [],
         good_id: this.good_id || 0,
         order_id: this.order_id || 0 },
       true).then(function (res) {
@@ -468,7 +467,7 @@ var _default =
             _this2.salesman = v.name;
           });
           _this2.seller_id = res.data.seller_id;
-          if (_this2.order_id != 0 || _this2.book_order_id != 0) {
+          if (_this2.order_id != 0 || _this2.book_order_ids.length != 0) {
             _this2.customer.id = res.data.customer_arr.customer_id;
             _this2.customer.name = res.data.customer_arr.customer_name;
             res.data.type_sale.map(function (v) {
@@ -555,7 +554,7 @@ var _default =
         return _this4._formatGood(v);
       });
       this.http.post('/api/v1/Order/createOrder', {
-        book_order_id: this.book_order_id || 0,
+        book_order_ids: this.book_order_ids || [],
         customer_id: this.customer.id,
         seller_id: this.seller_id,
         type_pay: this.settleWay_id,
@@ -583,6 +582,7 @@ var _default =
     },
     /* 编辑 */
     setting: function setting() {var _this5 = this;
+      console.log(this.lists);
       this.http.post('/api/v1/Order/editOrder', {
         order_id: this.order_id,
         customer_id: this.customer.id,
@@ -593,7 +593,7 @@ var _default =
         integral: this.user_integral || 0,
         date: this.date,
         remark: this.textAreaValue,
-        img_delivery: this.lists[0].response.data.path }).
+        img_delivery: this.lists.length != 0 ? this.lists[0].response.data.path : '' }).
       then(function (res) {
         if (res.code == 1000) {
           _this5.$refs.uToast.show({

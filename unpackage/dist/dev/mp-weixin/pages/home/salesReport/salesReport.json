@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "销售报表",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "navigationBarBackgroundColor": "#FE8702",
   "navigationBarTextStyle": "white",
   "onReachBottomDistance": 50,

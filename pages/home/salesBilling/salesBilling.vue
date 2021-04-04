@@ -113,7 +113,7 @@
 <script>
 	export default {
 		onLoad(e) {
-			this.book_order_id=e.book_order_id||0;
+			this.book_order_ids=JSON.parse(e.book_order_ids)
 			this.good_id=e.good_id||0;
 			this.order_id=e.order_id||0;
 			var ti= new Date();
@@ -123,7 +123,6 @@
 		},
 		onShow() {
 			uni.$on('chooseCustomer',(data)=>{
-				console.log(data);
 				this.customer=data.item;
 				this.getIntegralByCustomerId(data.item.id);
 				uni.$off('chooseCustomer')
@@ -160,7 +159,7 @@
 		},
 		data() {
 			return {
-				book_order_id:'',
+				book_order_ids:[],
 				good_id:'',
 				order_id:'',
 				
@@ -221,8 +220,8 @@
 		},
 		methods: {
 			getInfo(){
-				this.http.get('/api/v1/Order/getPreOrderInfo',{
-					book_order_id:this.book_order_id||0,
+				this.http.post('/api/v1/Order/getPreOrderInfo',{
+					book_order_ids:this.book_order_ids||[],
 					good_id:this.good_id||0,
 					order_id:this.order_id||0
 				},true).then((res)=>{
@@ -251,7 +250,7 @@
 							this.salesman=v.name
 						})
 						this.seller_id=res.data.seller_id;
-						if(this.order_id!=0||this.book_order_id!=0){
+						if(this.order_id!=0||this.book_order_ids.length!=0){
 							this.customer.id=res.data.customer_arr.customer_id;
 							this.customer.name=res.data.customer_arr.customer_name;
 							res.data.type_sale.map(v=>{
@@ -338,7 +337,7 @@
 					return this._formatGood(v);
 				})
 				this.http.post('/api/v1/Order/createOrder',{
-					book_order_id:this.book_order_id||0,
+					book_order_ids:this.book_order_ids||[],
 					customer_id:this.customer.id,
 					seller_id:this.seller_id,
 					type_pay:this.settleWay_id,
@@ -366,6 +365,7 @@
 			},
 			/* 编辑 */
 			setting(){
+				console.log(this.lists);
 				this.http.post('/api/v1/Order/editOrder',{
 					order_id:this.order_id,
 					customer_id:this.customer.id,
@@ -376,7 +376,7 @@
 					integral:this.user_integral||0,
 					date:this.date,
 					remark:this.textAreaValue,
-					img_delivery:this.lists[0].response.data.path
+					img_delivery:this.lists.length!=0?this.lists[0].response.data.path:''
 				}).then(res=>{
 					if(res.code==1000){
 						this.$refs.uToast.show({

@@ -99,10 +99,10 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-image/u-image */ "uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-image/u-image.vue */ 456))
     },
     uGap: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 600))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 602))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 666))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 668))
     },
     uCellGroup: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-group/u-cell-group */ "uview-ui/components/u-cell-group/u-cell-group").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-group/u-cell-group.vue */ 527))
@@ -114,7 +114,7 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-popup/u-popup */ "uview-ui/components/u-popup/u-popup").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 555))
     },
     uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 673))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-number-box/u-number-box */ "uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-number-box/u-number-box.vue */ 675))
     },
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 471))
@@ -123,10 +123,10 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 485))
     },
     uModal: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-modal/u-modal */ "uview-ui/components/u-modal/u-modal").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-modal/u-modal.vue */ 680))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-modal/u-modal */ "uview-ui/components/u-modal/u-modal").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-modal/u-modal.vue */ 682))
     },
     uCalendar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-calendar/u-calendar */ "uview-ui/components/u-calendar/u-calendar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-calendar/u-calendar.vue */ 635))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-calendar/u-calendar */ "uview-ui/components/u-calendar/u-calendar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-calendar/u-calendar.vue */ 637))
     },
     uIcon: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 478))
@@ -542,6 +542,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   onLoad: function onLoad(e) {
@@ -572,7 +574,8 @@ var _default =
       { name: '共享价', price: '' },
       { name: '同行价', price: '' },
       { name: '销售价', price: '' },
-      { name: '专柜价', price: '' }],
+      { name: '专柜价', price: '' },
+      { name: '成本价', price: '' }],
 
       /* 导航栏 */
       currentIndex: 0,
@@ -678,6 +681,7 @@ var _default =
           _this.priceList[1].price = res.data.peer_price;
           _this.priceList[2].price = res.data.sell_price;
           _this.priceList[3].price = res.data.counter_price;
+          _this.priceList[4].price = res.data.cost_price;
 
           _this.tagList = res.data.care;
           _this.attachmentList = res.data.annex;
@@ -783,6 +787,42 @@ var _default =
 
           } });
 
+      });
+    },
+    /* 视频下载保存相册 */
+    uploadVideo: function uploadVideo() {
+      uni.showLoading();
+      var downloadTask = uni.downloadFile({
+        // 视频路径 测试视频demo时长有1分钟
+        url: this.videoResource,
+        success: function success(res) {
+          if (res.statusCode === 200) {
+            // 视频保存到手机相册
+            uni.saveImageToPhotosAlbum({
+              filePath: res.tempFilePath,
+              success: function success() {
+                uni.hideLoading();
+                uni.showToast({
+                  title: '保存成功',
+                  icon: 'none' });
+
+              },
+              fail: function fail() {
+                uni.hideLoading();
+                uni.showToast({
+                  title: '保存失败，请稍后重试',
+                  icon: 'none' });
+
+              } });
+
+          }
+        } });
+
+      // 下载进度监听
+      downloadTask.onProgressUpdate(function (res) {
+        console.log('下载进度' + res.progress);
+        console.log('已经下载的数据长度' + res.totalBytesWritten);
+        console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
       });
     },
     /* 联系我 */

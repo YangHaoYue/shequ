@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "寄卖结款",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "navigationBarBackgroundColor": "#FE8702",
   "navigationBarTextStyle": "white",
   "usingComponents": {

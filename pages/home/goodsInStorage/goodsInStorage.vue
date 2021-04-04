@@ -160,11 +160,14 @@
 				})
 				return data
 			},
+			counterPrice(){
+				return this.fromList[9].value?'专柜价'+this.fromList[9].value:''
+			},
 			descAll(){
 				let data='';
 				data=this.fromList[1].value+this.fromList[2].value+
 				this.fromList[3].value+this.attachmentTitle+this.tagTitle+
-				'专柜价'+this.fromList[9].value+'我们现在好价'+this.fromList[8].value
+				this.counterPrice+'我们现在好价'+this.fromList[8].value
 				
 				return data
 			}
@@ -365,7 +368,6 @@
 			},
 			onListChange(lists) {
 				console.log('onListChange', lists);
-				console.log(lists[0].response);
 				this.lists = lists;
 			},
 			onscListChange(lists) {
@@ -383,7 +385,12 @@
 						console.log(res);
 						this.videoList=res.tempFiles;
 						this.http.uploadFile('/api/v1/Common/fileUploader',res.tempFiles[0].tempFilePath,'video').then((data)=>{
-							this.resource=data.path;
+							if(data.code==1000){
+								this.$refs.uToast.show({									title:'上传成功',									type:"success"								})
+								this.resource=data.data.path;
+								console.log(data);
+								console.log(this.resource);
+							}
 						})
 					}
 				});

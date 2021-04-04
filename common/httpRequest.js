@@ -161,13 +161,15 @@ const tui = {
 					// sizeArrayText:""
 				},
 				success: function(res) {
+					console.log(res);
 					if(res.data.code==2000){
 						tui.toast(res.data.msg);
 					}
 					let d = JSON.parse(res.data.replace(/\ufeff/g, "") || "{}")
+					console.log(d);
 					if (d.code % 100 == 0) {
 						//返回图片地址
-						let fileObj = d.data;
+						let fileObj = d;
 						resolve(fileObj)
 					} else {
 						tui.toast(res.msg);
