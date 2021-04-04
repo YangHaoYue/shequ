@@ -372,6 +372,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       scrollHeight: 0,
       /* 合并开单数组 */
+      customer_id: '', //客户id
       book_order_ids: [],
       /* 搜索值 */
       keyword: '',
@@ -564,12 +565,24 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     /* 选择合并的订单 */
-    book: function book(e, book_order_id) {
-      if (e.value) {
-        this.book_order_ids.push(book_order_id);
-      } else {
-        var index = this.book_order_ids.indexOf(book_order_id);
+    book: function book(e, item) {
+      if (!this.customer_id) {
+        this.customer_id = item.customer_id;
+      }
+
+      if (e.value && item.customer_id === this.customer_id) {
+        this.book_order_ids.push(item.id);
+      } else if (!e.value && item.customer_id === this.customer_id) {
+        var index = this.book_order_ids.indexOf(item.id);
         this.book_order_ids.splice(index, 1);
+      } else {
+        this.$refs.uToast.show({
+          title: "请选择同一客户的预订单！",
+          type: "error" });
+
+      }
+      if (this.book_order_ids.length == 0) {
+        this.customer_id = '';
       }
     },
     /* 合并开单 */

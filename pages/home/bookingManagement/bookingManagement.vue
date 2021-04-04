@@ -44,8 +44,8 @@
 			</scroll-view>
 			<!-- 按钮 -->
 			<view class="u-flex u-abso popupUi">
-				<view class="u-flex-1 u-text-center u-p-20 reset" hover-class="popupTouch" @click="reset">重置</view>
-				<view class="u-flex-1 u-text-center u-p-20 msure" hover-class="popupTouch" @click="clearGoodList">确定</view>
+				<view class="u-flex-1 u-text-center u-p-20 reset" hover-class="none" @click="reset">重置</view>
+				<view class="u-flex-1 u-text-center u-p-20 msure" hover-class="none" @click="clearGoodList">确定</view>
 			</view>
 		</u-popup>
 		<!-- 列表 -->
@@ -57,7 +57,7 @@
 					<u-tag slot="tag" :text="item.customer_type+'/'+item.customer_name" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
 				</good-list>
 				<view class="u-flex u-row-between u-p-10 u-p-l-20 u-p-r-20 solid-top" v-if="screen.currentIndex==0">
-					<u-checkbox v-model="item.checked" active-color="#FE8702" @change="book($event,item.id)">合并开单</u-checkbox>
+					<u-checkbox v-model="item.checked" active-color="#FE8702" @change="book($event,item)">合并开单</u-checkbox>
 					<view>
 						<u-button class="u-m-r-15" type="default" size="mini" @click="cancel(item.id)">取消预订</u-button>
 						<u-button class="u-m-l-15" type="warning" size="mini" @click="open(item.id)">正式开单</u-button>
@@ -67,8 +67,8 @@
 			</block>
 			<!-- 底部Tabbar -->
 			<view class="cu-tabbar-height" v-if="isShowTab&&screen.currentIndex===0"></view>
-			<view class="saveBtn u-text-center bg-white u-flex u-row-between solid-top u-p-l-20" v-if="isShowTab&&screen.currentIndex===0">
-				<u-checkbox v-model="checkedAll" active-color="#FE8702" @change="bookAll">全选</u-checkbox>
+			<view class="saveBtn u-text-center bg-white u-flex u-row-right solid-top u-p-l-20" v-if="isShowTab&&screen.currentIndex===0">
+				<!-- <u-checkbox v-model="checkedAll" active-color="#FE8702" @change="bookAll">全选</u-checkbox> -->
 				<view class="u-p-25 u-p-l-50 u-p-r-50 text-white" style="background-color: #FE8702;" @click="bookOrders">合并开单</view>
 			</view>
 			<!-- 数据为空 -->
@@ -130,6 +130,7 @@
 			return {
 				scrollHeight:0,
 				/* 合并开单数组 */
+				customer_id:'',//客户id
 				book_order_ids:[],
 				/* 搜索值 */
 				keyword:'',
@@ -322,12 +323,24 @@
 				}
 			},
 			/* 选择合并的订单 */
-			book(e,book_order_id){
-				if(e.value){
-					this.book_order_ids.push(book_order_id)
-				}else{
-					let index = this.book_order_ids.indexOf(book_order_id);
+			book(e,item){
+				if(!this.customer_id){
+					this.customer_id = item.customer_id
+				}
+				
+				if(e.value&&item.customer_id === this.customer_id){
+					this.book_order_ids.push(item.id)
+				}else if(!e.value&&item.customer_id === this.customer_id){
+					let index = this.book_order_ids.indexOf(item.id);
 					this.book_order_ids.splice(index,1);
+				}else{
+					this.$refs.uToast.show({
+						title:"请选择同一客户的预订单！",
+						type:"error"
+					})
+				}
+				if(this.book_order_ids.length==0){
+					this.customer_id = '';
 				}
 			},
 			/* 合并开单 */

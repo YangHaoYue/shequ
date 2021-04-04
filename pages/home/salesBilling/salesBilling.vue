@@ -113,7 +113,9 @@
 <script>
 	export default {
 		onLoad(e) {
-			this.book_order_ids=JSON.parse(e.book_order_ids)
+			if(e.book_order_ids){
+				this.book_order_ids=JSON.parse(e.book_order_ids);
+			}
 			this.good_id=e.good_id||0;
 			this.order_id=e.order_id||0;
 			var ti= new Date();
@@ -159,7 +161,7 @@
 		},
 		data() {
 			return {
-				book_order_ids:[],
+				book_order_ids:[0],
 				good_id:'',
 				order_id:'',
 				
@@ -221,7 +223,7 @@
 		methods: {
 			getInfo(){
 				this.http.post('/api/v1/Order/getPreOrderInfo',{
-					book_order_ids:this.book_order_ids||[],
+					book_order_ids:this.book_order_ids,
 					good_id:this.good_id||0,
 					order_id:this.order_id||0
 				},true).then((res)=>{
@@ -337,7 +339,7 @@
 					return this._formatGood(v);
 				})
 				this.http.post('/api/v1/Order/createOrder',{
-					book_order_ids:this.book_order_ids||[],
+					book_order_ids:this.book_order_ids,
 					customer_id:this.customer.id,
 					seller_id:this.seller_id,
 					type_pay:this.settleWay_id,
