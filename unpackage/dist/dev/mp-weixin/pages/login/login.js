@@ -107,8 +107,11 @@ try {
     uIcon: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 478))
     },
+    uModal: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-modal/u-modal */ "uview-ui/components/u-modal/u-modal").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-modal/u-modal.vue */ 485))
+    },
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 485))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 492))
     }
   }
 } catch (e) {
@@ -192,6 +195,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   computed: {
@@ -205,6 +212,7 @@ var _default =
 
   data: function data() {
     return {
+      show: false,
       headImg: '',
       mobile: '',
       password: '',
@@ -232,14 +240,17 @@ var _default =
         pwd: this.password },
       true).then(function (res) {
         if (res.code == 1000) {
-          _this2.http.setUserInfo(res.data);
-          _this2.$refs.uToast.show({
-            title: '登陆成功',
-            type: "success",
-            url: '/pages/home/home',
-            isTab: true,
-            duration: 1000 });
+          _this2.http.setUserInfo(res.data.token);
+          _this2.show = res.data.need_openid;
+          if (!_this2.show) {
+            _this2.$refs.uToast.show({
+              title: '登陆成功',
+              type: "success",
+              url: '/pages/home/home',
+              isTab: true,
+              duration: 1000 });
 
+          }
         } else {
           _this2.$refs.uToast.show({
             title: res.msg,
@@ -248,6 +259,41 @@ var _default =
           _this2.islogin = false;
         }
       });
+    },
+    getUserInfo: function getUserInfo(e) {var _this3 = this;
+      console.log(e);
+      if (e.detail.userInfo) {
+        //用户按了允许授权按钮
+        uni.login({
+          provider: 'weixin',
+          success: function success(res) {
+            console.log(res);
+            _this3.http.post('/api/v1/Auth/updateCode', {
+              code: res.code,
+              iv: e.detail.iv,
+              data: e.detail.encryptedData },
+            false).then(function (res) {
+              /* if(res.code==1000){
+                                        	this.$refs.uToast.show({
+                                        		title:'授权成功',
+                                        		type:"success",
+                                        		url:'/pages/home/home',
+                                        		isTab:true,
+                                        		duration:1000,
+                                        	})
+                                        }else{
+                                        	this.$refs.uToast.show({
+                                        		title:res.msg,
+                                        		type:'error',
+                                        		url:'/pages/home/home',
+                                        		isTab:true,
+                                        		duration:2000,
+                                        	})
+                                        } */
+            });
+          } });
+
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

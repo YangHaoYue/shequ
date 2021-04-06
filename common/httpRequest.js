@@ -111,7 +111,7 @@ const tui = {
 						tui.toast(res.data.msg);
 						setTimeout(()=>{uni.navigateBack({delta: 1});},1000)
 					} */
-					if (res.data.code == 401) {
+					/* if (res.data.code == 401) {
 						uni.clearStorageSync()
 						tui.modal("","登录信息已失效，请重新登录", false, () => {
 							//store.commit("logout") 登录页面执行
@@ -120,7 +120,7 @@ const tui = {
 							})
 						},'#FE8702')
 						return
-					}
+					} */
 					return resolve(res.data)
 				},
 				fail: (res) => {

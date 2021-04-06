@@ -57,7 +57,7 @@
 					<u-tag slot="tag" :text="item.customer_type+'/'+item.customer_name" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
 				</good-list>
 				<view class="u-flex u-row-between u-p-10 u-p-l-20 u-p-r-20 solid-top" v-if="screen.currentIndex==0">
-					<u-checkbox v-model="item.checked" active-color="#FE8702" @change="book($event,item)">合并开单</u-checkbox>
+					<u-checkbox v-model="item.checked" active-color="#FE8702" @change="book($event,item,i)">合并开单</u-checkbox>
 					<view>
 						<u-button class="u-m-r-15" type="default" size="mini" @click="cancel(item.id)">取消预订</u-button>
 						<u-button class="u-m-l-15" type="warning" size="mini" @click="open(item.id)">正式开单</u-button>
@@ -67,8 +67,8 @@
 			</block>
 			<!-- 底部Tabbar -->
 			<view class="cu-tabbar-height" v-if="isShowTab&&screen.currentIndex===0"></view>
-			<view class="saveBtn u-text-center bg-white u-flex u-row-right solid-top u-p-l-20" v-if="isShowTab&&screen.currentIndex===0">
-				<!-- <u-checkbox v-model="checkedAll" active-color="#FE8702" @change="bookAll">全选</u-checkbox> -->
+			<view class="saveBtn u-text-center bg-white u-flex  solid-top u-p-l-20" :class="showCheckAll?'u-row-between':'u-row-right'" v-if="isShowTab&&screen.currentIndex===0">
+				<u-checkbox v-if="showCheckAll" v-model="checkedAll" active-color="#FE8702" @change="bookAll">全选</u-checkbox>
 				<view class="u-p-25 u-p-l-50 u-p-r-50 text-white" style="background-color: #FE8702;" @click="bookOrders">合并开单</view>
 			</view>
 			<!-- 数据为空 -->
@@ -119,8 +119,17 @@
 			isShowTab() {
 				return this.book_order_ids.length === 0?false:true 
 			},
-			checkedAll() {
-				return this.goodList.every(v=>v.checked===true)
+			checkedAll:{
+				  get(){
+					 return this.goodList.every(v=>{
+					 	return v.checked===true
+					 })
+				  },
+				  set(val){
+				  }
+			},
+			showCheckAll() {
+				return this.fromList[0].id!=''?true:false
 			}
 		},
 		onPullDownRefresh() {
@@ -246,6 +255,8 @@
 				this.last_page=1;
 				this.goodList=[];
 				this.status='loading';
+				this.book_order_ids=[];
+				this.customer_id='';
 				this.getInfo();
 				uni.stopPullDownRefresh();
 			},
@@ -323,7 +334,7 @@
 				}
 			},
 			/* 选择合并的订单 */
-			book(e,item){
+			book(e,item,i){
 				if(!this.customer_id){
 					this.customer_id = item.customer_id
 				}
@@ -333,11 +344,15 @@
 				}else if(!e.value&&item.customer_id === this.customer_id){
 					let index = this.book_order_ids.indexOf(item.id);
 					this.book_order_ids.splice(index,1);
-				}else{
+				}else if(e.value&&item.customer_id != this.customer_id){
+					setTimeout(()=>{
+						this.$set(item, 'checked', false);
+						console.log('settimeout');
+					},50)
 					this.$refs.uToast.show({
 						title:"请选择同一客户的预订单！",
 						type:"error"
-					})
+					});
 				}
 				if(this.book_order_ids.length==0){
 					this.customer_id = '';

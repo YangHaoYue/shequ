@@ -21,6 +21,10 @@
 			</navigator>
 		</view>
 		
+		<u-modal v-model="show" title="请求授权" content="请授权用户信息,拒绝授权可能无法接收到每日营收数据!" confirm-color="#FE8702">
+			<button open-type="getUserInfo" class="u-reset-button" slot="confirm-button" @getuserinfo="getUserInfo">授权</button>
+		</u-modal>
+		
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -38,6 +42,7 @@ export default {
 	},
 	data() {
 		return {
+			show:false,
 			headImg:'',
 			mobile: '',
 			password: '',
@@ -65,14 +70,17 @@ export default {
 				pwd:this.password
 			},true).then((res)=>{
 				if(res.code==1000){
-					this.http.setUserInfo(res.data);
-					this.$refs.uToast.show({
-						title:'登陆成功',
-						type:"success",
-						url:'/pages/home/home',
-						isTab:true,
-						duration:1000,
-					})
+					this.http.setUserInfo(res.data.token);
+					this.show=res.data.need_openid;
+					if(!this.show){
+						this.$refs.uToast.show({
+							title:'登陆成功',
+							type:"success",
+							url:'/pages/home/home',
+							isTab:true,
+							duration:1000,
+						})
+					}
 				}else{
 					this.$refs.uToast.show({
 						title:res.msg,
@@ -81,6 +89,41 @@ export default {
 					this.islogin=false;
 				}
 			})
+		},
+		getUserInfo(e){
+			console.log(e)
+			if(e.detail.userInfo){
+				//用户按了允许授权按钮
+				uni.login({
+					provider:'weixin',
+					success: (res) => {
+						console.log(res)
+						this.http.post('/api/v1/Auth/updateCode',{
+							code:res.code,
+							iv:e.detail.iv,
+							data:e.detail.encryptedData
+						},false).then((res)=>{
+							/* if(res.code==1000){
+								this.$refs.uToast.show({
+									title:'授权成功',
+									type:"success",
+									url:'/pages/home/home',
+									isTab:true,
+									duration:1000,
+								})
+							}else{
+								this.$refs.uToast.show({
+									title:res.msg,
+									type:'error',
+									url:'/pages/home/home',
+									isTab:true,
+									duration:2000,
+								})
+							} */
+						})
+					}
+				})
+			}
 		}
 	}
 };
