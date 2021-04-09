@@ -273,23 +273,23 @@ var _default =
               iv: e.detail.iv,
               data: e.detail.encryptedData },
             false).then(function (res) {
-              /* if(res.code==1000){
-                                        	this.$refs.uToast.show({
-                                        		title:'授权成功',
-                                        		type:"success",
-                                        		url:'/pages/home/home',
-                                        		isTab:true,
-                                        		duration:1000,
-                                        	})
-                                        }else{
-                                        	this.$refs.uToast.show({
-                                        		title:res.msg,
-                                        		type:'error',
-                                        		url:'/pages/home/home',
-                                        		isTab:true,
-                                        		duration:2000,
-                                        	})
-                                        } */
+              if (res.code == 1000) {
+                _this3.$refs.uToast.show({
+                  title: '授权成功',
+                  type: "success",
+                  url: '/pages/home/home',
+                  isTab: true,
+                  duration: 1000 });
+
+              } else {
+                _this3.$refs.uToast.show({
+                  title: res.msg,
+                  type: 'error',
+                  url: '/pages/home/home',
+                  isTab: true,
+                  duration: 2000 });
+
+              }
             });
           } });
 

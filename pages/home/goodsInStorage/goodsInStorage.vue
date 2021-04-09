@@ -27,11 +27,13 @@
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
 					<view class="bg-img" v-for="(item,index) in videoList" :key="index">
-					 <image :src="item.thumbTempFilePath" mode="aspectFill"></image>
-					 <!-- <video :src="item.tempFilePath" muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.fileType=='video'"></video> -->
-						<view class="cu-tag bg-red" @tap.stop="DelVideo" :data-index="index">
-							<text class='cuIcon-close'></text>
-						</view>
+					 <!-- <image :src="item.thumbTempFilePath" mode="aspectFill"></image> -->
+					 <video id="myvideo" @click="playVideo" :src="item.tempFilePath" muted :show-play-btn="false"
+					  :controls="false" :show-center-play-btn="false" objectFit="cover" @fullscreenchange="fullscreenchange" style="width: 130rpx;height: 130rpx;">
+						  <cover-view class="cu-tag bg-red u-font-14" @tap.stop="DelVideo" :data-index="index">
+								x
+						  </cover-view>
+					  </video>
 					</view>
 					<view class="solids" @tap="chooseVideo" v-if="videoList.length<1">
 						<text class='cuIcon-cameraadd'></text>
@@ -74,11 +76,13 @@
 		</view>
 		<!-- 描述 -->
 		<view class="u-p-30 solid-bottom">
-			<u-input type="textarea" v-model="textAreaValue" placeholder="请填写综合描述(留空，自动生成描述)"></u-input>
+			<u-input v-if="showTextArea" type="textarea" :focus="true" @blur="hideTextArea" @confirm="hideTextArea"
+			height="100"  v-model="textAreaValue" placeholder="请填写综合描述(留空，自动生成描述)"></u-input>
+			<view class="u-p-t-6" style="height: 100rpx;" :style="{'color':textAreaValue==''?'#CCC4CF':'#333333'}" v-else @click="inputTextArea">{{textAreaValue||"请填写综合描述(留空，自动生成描述)"}}</view>
 		</view>
 		<!-- 底部Tabbar -->
 		<view class="cu-tabbar-height"></view>
-		<view class="saveBtn u-p-30 u-text-center" @click="submit">确认入库</view>
+		<cover-view  style="z-index: 999;" class="saveBtn u-p-30 u-text-center" @click="submit">确认入库</cover-view>
 		
 		<u-toast ref="uToast"></u-toast>
 	</view>
@@ -174,7 +178,9 @@
 		},
 		watch: {
 			descAll(newValue, oldValue) {
-				this.textAreaValue=newValue;
+				if(this.good_id == ''){
+					this.textAreaValue=newValue;
+				}
 			}
 		},
 		data() {
@@ -197,10 +203,12 @@
 				scfileList: [],
 				sclists: [], // 组件内部的文件列表
 				/* 视频 */
+				videoContext:'',//video的上下文
 				videoList:[],
 				resource:'',
 				
 				/* 备注 */
+				showTextArea:false,
 				textAreaValue:'',
 				/* 护理情况 */
 				tagList:[],
@@ -282,6 +290,8 @@
 							this.fileList=res.data.img.map(v=>{
 								return this._formatImg(v)
 							});
+							res.data.pri_video?this.videoList.push({tempFilePath:this.http.resourceUrl() + res.data.pri_video}):''
+							res.data.pri_video?this.resource=res.data.pri_video:''
 							this.fromList[0].value=res.data.good_name;
 							this.fromList[1].value=res.data.brand_fill_arr.brand_name;
 							this.fromList[1].id=res.data.brand_fill_arr.brand_id;
@@ -381,7 +391,7 @@
 					sourceType: ['camera', 'album'],
 					maxDuration:15,
 					success:(res)=> {
-						if(res.duration>15) return this.$refs.uToast.show({title:"请选择或拍摄15s以下的视频！",type:"warning"})
+						if(res.tempFiles[0].duration>15) return this.$refs.uToast.show({title:"请选择或拍摄15s以下的视频！",type:"warning"})
 						console.log(res);
 						this.videoList=res.tempFiles;
 						this.http.uploadFile('/api/v1/Common/fileUploader',res.tempFiles[0].tempFilePath,'video').then((data)=>{
@@ -398,6 +408,18 @@
 			DelVideo(){
 				this.videoList=[];
 				this.resource=''
+			},
+			/* 播放视频 */
+			playVideo(){
+				this.videoContext = uni.createVideoContext("myvideo",this);
+				this.videoContext.requestFullScreen();
+				this.videoContext.play();
+			},
+			/* 退出全屏时停止播放 */
+			fullscreenchange (e){
+				if(!e.detail.fullScreen){
+					this.videoContext.pause()
+				}
 			},
 			preview(url,lists,index){
 				const item=lists[index];
@@ -468,6 +490,14 @@
 				}
 				//选中
 				this.attachmentSelectedList.push(id);
+			},
+			/* 显示testarea，并获取焦点 */
+			inputTextArea(){
+				this.showTextArea = true;
+			},
+			/* 隐藏textarea */
+			hideTextArea(){
+				this.showTextArea = false;
 			},
 			/* 提交入库 */
 			submit(){

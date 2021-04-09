@@ -118,6 +118,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.list, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = _vm.compare(item.value)
+    var m1 = _vm.compare(item.value)
+    return {
+      $orig: $orig,
+      m0: m0,
+      m1: m1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -160,6 +180,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
 var _default =
 {
   onLoad: function onLoad(e) {
@@ -182,15 +203,18 @@ var _default =
     getInfo: function getInfo(urlData) {var _this = this;
       this.http.post('/api/v1/Index/topCostDetail', urlData, true).then(function (res) {
         if (res.code == 1000) {
-          _this.list[0].value = res.data.total_cost_price_detail.new || 0;
-          _this.list[1].value = res.data.total_cost_price_detail.cus_rec || 0;
-          _this.list[2].value = res.data.total_cost_price_detail.cus_consign || 0;
-          _this.list[3].value = res.data.total_cost_price_detail.pe_consign || 0;
-          _this.list[4].value = res.data.total_cost_price_detail.pe_rec || 0;
-          _this.list[5].value = res.data.total_cost_price_detail.other || 0;
-          _this.list[6].value = res.data.total_cost_price_detail.total_cost_price || 0;
+          _this.list[0].value = res.data.total_cost_price_detail.new;
+          _this.list[1].value = res.data.total_cost_price_detail.cus_rec;
+          _this.list[2].value = res.data.total_cost_price_detail.cus_consign;
+          _this.list[3].value = res.data.total_cost_price_detail.pe_consign;
+          _this.list[4].value = res.data.total_cost_price_detail.pe_rec;
+          _this.list[5].value = res.data.total_cost_price_detail.other;
+          _this.list[6].value = res.data.total_cost_price_detail.total_cost_price;
         }
       });
+    },
+    compare: function compare(value) {
+      return typeof value == "number";
     } } };exports.default = _default;
 
 /***/ })

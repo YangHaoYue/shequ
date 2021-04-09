@@ -93,7 +93,7 @@
 					<view class="u-flex u-m-b-10 u-flex-1" style="color: #A5A5A5;">视频</view>
 					<view class="text-yellow text-sm" @click="uploadVideo">一键下载到手机</view>
 				</view>
-				<view class="u-flex u-flex-wrap u-row-left">
+				<view class="u-flex u-flex-wrap u-row-left u-m-t-10">
 					<video :src="videoResource" style="width: 100%;" objectFit="cover"></video>
 				</view>
 			</view>
@@ -475,7 +475,7 @@
 					success: res => {
 						if (res.statusCode === 200) {
 							// 视频保存到手机相册
-							uni.saveImageToPhotosAlbum({
+							uni.saveVideoToPhotosAlbum({
 								filePath: res.tempFilePath,
 								success: function() {
 									uni.hideLoading();

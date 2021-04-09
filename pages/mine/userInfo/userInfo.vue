@@ -143,6 +143,8 @@
 					manager_wx:this.storeInfo.manager_wx,
 					area_id:this.storeInfo.area_code,
 					address:this.storeInfo.address,
+					integral_deduction_per_yuan:this.storeInfo.integral_deduction_per_yuan,
+					integral_per_yuan:this.storeInfo.integral_per_yuan,
 					get_on:this.checked1?1:0,
 					deduct_on:this.checked2?1:0
 				}).then((res)=>{

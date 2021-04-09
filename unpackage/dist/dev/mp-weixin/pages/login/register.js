@@ -292,12 +292,6 @@ var _default =
           trigger: 'blur' },
 
         {
-          min: 3,
-          max: 5,
-          message: '姓名长度在3到5个字符',
-          trigger: ['change', 'blur'] },
-
-        {
           // 此为同步验证，可以直接返回true或者false，如果是异步验证，稍微不同，见下方说明
           validator: function validator(rule, value, callback) {
             // 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
@@ -347,6 +341,13 @@ var _default =
         {
           required: true,
           message: '请选择商品类型',
+          trigger: 'change' }],
+
+
+        wx: [
+        {
+          required: true,
+          message: '请填写店主微信',
           trigger: 'change' }],
 
 
@@ -422,8 +423,8 @@ var _default =
       this.$refs.uForm.validate(function (valid) {
         if (valid) {
           _this2.http.get('/api/v1/Apply/save', {
-            logo: _this2.logoLists[0].response.data.path,
-            pay_img: _this2.payLists[0].response.data.path,
+            logo: _this2.logoLists[0] && _this2.logoLists[0].response.data.path || '',
+            pay_img: _this2.payLists[0] && _this2.payLists[0].response.data.path || '',
             store_name: _this2.model.storeName,
             person_name: _this2.model.name,
             person_mobile: _this2.model.phone,
@@ -447,9 +448,11 @@ var _default =
 
             }
           });
-          console.log('验证通过');
         } else {
-          console.log('验证失败');
+          _this2.$refs.uToast.show({
+            title: "请填写完带*号的选项再提交",
+            type: 'error' });
+
         }
       });
     },

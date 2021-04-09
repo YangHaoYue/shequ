@@ -15,7 +15,7 @@
 		<u-swiper class="u-skeleton-rect" :list="list" name="img" :title="true" height="375" @click="toImgDetail"></u-swiper>
 		<!-- 九宫格 -->
 		<u-grid :col="3">
-			<u-grid-item v-for="(item,index) in gridList" :key="index" :index="index" @click="navigator(item.url)" v-if="Permissions.indexOf(item.permission)!=-1">
+			<u-grid-item v-for="(item,index) in gridList" :key="index" :index="index" @click="navigator(item.url)" v-if="loading||Permissions.indexOf(item.permission)!=-1">
 				<view class="u-flex u-m-t-20 u-m-b-20" style="flex-direction: column;" hover-class='none' :url="item.url" navigateTo>
 					<u-image class="u-skeleton-fillet" showLoading="true" width="98rpx" height="98rpx" :src="item.img" :fade="true" duration="450"></u-image>
 					<!-- <image :src="item.img" style="width: 88rpx;height: 88rpx;" mode="aspectFit"></image> -->

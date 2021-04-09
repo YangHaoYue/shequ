@@ -14,8 +14,11 @@
 						<view class="u-line-1 text-bold text-black u-font-30">{{item.title}}</view>
 						<view class="u-line-1 text-gray u-font-22 u-m-t-20">{{item.store_no}}</view>
 						<view class="u-flex u-row-between u-m-t-20">
-							<view class="text-bold u-font-36" style="color: #FE8702;">{{item.sell_price}}</view>
-							<view class="text-black">x{{item.buy_num}}</view>
+							<view class="u-flex u-col-bottom" style="line-height: 1;">
+								<view class="text-bold u-font-36 u-col-center" style="color: #FE8702;">￥{{item.sell_price}}</view>
+								<view class="text-black u-m-l-10">x{{item.buy_num}}</view>
+							</view>
+							<u-button class="u-m-10" size="mini" plain type="warning" @click="showModal(item.id)">修改成本价</u-button>
 						</view>
 					</view>
 				</view>
@@ -57,7 +60,7 @@
 		<!-- 底部导航栏 -->
 		<view class="cu-tabbar-height" v-if="status==0"></view>
 		<view class="addTabBtn bg-white u-flex u-row-right u-text-center u-p-10" v-if="status==0">
-			<u-button class="u-m-10" size="mini" plain type="warning" @click="show = true">修改成本价</u-button>
+			<!-- <u-button class="u-m-10" size="mini" plain type="warning" @click="show = true">修改成本价</u-button> -->
 			<u-button class="u-m-10" size="mini" plain type="warning" @click="print">打印订单</u-button>
 			<u-button class="u-m-10" size="mini" plain type="warning" @click="toSetting">修改订单</u-button>
 			<u-button class="u-m-10" size="mini" plain type="warning" @click="cancelOrder">取消订单</u-button>
@@ -110,6 +113,7 @@
 					{name:'备注',value:''},
 				],
 				/* 成本价格 */
+				good_id:'',
 				show:false,
 				costPrice:''
 			}
@@ -173,10 +177,15 @@
 			toSetting(){
 				uni.navigateTo({url: `/pages/home/salesBilling/salesBilling?order_id=${this.order_id}`});
 			},
+			//显示编辑成本价modal
+			showModal(id){
+				this.good_id = id;
+				this.show = true;
+			},
 			/* 编辑订单成本价 */
 			editOrderCostPrice(){
-				this.http.post('/api/v1/OrderLog/editOrderCostPrice',{
-					order_id:this.order_id,
+				this.http.post('/api/v1/OrderLog/editGoodCostPrice',{
+					good_id:this.good_id,
 					cost_price:this.costPrice
 				}).then((res)=>{
 					if(res.code===1000){
@@ -184,8 +193,10 @@
 							title:res.msg,
 							type:"success"
 						});
+						this.costPrice='';
 						this.getInfo();
 					}else{
+						this.good_id = '';
 						this.$refs.uToast.show({
 							title:res.msg,
 							type:"error"

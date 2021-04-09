@@ -98,6 +98,9 @@ try {
     uImage: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-image/u-image */ "uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-image/u-image.vue */ 456))
     },
+    uButton: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 471))
+    },
     uToast: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 492))
     },
@@ -106,9 +109,6 @@ try {
     },
     uInput: function() {
       return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 463))
-    },
-    uButton: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 471))
     }
   }
 } catch (e) {
@@ -134,13 +134,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   var g0 = _vm.http.resourceUrl()
   var g1 = _vm.img_delivery ? _vm.http.resourceUrl() : null
-
-  if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
-      _vm.show = true
-    }
-  }
-
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -184,6 +177,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
 //
 //
 //
@@ -295,6 +291,7 @@ var _default =
       { name: '备注', value: '' }],
 
       /* 成本价格 */
+      good_id: '',
       show: false,
       costPrice: '' };
 
@@ -358,10 +355,15 @@ var _default =
     toSetting: function toSetting() {
       uni.navigateTo({ url: "/pages/home/salesBilling/salesBilling?order_id=".concat(this.order_id) });
     },
+    //显示编辑成本价modal
+    showModal: function showModal(id) {
+      this.good_id = id;
+      this.show = true;
+    },
     /* 编辑订单成本价 */
     editOrderCostPrice: function editOrderCostPrice() {var _this3 = this;
-      this.http.post('/api/v1/OrderLog/editOrderCostPrice', {
-        order_id: this.order_id,
+      this.http.post('/api/v1/OrderLog/editGoodCostPrice', {
+        good_id: this.good_id,
         cost_price: this.costPrice }).
       then(function (res) {
         if (res.code === 1000) {
@@ -369,8 +371,10 @@ var _default =
             title: res.msg,
             type: "success" });
 
+          _this3.costPrice = '';
           _this3.getInfo();
         } else {
+          _this3.good_id = '';
           _this3.$refs.uToast.show({
             title: res.msg,
             type: "error" });

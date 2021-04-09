@@ -290,6 +290,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 {
   components: {
     formList: formList },
@@ -378,7 +382,9 @@ __webpack_require__.r(__webpack_exports__);
 
   watch: {
     descAll: function descAll(newValue, oldValue) {
-      this.textAreaValue = newValue;
+      if (this.good_id == '') {
+        this.textAreaValue = newValue;
+      }
     } },
 
   data: function data() {
@@ -401,10 +407,12 @@ __webpack_require__.r(__webpack_exports__);
       scfileList: [],
       sclists: [], // 组件内部的文件列表
       /* 视频 */
+      videoContext: '', //video的上下文
       videoList: [],
       resource: '',
 
       /* 备注 */
+      showTextArea: false,
       textAreaValue: '',
       /* 护理情况 */
       tagList: [],
@@ -486,6 +494,8 @@ __webpack_require__.r(__webpack_exports__);
             _this4.fileList = res.data.img.map(function (v) {
               return _this4._formatImg(v);
             });
+            res.data.pri_video ? _this4.videoList.push({ tempFilePath: _this4.http.resourceUrl() + res.data.pri_video }) : '';
+            res.data.pri_video ? _this4.resource = res.data.pri_video : '';
             _this4.fromList[0].value = res.data.good_name;
             _this4.fromList[1].value = res.data.brand_fill_arr.brand_name;
             _this4.fromList[1].id = res.data.brand_fill_arr.brand_id;
@@ -588,7 +598,7 @@ __webpack_require__.r(__webpack_exports__);
         sourceType: ['camera', 'album'],
         maxDuration: 15,
         success: function success(res) {
-          if (res.duration > 15) return _this5.$refs.uToast.show({ title: "请选择或拍摄15s以下的视频！", type: "warning" });
+          if (res.tempFiles[0].duration > 15) return _this5.$refs.uToast.show({ title: "请选择或拍摄15s以下的视频！", type: "warning" });
           console.log(res);
           _this5.videoList = res.tempFiles;
           _this5.http.uploadFile('/api/v1/Common/fileUploader', res.tempFiles[0].tempFilePath, 'video').then(function (data) {
@@ -608,6 +618,18 @@ __webpack_require__.r(__webpack_exports__);
     DelVideo: function DelVideo() {
       this.videoList = [];
       this.resource = '';
+    },
+    /* 播放视频 */
+    playVideo: function playVideo() {
+      this.videoContext = uni.createVideoContext("myvideo", this);
+      this.videoContext.requestFullScreen();
+      this.videoContext.play();
+    },
+    /* 退出全屏时停止播放 */
+    fullscreenchange: function fullscreenchange(e) {
+      if (!e.detail.fullScreen) {
+        this.videoContext.pause();
+      }
     },
     preview: function preview(url, lists, index) {
       var item = lists[index];
@@ -678,6 +700,14 @@ __webpack_require__.r(__webpack_exports__);
       }
       //选中
       this.attachmentSelectedList.push(id);
+    },
+    /* 显示testarea，并获取焦点 */
+    inputTextArea: function inputTextArea() {
+      this.showTextArea = true;
+    },
+    /* 隐藏textarea */
+    hideTextArea: function hideTextArea() {
+      this.showTextArea = false;
     },
     /* 提交入库 */
     submit: function submit() {var _this7 = this;

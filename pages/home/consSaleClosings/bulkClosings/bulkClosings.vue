@@ -9,9 +9,18 @@
 		<!-- 列表 -->
 		<block v-for="(item,i) in goodList" :key="i">
 			<u-gap height="10" bg-color="#F5F5F5"></u-gap>
-			<good-list :item="item" :index="i" :length="orderList.length"></good-list>
+			<good-list :item="item" :index="i" :length="orderList.length">
+				<view slot="price" class="u-flex">
+					<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price}}</view>
+					<view class="u-font-28 u-m-l-10">成本价:￥{{item.cost_price}}</view>
+				</view>
+			</good-list>
 			<view class="u-flex u-row-right u-p-10 solid-top" @click="selected(item.id)">
-				<view class="u-p-20 u-font-14" :class="selectedList.indexOf(item.id)==-1?'nomal':'selected'" >本次结款</view>
+				<checkbox class='yellow' style="transform:scale(0.7)"
+				 :class="selectedList.indexOf(item.id)!=-1?'checked':''" 
+				 :checked="selectedList.indexOf(item.id)!=-1"></checkbox><text class="u-m-l-10">本次结款</text>
+				<!-- <checkbox style="transform:scale(0.7)" :checked="selectedList.indexOf(item.id)!=-1" :color="'#FE8702'"></checkbox> -->
+				<!-- <view class="u-p-20 u-font-14" :class="selectedList.indexOf(item.id)==-1?'nomal':'selected'" >本次结款</view> -->
 			</view>
 			<u-gap height="10" bg-color="#F5F5F5"></u-gap>
 		</block>
@@ -93,7 +102,9 @@
 					}else{
 						this.$refs.uToast.show({
 							title:res.msg,
-							type:"error"
+							type:"error",
+							back:true,
+							duration:1500
 						})
 					}
 				})

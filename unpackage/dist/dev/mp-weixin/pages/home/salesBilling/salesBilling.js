@@ -483,6 +483,14 @@ var _default =
             });
             _this2.delivery_id = res.data.type_send_id;
 
+            if (_this2.delivery_id == 2) {
+              _this2.fileList.push({
+                url: _this2.http.resourceUrl() + res.data.img_delivery,
+                error: false,
+                progress: 100 });
+
+            }
+            _this2.textAreaValue = res.data.remark;
             _this2.goodsList = res.data.good_data.map(function (v) {
               return _this2._formatData(v);
             });
@@ -574,6 +582,9 @@ var _default =
             type: "success",
             back: true });
 
+          uni.$emit('back', {
+            back: true });
+
         } else {
           _this4.$refs.uToast.show({
             title: res.msg,
@@ -584,6 +595,9 @@ var _default =
     },
     /* 编辑 */
     setting: function setting() {var _this5 = this;
+      var goods = this.goodsList.map(function (v) {
+        return _this5._formatGood(v);
+      });
       console.log(this.lists);
       this.http.post('/api/v1/Order/editOrder', {
         order_id: this.order_id,
@@ -595,7 +609,8 @@ var _default =
         integral: this.user_integral || 0,
         date: this.date,
         remark: this.textAreaValue,
-        img_delivery: this.lists.length != 0 ? this.lists[0].response.data.path : '' }).
+        img_delivery: this.lists.length != 0 ? this.lists[0].response.data.path : '',
+        good_data: goods }).
       then(function (res) {
         if (res.code == 1000) {
           _this5.$refs.uToast.show({

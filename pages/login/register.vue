@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 		<u-form :model="model" :rules="rules" ref="uForm" :errorType="errorType">
-			<u-form-item :label-style="labelStyle" :label-position="labelPosition" label="店铺logo" prop="photo" label-width="150">
+			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺logo" prop="photo" label-width="150">
 				<u-upload width="160" ref="uUpload" height="160" :action="action" @on-list-change="onLogoChange" :max-count="1"></u-upload>
 			</u-form-item>
 			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺名称" prop="storeName">
@@ -41,8 +41,8 @@
 		<u-button @click="submit">提交</u-button>
 		<u-toast ref="uToast"></u-toast>
 		<u-action-sheet :list="actionSheetList" v-model="actionSheetShow" @click="actionSheetCallback"></u-action-sheet>
-		<u-select mode="single-column" :list="selectList" v-model="selectShow" @confirm="selectConfirm"></u-select>
-		<u-picker mode="region" v-model="pickerShow" @confirm="regionConfirm"></u-picker>
+		<u-select mode="single-column" confirm-color="#FE8702" :list="selectList" v-model="selectShow" @confirm="selectConfirm"></u-select>
+		<u-picker mode="region" confirm-color="#FE8702" v-model="pickerShow" @confirm="regionConfirm"></u-picker>
 	</view>
 </template>
 
@@ -94,12 +94,6 @@ export default {
 						trigger: 'blur' ,
 					},
 					{
-						min: 3,
-						max: 5,
-						message: '姓名长度在3到5个字符',
-						trigger: ['change','blur'],
-					},
-					{
 						// 此为同步验证，可以直接返回true或者false，如果是异步验证，稍微不同，见下方说明
 						validator: (rule, value, callback) => {
 							// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
@@ -149,6 +143,13 @@ export default {
 					{
 						required: true,
 						message: '请选择商品类型',
+						trigger: 'change',
+					}
+				],
+				wx: [
+					{
+						required: true,
+						message: '请填写店主微信',
 						trigger: 'change',
 					}
 				],
@@ -224,8 +225,8 @@ export default {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
 					this.http.get('/api/v1/Apply/save',{
-						logo:this.logoLists[0].response.data.path,
-						pay_img:this.payLists[0].response.data.path,
+						logo:this.logoLists[0]&&this.logoLists[0].response.data.path||'',
+						pay_img:this.payLists[0]&&this.payLists[0].response.data.path||'',
 						store_name:this.model.storeName,
 						person_name:this.model.name,
 						person_mobile:this.model.phone,
@@ -249,9 +250,11 @@ export default {
 							})
 						}
 					})
-					console.log('验证通过');
 				} else {
-					console.log('验证失败');
+					this.$refs.uToast.show({
+						title:"请填写完带*号的选项再提交",
+						type:'error'
+					})
 				}
 			});
 		},

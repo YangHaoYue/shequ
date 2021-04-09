@@ -315,6 +315,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   components: {
     goodList: goodList,
@@ -349,7 +364,7 @@ __webpack_require__.r(__webpack_exports__);
       uni.$off('chooseEmployees1');
     });
     uni.$on('back', function () {
-      _this.reset();
+      _this.clearGoodList();
       uni.$off('back');
     });
   },

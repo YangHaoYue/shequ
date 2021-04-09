@@ -85,7 +85,7 @@
 				<view>￥{{totalPrice}}</view>
 			</view>
 		</view>
-		<!-- 间隔槽 -->
+		<!-- 间隔槽/订单备注 -->
 		<u-gap height="30" bg-color="#F5F5F5"></u-gap>
 		<view class="u-p-30">
 			<u-input type="textarea" v-model="textAreaValue" placeholder="请填写订单备注"></u-input>
@@ -266,6 +266,14 @@
 							})
 							this.delivery_id=res.data.type_send_id;
 							
+							if(this.delivery_id==2){
+								this.fileList.push({
+									url: this.http.resourceUrl() + res.data.img_delivery,
+									error: false,
+									progress: 100
+								})
+							}
+							this.textAreaValue=res.data.remark;
 							this.goodsList=res.data.good_data.map(v=>{
 								return this._formatData(v);
 							});
@@ -357,6 +365,9 @@
 							type:"success",
 							back:true
 						});
+						uni.$emit('back',{
+							back:true
+						})
 					}else{
 						this.$refs.uToast.show({
 							title:res.msg,
@@ -367,6 +378,9 @@
 			},
 			/* 编辑 */
 			setting(){
+				let goods=this.goodsList.map(v=>{
+					return this._formatGood(v);
+				})
 				console.log(this.lists);
 				this.http.post('/api/v1/Order/editOrder',{
 					order_id:this.order_id,
@@ -378,7 +392,8 @@
 					integral:this.user_integral||0,
 					date:this.date,
 					remark:this.textAreaValue,
-					img_delivery:this.lists.length!=0?this.lists[0].response.data.path:''
+					img_delivery:this.lists.length!=0?this.lists[0].response.data.path:'',
+					good_data:goods
 				}).then(res=>{
 					if(res.code==1000){
 						this.$refs.uToast.show({

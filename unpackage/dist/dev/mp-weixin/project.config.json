@@ -11,6 +11,8 @@
   "libVersion": "",
   "appid": "wx473124bb9aa91829",
   "projectname": "uView-demo",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
       "list": []

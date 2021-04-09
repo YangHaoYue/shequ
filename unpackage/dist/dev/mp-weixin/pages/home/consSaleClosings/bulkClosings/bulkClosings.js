@@ -142,9 +142,11 @@ var render = function() {
     var $orig = _vm.__get_orig(item)
 
     var g0 = _vm.selectedList.indexOf(item.id)
+    var g1 = _vm.selectedList.indexOf(item.id)
     return {
       $orig: $orig,
-      g0: g0
+      g0: g0,
+      g1: g1
     }
   })
 
@@ -190,6 +192,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var goodList = function goodList() {__webpack_require__.e(/*! require.ensure | components/good-list/good-list */ "components/good-list/good-list").then((function () {return resolve(__webpack_require__(/*! @/components/good-list/good-list.vue */ 602));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
 
 
 
@@ -284,7 +295,9 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           _this2.$refs.uToast.show({
             title: res.msg,
-            type: "error" });
+            type: "error",
+            back: true,
+            duration: 1500 });
 
         }
       });

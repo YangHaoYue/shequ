@@ -798,7 +798,7 @@ var _default =
         success: function success(res) {
           if (res.statusCode === 200) {
             // 视频保存到手机相册
-            uni.saveImageToPhotosAlbum({
+            uni.saveVideoToPhotosAlbum({
               filePath: res.tempFilePath,
               success: function success() {
                 uni.hideLoading();

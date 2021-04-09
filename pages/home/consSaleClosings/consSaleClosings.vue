@@ -54,11 +54,26 @@
 		<scroll-view scroll-y :style="'height:'+scrollHeight+'px;'" @scrolltolower="scrolltolower" lower-threshold="70">
 			<block v-for="(item,i) in goodList" :key="i">
 				<u-gap height="10" bg-color="#F5F5F5"></u-gap>
-					<good-list :item="item" :index="i" :length="orderList.length" :idType="true"></good-list>
-					<view class="u-flex u-row-right u-p-10 solid-top" v-if="screen.currentIndex==0">
+				<view class="u-flex u-row-between u-p-20" v-if="item.status_pay==1">
+					<view>{{item.type_pay}} 结款账号:{{item.consign_account}}</view>
+					<view>{{item.customer_name}} {{item.created_at}}</view>
+				</view>
+				<good-list :item="item" :index="i" :length="orderList.length" :idType="true">
+					<view slot="price" class="u-flex">
+						<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price}}</view>
+						<view class="u-font-28 u-m-l-10">成本价:￥{{item.cost_price}}</view>
+					</view>
+				</good-list>
+				<view class="u-flex u-row-between u-p-10 solid-top" v-if="screen.currentIndex==0">
+					<view class="u-m-l-10">买家:{{item.customer_name}}</view>
+					<view class="u-flex u-row-right">
 						<u-button class="u-m-r-15" type="primary" size="mini" @click="toBulk(item.customer_id)"><text class="u-p-l-20 u-p-r-20">批量</text></u-button>
 						<u-button class="u-m-l-15" type="warning" size="mini" @click="payment(item.id)"><text class="u-p-l-20 u-p-r-20">结款</text></u-button>
 					</view>
+				</view>
+				<view class="u-flex u-row-between u-p-20 solid-top u-line-1" v-if="item.status_pay==1">
+					备注信息：{{item.consign_remark}}
+				</view>
 				<u-gap height="10" bg-color="#F5F5F5"></u-gap>
 			</block>
 			<!-- 数据为空 -->
@@ -113,7 +128,7 @@
 				uni.$off('chooseEmployees1')
 			});
 			uni.$on('back',()=>{
-				this.reset();
+				this.clearGoodList();
 				uni.$off('back')
 			})
 		},

@@ -114,6 +114,12 @@
 				this.fromList[1].id=data.item.id;
 				uni.$off('chooseEmployees1')
 			});
+			uni.$on('back',(data)=>{
+				setTimeout(()=>{
+					this.clearGoodList();
+				},2100)
+				uni.$off('back')
+			});
 		},
 		computed: {
 			isShowTab() {

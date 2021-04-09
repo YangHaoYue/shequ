@@ -103,7 +103,7 @@ export default {
 							iv:e.detail.iv,
 							data:e.detail.encryptedData
 						},false).then((res)=>{
-							/* if(res.code==1000){
+							if(res.code==1000){
 								this.$refs.uToast.show({
 									title:'授权成功',
 									type:"success",
@@ -119,7 +119,7 @@ export default {
 									isTab:true,
 									duration:2000,
 								})
-							} */
+							}
 						})
 					}
 				})

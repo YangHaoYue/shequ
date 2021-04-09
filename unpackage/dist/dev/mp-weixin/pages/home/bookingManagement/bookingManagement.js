@@ -356,6 +356,12 @@ __webpack_require__.r(__webpack_exports__);
       _this.fromList[1].id = data.item.id;
       uni.$off('chooseEmployees1');
     });
+    uni.$on('back', function (data) {
+      setTimeout(function () {
+        _this.clearGoodList();
+      }, 2100);
+      uni.$off('back');
+    });
   },
   computed: {
     isShowTab: function isShowTab() {
