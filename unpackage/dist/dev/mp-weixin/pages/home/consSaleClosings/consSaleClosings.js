@@ -364,7 +364,9 @@ __webpack_require__.r(__webpack_exports__);
       uni.$off('chooseEmployees1');
     });
     uni.$on('back', function () {
-      _this.clearGoodList();
+      setTimeout(function () {
+        _this.clearGoodList();
+      }, 2000);
       uni.$off('back');
     });
   },
@@ -376,7 +378,7 @@ __webpack_require__.r(__webpack_exports__);
     this.status = 'loading';
     this.page = ++this.page;
     setTimeout(function () {
-      _this2.getInfo();
+      _this2.clearGoodList();
     }, 2000);
   },
   data: function data() {
@@ -461,9 +463,9 @@ __webpack_require__.r(__webpack_exports__);
             _this5.goodList = res.data.main.consign_data;
             _this5.last_page = res.data.main.last_page;
             _this5.navList[0].number = res.data.top.total_price.value;
-            _this5.navList[1].number = res.data.top.good_num;
-            _this5.navList[2].number = res.data.top.total_num;
-            _this5.navList[3].number = res.data.top.cus_num;
+            _this5.navList[1].number = res.data.top.total_num;
+            _this5.navList[2].number = res.data.top.cus_num;
+            _this5.navList[3].number = res.data.top.good_num;
             _this5.navList[0].unit = res.data.top.total_price.unit;
           } else {
             res.data.main.consign_data.map(function (v) {

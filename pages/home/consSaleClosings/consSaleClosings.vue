@@ -128,7 +128,9 @@
 				uni.$off('chooseEmployees1')
 			});
 			uni.$on('back',()=>{
-				this.clearGoodList();
+				setTimeout(()=>{
+					this.clearGoodList();
+				},2000)
 				uni.$off('back')
 			})
 		},
@@ -140,7 +142,7 @@
 			this.status = 'loading';
 			this.page = ++ this.page;
 			setTimeout(() => {
-				this.getInfo();
+				this.clearGoodList();
 			}, 2000)
 		},
 		data() {
@@ -225,9 +227,9 @@
 							this.goodList=res.data.main.consign_data;
 							this.last_page=res.data.main.last_page;
 							this.navList[0].number=res.data.top.total_price.value;
-							this.navList[1].number=res.data.top.good_num;
-							this.navList[2].number=res.data.top.total_num;
-							this.navList[3].number=res.data.top.cus_num;
+							this.navList[1].number=res.data.top.total_num;
+							this.navList[2].number=res.data.top.cus_num;
+							this.navList[3].number=res.data.top.good_num;
 							this.navList[0].unit=res.data.top.total_price.unit
 						}else{
 							res.data.main.consign_data.map(v=>{

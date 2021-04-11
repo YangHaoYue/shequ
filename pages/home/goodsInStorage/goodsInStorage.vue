@@ -254,6 +254,7 @@
 					type_for:this.type_for
 				}).then((res)=>{
 					if(res.code==1000){
+						uni.setStorageSync('goodsSourceData',res.data.type_from)
 						this.tagList=res.data.care;
 						this.attachmentList=res.data.annex;
 						this.type_condition=res.data.type_condition;
@@ -271,7 +272,6 @@
 							}
 							return{value:v.id,label:v.val}
 						})
-						
 						if(this.type_for==1){
 							this.$set(this.fromList[14],'type','')
 							/* this.$set(this.fromList[9],'disable',true)

@@ -11,7 +11,7 @@
 <script>
 	export default {
 		onLoad() {
-			this.getInfo();
+			this.list=uni.getStorageSync('goodsSourceData')
 		},
 		data() {
 			return {
@@ -21,11 +21,11 @@
 		},
 		methods: {
 			getInfo(){
-				this.http.get('/api/v1/Index/getScreenData').then((res)=>{
+				/* this.http.get('/api/v1/Storage/getStoOption').then((res)=>{
 					if(res.code==1000){
 						this.list=res.data.type_from;
 					}
-				})
+				}) */
 			},
 			choose(item){
 				uni.$emit('chooseSource',{item:item});

@@ -405,8 +405,11 @@ __webpack_require__.r(__webpack_exports__);
       uni.$off('chooseWarehouse');
     });
     uni.$on('chooseCustomer', function (data) {
-      _this.fromList[1].value = data.item.name;
-      _this.fromList[1].id = data.item.id;
+      var pages = getCurrentPages();
+      if (pages.length == 3) {
+        _this.fromList[1].value = data.item.name;
+        _this.fromList[1].id = data.item.id;
+      }
       uni.$off('chooseCustomer');
     });
     uni.$on('chooseEmployees1', function (data) {
@@ -544,12 +547,12 @@ __webpack_require__.r(__webpack_exports__);
         sto_order: this.screen.list[1].status,
         price_order: this.screen.list[2].status,
         brand_id: this.popupList[0].selected.toString(),
-        top_cate_id: this.popupList[1].selected.toString() || 0,
+        top_cate_id: this.popupList[1].selected.toString(),
         cate_id: this.popupList[2].selected.toString(),
-        time_up: this.popupList[3].selected.toString() || 2,
-        type_from: this.popupList[4].selected.toString() || 6,
-        type_condition: this.popupList[5].selected.toString() || 3,
-        type_sell: this.popupList[6].selected.toString() || -1,
+        time_up: this.popupList[3].selected.toString(),
+        type_from: this.popupList[4].selected.toString(),
+        type_condition: this.popupList[5].selected.toString(),
+        type_sell: this.popupList[6].selected.toString(),
         store_house_id: this.fromList[0].id,
         customer_id: this.fromList[1].id,
         sto_user_id: this.fromList[2].id,

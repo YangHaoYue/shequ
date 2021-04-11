@@ -193,7 +193,7 @@ var _default =
 
         return;
       } else {
-        this.http.get('/api/v1/Auth/editPwd', {
+        this.http.post('/api/v1/Auth/editPwd', {
           origin: this.oldPwd,
           pwd: this.newPwd }).
         then(function (res) {
@@ -202,8 +202,10 @@ var _default =
               title: res.msg,
               type: "success" });
 
-            uni.clearStorage();
-            uni.reLaunch({ url: '/pages/login/login' });
+            setTimeout(function () {
+              uni.clearStorage();
+              uni.reLaunch({ url: '/pages/login/login' });
+            }, 2000);
           } else {
             _this.$refs.uToast.show({
               title: res.msg,

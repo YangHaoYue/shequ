@@ -359,7 +359,7 @@ __webpack_require__.r(__webpack_exports__);
     uni.$on('back', function (data) {
       setTimeout(function () {
         _this.clearGoodList();
-      }, 2100);
+      }, 2000);
       uni.$off('back');
     });
   },

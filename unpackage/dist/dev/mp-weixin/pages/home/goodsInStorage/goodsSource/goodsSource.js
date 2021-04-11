@@ -141,7 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 var _default =
 {
   onLoad: function onLoad() {
-    this.getInfo();
+    this.list = uni.getStorageSync('goodsSourceData');
   },
   data: function data() {
     return {
@@ -150,12 +150,12 @@ var _default =
 
   },
   methods: {
-    getInfo: function getInfo() {var _this = this;
-      this.http.get('/api/v1/Index/getScreenData').then(function (res) {
-        if (res.code == 1000) {
-          _this.list = res.data.type_from;
-        }
-      });
+    getInfo: function getInfo() {
+      /* this.http.get('/api/v1/Storage/getStoOption').then((res)=>{
+                                 	if(res.code==1000){
+                                 		this.list=res.data.type_from;
+                                 	}
+                                 }) */
     },
     choose: function choose(item) {
       uni.$emit('chooseSource', { item: item });

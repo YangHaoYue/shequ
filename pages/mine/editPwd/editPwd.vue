@@ -34,7 +34,7 @@
 					})
 					return
 				}else{
-					this.http.get('/api/v1/Auth/editPwd',{
+					this.http.post('/api/v1/Auth/editPwd',{
 						origin:this.oldPwd,
 						pwd:this.newPwd
 					}).then(res=>{
@@ -43,8 +43,10 @@
 								title:res.msg,
 								type:"success"
 							});
-							uni.clearStorage();
-							uni.reLaunch({url:'/pages/login/login'})
+							setTimeout(()=>{
+								uni.clearStorage();
+								uni.reLaunch({url:'/pages/login/login'})
+							},2000)
 						}else{
 							this.$refs.uToast.show({
 								title:res.msg,

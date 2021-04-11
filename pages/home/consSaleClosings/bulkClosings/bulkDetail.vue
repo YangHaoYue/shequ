@@ -9,7 +9,12 @@
 		<!-- 列表 -->
 		<block v-for="(item,i) in goodList" :key="i">
 			<u-gap height="10" bg-color="#F5F5F5"></u-gap>
-			<good-list :item="item" :index="i" :length="orderList.length"></good-list>
+			<good-list :item="item" :index="i" :length="orderList.length">
+				<view slot="price" class="u-flex">
+					<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price}}</view>
+					<view class="u-font-28 u-m-l-10">成本价:￥{{item.cost_price}}</view>
+				</view>
+			</good-list>
 			<u-gap height="10" bg-color="#F5F5F5"></u-gap>
 		</block>
 		

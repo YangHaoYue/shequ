@@ -34,7 +34,7 @@
 		data() {
 			return {
 				avaterUrl: '',
-				nickname:'测试',
+				nickname:'',
 				cellList:[{
 					name:'客户管理',
 					img:'../../../static/uiImg/khglicon.png',
@@ -79,6 +79,7 @@
 				this.http.post('/api/v1/Auth/getStoreInfo',{},true).then((res)=>{
 					if(res.code==1000){
 						this.avaterUrl=this.http.resourceUrl()+res.data.logo;
+						this.nickname=res.data.manager_name+'('+res.data.store_name+')'
 					}
 				})
 			},

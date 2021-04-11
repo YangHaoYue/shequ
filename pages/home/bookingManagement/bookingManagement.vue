@@ -117,7 +117,7 @@
 			uni.$on('back',(data)=>{
 				setTimeout(()=>{
 					this.clearGoodList();
-				},2100)
+				},2000)
 				uni.$off('back')
 			});
 		},

@@ -16,7 +16,7 @@
 				<view class="u-m-r-20">快递面单照</view>
 			</view>
 			<u-upload ref="uUpload" :action="action" :file-list="fileList" :show-progress="true" :header="header"
-			:deletable="true" height="170rpx" :max-count="99" @on-list-change="onListChange">
+			:deletable="true" height="170rpx" :max-count="1" @on-list-change="onListChange">
 			</u-upload>
 		</view>
 		<!-- 积分 -->
@@ -87,8 +87,10 @@
 		</view>
 		<!-- 间隔槽/订单备注 -->
 		<u-gap height="30" bg-color="#F5F5F5"></u-gap>
-		<view class="u-p-30">
-			<u-input type="textarea" v-model="textAreaValue" placeholder="请填写订单备注"></u-input>
+		<view class="u-p-30 solid-bottom">
+			<u-input v-if="showTextArea" type="textarea" :focus="true" @blur="hideTextArea" @confirm="hideTextArea"
+			height="100"  v-model="textAreaValue" placeholder="请填写综合描述(留空，自动生成描述)"></u-input>
+			<view class="u-p-t-6" style="height: 100rpx;" :style="{'color':textAreaValue==''?'#CCC4CF':'#333333'}" v-else @click="inputTextArea">{{textAreaValue||"请填写综合描述(留空，自动生成描述)"}}</view>
 		</view>
 		<u-gap height="30" bg-color="#F5F5F5"></u-gap>
 		<!-- 底部Tabbar -->
@@ -217,6 +219,7 @@
 				listTouchDirection: null,
 				goodsList:[],
 				/* 备注 */
+				showTextArea:false,
 				textAreaValue:''
 			}
 		},
@@ -278,6 +281,12 @@
 								return this._formatData(v);
 							});
 						}
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error",
+							back:true
+						})
 					}
 				})
 			},
@@ -340,6 +349,14 @@
 					buy_num:e.number,
 					sale_price:e.cost_price
 				}
+			},
+			/* 显示testarea，并获取焦点 */
+			inputTextArea(){
+				this.showTextArea = true;
+			},
+			/* 隐藏textarea */
+			hideTextArea(){
+				this.showTextArea = false;
 			},
 			/* 开单 */
 			submit(){

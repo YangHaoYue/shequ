@@ -50,13 +50,22 @@
 		<scroll-view scroll-y :style="'height:'+scrollHeight+'px;'" @scrolltolower="scrolltolower">
 			<block v-for="(item,i) in goodList" :key="i">
 				<good-list :item="item" :index="i" :length="goodList.length" :idType="true">
-					<u-tag slot="tag" :text="item.tag_str" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
-					<view slot="price" class="u-flex">
-						<view  class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price}}</view>
-						<view  class="text-gray u-font-12 u-m-l-10">成本价￥{{item.cost_price}}</view>
+					<view slot="tag">
+						<u-tag :text="item.tag_str" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
+						<view  class="u-flex">
+							<view  class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price}}</view>
+							<view  class="text-gray u-font-12 u-m-l-10">成本价￥{{item.cost_price}}</view>
+						</view>
+						<view class="u-flex u-row-between u-m-t-10">
+							<view class="u-m-t-10 u-font-12">{{item.created_at}}</view>
+							<view class="text-black">{{item.sub_tag_str}}</view>
+						</view>
 					</view>
-					<view slot="number" class="text-black">{{item.sub_tag_str}}</view>
+					<view slot="foot"></view>
 				</good-list>
+				<view class="u-flex u-row-between u-p-20 solid-top u-line-1" v-if="screen.currentIndex==2">
+					备注：{{item.remark}}
+				</view>
 				<u-gap height="10" bg-color="#F5F5F5"></u-gap>
 			</block>
 			<!-- 数据为空 -->

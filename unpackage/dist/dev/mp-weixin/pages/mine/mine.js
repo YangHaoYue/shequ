@@ -226,7 +226,7 @@ var _default =
   data: function data() {
     return {
       avaterUrl: '',
-      nickname: '测试',
+      nickname: '',
       cellList: [{
         name: '客户管理',
         img: '../../../static/uiImg/khglicon.png',
@@ -271,6 +271,7 @@ var _default =
       this.http.post('/api/v1/Auth/getStoreInfo', {}, true).then(function (res) {
         if (res.code == 1000) {
           _this.avaterUrl = _this.http.resourceUrl() + res.data.logo;
+          _this.nickname = res.data.manager_name + '(' + res.data.store_name + ')';
         }
       });
     },

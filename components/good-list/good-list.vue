@@ -14,14 +14,16 @@
 				<slot name="tag">
 					<u-tag :text="item.store_name||item.tag_str" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
 				</slot>
-				<view class="u-flex u-row-between u-m-t-40">
-					<slot name="price">
-						<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price||item.price}}</view>
-					</slot>
-					<slot name="number">
-						<view class="text-black">x{{item.num_now||item.num||item.book_num||0}}</view>
-					</slot>
-				</view>
+				<slot name="foot">
+					<view class="u-flex u-row-between u-m-t-40">
+						<slot name="price">
+							<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.sell_price||item.price}}</view>
+						</slot>
+						<slot name="number">
+							<view class="text-black">x{{item.num_now||item.num||item.book_num||0}}</view>
+						</slot>
+					</view>
+				</slot>
 			</view>
 		</view>
 	</view>

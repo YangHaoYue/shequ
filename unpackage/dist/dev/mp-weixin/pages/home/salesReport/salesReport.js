@@ -355,6 +355,7 @@ __webpack_require__.r(__webpack_exports__);
   onLoad: function onLoad(e) {
     if (e.customer_id) {
       this.fromList[1].id = e.customer_id;
+      this.screen.currentIndex = 3;
     }
     if (e.good_id) {
       this.screen.currentIndex = 3;
@@ -362,6 +363,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     if (e.seller_id) {
       this.fromList[2].id = e.seller_id;
+      this.screen.currentIndex = 3;
     }
     this.scrollHeight = this.$u.sys().windowHeight - uni.upx2px(300);
     this.getScreenData();
@@ -500,26 +502,26 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getInfo: function getInfo() {var _this4 = this;
-      this.http.get('/api/v1/OrderLog/getOrderLogs', {
+      this.http.post('/api/v1/OrderLog/getOrderLogs', {
         need_top_data: 1,
         keyword: this.keyword,
         type_time_limit: this.screen.currentIndex,
-        brand_id: this.popupList[0].selected.toString() || 0,
-        top_cate_id: this.popupList[1].selected.toString() || 0,
-        cate_id: this.popupList[2].selected.toString() || 0,
-        type_from: this.popupList[3].selected.toString() || 6,
-        type_sale: this.popupList[4].selected.toString() || 5,
+        brand_id: this.popupList[0].selected.toString(),
+        top_cate_id: this.popupList[1].selected.toString(),
+        cate_id: this.popupList[2].selected.toString(),
+        type_from: this.popupList[3].selected.toString(),
+        type_sale: this.popupList[4].selected.toString(),
 
-        good_id: this.good_id || 0,
+        good_id: this.good_id,
 
-        store_house_id: this.fromList[0].id || 0,
-        customer_id: this.fromList[1].id || 0,
-        seller_id: this.fromList[2].id || 0,
-        recovery_id: this.fromList[3].id || 0,
+        store_house_id: this.fromList[0].id,
+        customer_id: this.fromList[1].id,
+        seller_id: this.fromList[2].id,
+        recovery_id: this.fromList[3].id,
         price_min: this.min,
         price_max: this.max,
-        date_min: this.start || 0,
-        date_max: this.end || 0,
+        date_min: this.start,
+        date_max: this.end,
         show_cancel: this.show_cancel,
         page: this.page },
       true).then(function (res) {

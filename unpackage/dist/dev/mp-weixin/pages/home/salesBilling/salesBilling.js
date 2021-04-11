@@ -327,6 +327,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   onLoad: function onLoad(e) {
@@ -434,6 +436,7 @@ var _default =
       listTouchDirection: null,
       goodsList: [],
       /* 备注 */
+      showTextArea: false,
       textAreaValue: '' };
 
   },
@@ -495,6 +498,12 @@ var _default =
               return _this2._formatData(v);
             });
           }
+        } else {
+          _this2.$refs.uToast.show({
+            title: res.msg,
+            type: "error",
+            back: true });
+
         }
       });
     },
@@ -557,6 +566,14 @@ var _default =
         buy_num: e.number,
         sale_price: e.cost_price };
 
+    },
+    /* 显示testarea，并获取焦点 */
+    inputTextArea: function inputTextArea() {
+      this.showTextArea = true;
+    },
+    /* 隐藏textarea */
+    hideTextArea: function hideTextArea() {
+      this.showTextArea = false;
     },
     /* 开单 */
     submit: function submit() {var _this4 = this;

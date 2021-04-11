@@ -458,6 +458,7 @@ __webpack_require__.r(__webpack_exports__);
         type_for: this.type_for }).
       then(function (res) {
         if (res.code == 1000) {
+          uni.setStorageSync('goodsSourceData', res.data.type_from);
           _this4.tagList = res.data.care;
           _this4.attachmentList = res.data.annex;
           _this4.type_condition = res.data.type_condition;
@@ -475,7 +476,6 @@ __webpack_require__.r(__webpack_exports__);
             }
             return { value: v.id, label: v.val };
           });
-
           if (_this4.type_for == 1) {
             _this4.$set(_this4.fromList[14], 'type', '');
             /* this.$set(this.fromList[9],'disable',true)
