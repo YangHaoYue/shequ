@@ -11,13 +11,15 @@
 					</view>
 				</view>
 				<view class="u-flex">
-					<u-tag class="u-m-l-10" type="info" mode="dark" text="未卖" :show="item.isSellAgain==0"></u-tag>
-					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="卖过" :show="item.isSellAgain==1"></u-tag>
-					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="有复卖" :show="item.isSellAgain==2"></u-tag>
+					<u-tag class="u-m-l-10" type="info" mode="dark" text="无买卖" :show="item.no_deal"></u-tag>
 					
-					<u-tag class="u-m-l-10" type="info" mode="dark" text="未买" :show="item.isBuyAgain==0"></u-tag>
-					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="买过" :show="item.isBuyAgain==1"></u-tag>
-					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="有复购" :show="item.isBuyAgain==2"></u-tag>
+					<u-tag class="u-m-l-10" type="info" mode="dark" text="未卖" :show="!item.no_deal&&item.isSellAgain==0"></u-tag>
+					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="卖过" :show="!item.no_deal&&item.isSellAgain==1"></u-tag>
+					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="有复卖" :show="!item.no_deal&&item.isSellAgain==2"></u-tag>
+					
+					<u-tag class="u-m-l-10" type="info" mode="dark" text="未买" :show="!item.no_deal&&item.isBuyAgain==0"></u-tag>
+					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="买过" :show="!item.no_deal&&item.isBuyAgain==1"></u-tag>
+					<u-tag class="u-m-l-10" bg-color="#FE8702" mode="dark" text="有复购" :show="!item.no_deal&&item.isBuyAgain==2"></u-tag>
 				</view>
 			</view>
 			<slot name="message">

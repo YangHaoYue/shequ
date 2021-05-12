@@ -30,7 +30,7 @@
 		<u-gap height="20" bg-color="#F5F5F5"></u-gap>
 		<view class="u-text-center u-flex u-row-between solid-bottom">
 			<view class="u-flex-1 u-p-20" :class="currentIndex==0?'bg-orange':''" @click="currentChange(0)">商品信息</view>
-			<view class="u-flex-1 u-p-20 solid-left"  :class="currentIndex==1?'bg-orange':''" @click="currentChange(1)">业务状态</view>
+			<view v-if="goodDetail.is_own==1" class="u-flex-1 u-p-20 solid-left"  :class="currentIndex==1?'bg-orange':''" @click="currentChange(1)">业务状态</view>
 		</view>
 		<!-- 商品信息 -->
 		<block v-if="currentIndex==0">
@@ -67,7 +67,7 @@
 			<view class="u-p-30 solid-bottom">
 				<view class="u-flex u-row-between">
 					<view class="u-flex u-m-b-10 u-flex-1" style="color: #A5A5A5;">商品图片</view>
-					<view class="text-yellow text-sm" @click="downLoadImg">一键下载到手机</view>
+					<view class="text-yellow text-sm" @click="getSaveImgRole">一键下载到手机</view>
 				</view>
 				<view class="u-flex u-flex-wrap u-row-left">
 					<block v-for="(item,v) in imgList" :key="v">
@@ -102,7 +102,7 @@
 				<!-- <u-cell-item title="商品描述" :title-style="{'color': '#A5A5A5'}" :value="desc||''"
 				  :value-style="{'font-size':'32rpx','color':'#333333'}" :arrow="false" :hover-class="false"></u-cell-item> -->
 				<u-cell-item title="综合描述" :title-style="{'color': '#A5A5A5'}" :value="totalDesc||''"
-				  :value-style="{'font-size':'32rpx','color':'#333333'}" :arrow="false" :hover-class="false"></u-cell-item>
+				  :value-style="{'font-size':'32rpx','color':'#333333'}" :arrow="false" :hover-class="false" @click="copy(totalDesc)"></u-cell-item>
 			</u-cell-group>
 		</block>
 		
@@ -427,9 +427,35 @@
 					urls:index==0?this.imgList:this.scimgList
 				})
 			},
+			//获取微信用户保存图片权限
+			getSaveImgRole(){
+				wx.getSetting({
+				  success:(res)=>{
+				    if (!res.authSetting['scope.writePhotosAlbum']) {
+				      wx.authorize({
+				        scope: 'scope.writePhotosAlbum',
+				        success:()=> {
+				          console.log('success')
+						  this.downLoadImg();
+				        }
+				      })
+				    }else{
+						this.downLoadImg();
+					}
+				  }
+				})
+			},
 			/* 下载到手机上 */
 			downLoadImg(){
-				this.imgList.map(item=>{
+				let length =this.imgList.length;
+				this.imgList.map((item,index)=>{
+					console.log(index);
+					if(index === 0 && length != 1){
+						this.$refs.uToast.show({
+							title:"正在保存，请稍后！",
+							type:"warning"
+						});
+					}
 					uni.downloadFile({
 						url:item,
 						success:(res)=>{
@@ -437,7 +463,13 @@
 							uni.saveImageToPhotosAlbum({
 								filePath:res.tempFilePath,
 								success: (e) => {
-									console.log(e);
+									if(index === length-1){
+										this.$refs.uToast.show({
+											title:"保存成功！请在相册中查看！",
+											type:"success"
+										});
+										this.copy(this.totalDesc)
+									}
 								},
 								fail: (re) => {
 									console.log(re);

@@ -464,6 +464,7 @@ __webpack_require__.r(__webpack_exports__);
         warehouseName: e.name,
         isSellAgain: e.repeat_sale,
         isBuyAgain: e.repeat_buy,
+        no_deal: e.no_deal,
         id: e.id,
         message: [
         { title: '订单', value: e.order_num_arr.order_num, url: "/pages/home/salesReport/salesReport?customer_id=".concat(e.order_num_arr.customer_id) },

@@ -79,7 +79,7 @@
 									<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.cost_price}}</view>
 								</slot>
 								<slot name="number">
-									<view class="text-black">x{{item.num_now}}</view>
+									<view class="text-black">x{{item.num_real}}</view>
 								</slot>
 							</view>
 						</view>
@@ -165,7 +165,7 @@
 				let total = 0;
 				this.list.forEach((item)=>{
 					if(this.selectedList.indexOf(item.id)!=-1)
-					total+=item.sell_price*item.num_now
+					total+=item.cost_price*item.num_now
 				})
 				return total.toFixed(2)
 			},
@@ -281,6 +281,11 @@
 					if(res.code==1000){
 						if(this.list.length==0){
 							this.last_page=res.data.page_data.last_page;
+							/* let filterData=res.data.page_data.good_data;
+							this.list=filterData.filter(v=>{
+								this.$set(v,'checked',false)
+								return v.num_now > 0
+							}); */
 							this.list=res.data.page_data.good_data;
 							this.list.map(v=>{
 								return this.$set(v,'checked',false)

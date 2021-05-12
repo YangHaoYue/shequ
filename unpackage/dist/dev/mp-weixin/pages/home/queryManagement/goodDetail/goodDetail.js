@@ -750,9 +750,35 @@ var _default =
         urls: index == 0 ? this.imgList : this.scimgList });
 
     },
+    //获取微信用户保存图片权限
+    getSaveImgRole: function getSaveImgRole() {var _this2 = this;
+      wx.getSetting({
+        success: function success(res) {
+          if (!res.authSetting['scope.writePhotosAlbum']) {
+            wx.authorize({
+              scope: 'scope.writePhotosAlbum',
+              success: function success() {
+                console.log('success');
+                _this2.downLoadImg();
+              } });
+
+          } else {
+            _this2.downLoadImg();
+          }
+        } });
+
+    },
     /* 下载到手机上 */
-    downLoadImg: function downLoadImg() {
-      this.imgList.map(function (item) {
+    downLoadImg: function downLoadImg() {var _this3 = this;
+      var length = this.imgList.length;
+      this.imgList.map(function (item, index) {
+        console.log(index);
+        if (index === 0 && length != 1) {
+          _this3.$refs.uToast.show({
+            title: "正在保存，请稍后！",
+            type: "warning" });
+
+        }
         uni.downloadFile({
           url: item,
           success: function success(res) {
@@ -760,7 +786,13 @@ var _default =
             uni.saveImageToPhotosAlbum({
               filePath: res.tempFilePath,
               success: function success(e) {
-                console.log(e);
+                if (index === length - 1) {
+                  _this3.$refs.uToast.show({
+                    title: "保存成功！请在相册中查看！",
+                    type: "success" });
+
+                  _this3.copy(_this3.totalDesc);
+                }
               },
               fail: function fail(re) {
                 console.log(re);
@@ -832,21 +864,21 @@ var _default =
 
     },
     /* 删除 */
-    delet: function delet() {var _this2 = this;
+    delet: function delet() {var _this4 = this;
       this.http.modal('提示', '您确定要删除商品吗，删除后不可恢复？', true, function (e) {
         if (e) {
-          _this2.http.post('/api/v1/Storage/goodDelete', {
-            good_id: _this2.goodId }).
+          _this4.http.post('/api/v1/Storage/goodDelete', {
+            good_id: _this4.goodId }).
           then(function (res) {
             if (res.code == 1000) {
               uni.$emit('back');
-              _this2.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "success",
                 back: true });
 
             } else {
-              _this2.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "error" });
 
@@ -861,20 +893,20 @@ var _default =
       this.reasonId = this.reasonList[e].id;
     },
     /* 打印 */
-    print: function print() {var _this3 = this;
+    print: function print() {var _this5 = this;
       this.http.modal('提示', '您要打印商品详情吗？', true, function (e) {
         if (e) {
-          _this3.http.get('/api/v1/Printer/goods', {
+          _this5.http.get('/api/v1/Printer/goods', {
             type: 0, //0商品信息打印1销售单
-            goods_id: _this3.goodId }).
+            goods_id: _this5.goodId }).
           then(function (res) {
             if (res.code == 1000) {
-              _this3.$refs.uToast.show({
+              _this5.$refs.uToast.show({
                 title: res.msg,
                 type: "success" });
 
             } else {
-              _this3.$refs.uToast.show({
+              _this5.$refs.uToast.show({
                 title: res.msg,
                 type: "error" });
 
@@ -884,7 +916,7 @@ var _default =
       }, '#FE8702');
     },
     /* 修改库存 */
-    editStoNum: function editStoNum() {var _this4 = this;
+    editStoNum: function editStoNum() {var _this6 = this;
       this.http.post('/api/v1/History/editStoNum', {
         good_id: this.goodId,
         num_now: this.number,
@@ -893,16 +925,16 @@ var _default =
         remark: this.memo }).
       then(function (res) {
         if (res.code == 1000) {
-          _this4.$refs.uToast.show({
+          _this6.$refs.uToast.show({
             title: res.msg,
             type: "success" });
 
-          _this4.showPopup = false;
-          _this4.showReason = false;
-          _this4.number = 0;
-          _this4.getInfo();
+          _this6.showPopup = false;
+          _this6.showReason = false;
+          _this6.number = 0;
+          _this6.getInfo();
         } else {
-          _this4.$refs.uToast.show({
+          _this6.$refs.uToast.show({
             title: res.msg,
             type: "error" });
 

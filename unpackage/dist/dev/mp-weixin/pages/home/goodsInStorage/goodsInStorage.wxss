@@ -20,7 +20,8 @@
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 48.5%;
           flex: 0 0 48.5%;
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
   height: 100rpx;
   overflow: hidden;
   position: relative;
@@ -44,7 +45,8 @@
   right: 10rpx;
   z-index: 10;
   background-color: #fa3534;
-  border-radius: 100rpx;
+  -webkit-border-radius: 100rpx;
+          border-radius: 100rpx;
   width: 44rpx;
   height: 44rpx;
   display: -webkit-box;
@@ -64,7 +66,8 @@
   margin: 10rpx;
   background: #f4f5f6;
   /* position: relative; */
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;

@@ -37,7 +37,7 @@
 					{type:'input',name:'仓库名',value:'',id:'',placeholder:'请输入仓库名',inputType:'text',isImport:true},
 					{type:'payPicker',name:'状态',value:'普通仓库',id:0,isImport:true,list:[{value: 0,label: '普通仓库'},{value: 1,label: '隐私仓库'}]},
 				],
-				textarea:'',
+				textAreaValue:'',
 				info:''
 			}
 		},
@@ -58,7 +58,7 @@
 								this.list[1].id=v.value;
 							}
 						})
-						this.textarea=res.data.store_house_data[0].remark;
+						this.textAreaValue=res.data.store_house_data[0].remark;
 					}
 				})
 			},
@@ -78,7 +78,7 @@
 					store_house_id:this.store_house_id||0,
 					store_house_name:this.list[0].value,
 					type:this.list[1].id,
-					remark:this.textarea
+					remark:this.textAreaValue
 				}).then((res)=>{
 					if(res.code==1000){
 						this.$refs.uToast.show({

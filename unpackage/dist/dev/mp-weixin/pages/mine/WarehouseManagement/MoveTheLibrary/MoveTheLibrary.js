@@ -392,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
       var total = 0;
       this.list.forEach(function (item) {
         if (_this3.selectedList.indexOf(item.id) != -1)
-        total += item.sell_price * item.num_now;
+        total += item.cost_price * item.num_now;
       });
       return total.toFixed(2);
     },
@@ -508,6 +508,11 @@ __webpack_require__.r(__webpack_exports__);
         if (res.code == 1000) {
           if (_this7.list.length == 0) {
             _this7.last_page = res.data.page_data.last_page;
+            /* let filterData=res.data.page_data.good_data;
+                                                             this.list=filterData.filter(v=>{
+                                                             	this.$set(v,'checked',false)
+                                                             	return v.num_now > 0
+                                                             }); */
             _this7.list = res.data.page_data.good_data;
             _this7.list.map(function (v) {
               return _this7.$set(v, 'checked', false);

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="u-p-20 u-p-t-10 u-p-b-10 solid-bottom">
-			<u-search placeholder="请输入姓名或客户代号" v-model="keyword" shape="square" @search="clearGoodList" @custom="clearGoodList"></u-search>
+			<u-search placeholder="请输入姓名或客户代号" v-model="keywordValue" shape="square" @search="clearGoodList" @custom="clearGoodList"></u-search>
 		</view>
 		<block v-for="(item,index) in list" :key="index">
 			<view class="u-p-20 u-p-t-25 u-p-b-25 solid-bottom" @click="choose(item)">
@@ -36,7 +36,7 @@
 		data() {
 			return {
 				type:'',
-				keyword:'',
+				keywordValue:'',
 				baned_in:'',
 				
 				page:1,
@@ -62,9 +62,9 @@
 		},
 		methods: {
 			getInfo(){
-				this.http.get('/api/v1/Common/getCustomerLists',{
+				this.http.post('/api/v1/Common/getCustomerLists',{
 						page:this.page,
-						keyword:this.keyword
+						keyword:this.keywordValue
 					},true).then((res)=>{
 					if(res.code==1000){
 						if(this.list.length==0){

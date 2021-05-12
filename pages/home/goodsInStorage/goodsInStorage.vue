@@ -178,7 +178,7 @@
 		},
 		watch: {
 			descAll(newValue, oldValue) {
-				if(this.good_id == ''){
+				if(this.good_id == ''||this.textAreaValue == ''){
 					this.textAreaValue=newValue;
 				}
 			}
@@ -227,7 +227,7 @@
 					{type:'input',name:'销售价',value:'1',id:'',placeholder:'请输入销售价',inputType:'digit',isImport:true},
 					{type:'input',name:'专柜价',value:'',id:'',placeholder:'请输入专柜价',inputType:'digit',isImport:false},
 					{type:'picker',name:'商品来源',value:'',id:'',url:'/pages/home/goodsInStorage/goodsSource/goodsSource',isImport:true},
-					{type:'picker',name:'商品来源方',value:'',id:'',url:'/pages/home/salesBilling/customerList/customerList',isImport:true},
+					{type:'picker',name:'商品来源方',value:'',id:'',url:'/pages/home/salesBilling/customerList/customerList',isImport:true,disable:false},
 					{type:'picker',name:'存放仓库',value:'',id:'',url:'/pages/home/goodsInStorage/Warehouse/Warehouse',isImport:true},
 					{type:'datePicker',name:'入库时间',value:'',isImport:true},
 					{type:'input',name:'商品数量',value:'1',id:'',placeholder:'请输入商品数量',inputType:'number',isImport:true},
@@ -324,6 +324,7 @@
 							
 							this.fromList[11].value=res.data.customer_option.customer_name;
 							this.fromList[11].id=res.data.customer_option.customer_id;
+							this.fromList[11].disable=!res.data.customer_option.can_edit;
 							
 							res.data.store_house.map(v=>{
 								if(v.id==res.data.store_house_id)

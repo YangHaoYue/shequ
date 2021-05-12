@@ -19,7 +19,7 @@
 		<block v-for="(item,i) in list" :key="i">
 			<inventory-list :item="item" :index="index" topImg="/static/uiImg/yggl.png" :colorchange="false" @tap="navigate(item)">
 				<view slot="tab">
-					<view class="u-p-t-20 u-p-l-40 text-gray text-sm">备注:{{item.remark}}</view>
+					<view class="u-p-t-20 u-p-l-40 text-gray text-sm">备注:{{item.remark==='null'?'':item.remark}}</view>
 				</view>
 			</inventory-list>
 			<view class="u-flex u-row-right u-p-20 u-p-t-30 u-p-b-30 solid-top">

@@ -198,7 +198,7 @@ var _default =
   data: function data() {
     return {
       type: '',
-      keyword: '',
+      keywordValue: '',
       baned_in: '',
 
       page: 1,
@@ -224,9 +224,9 @@ var _default =
   },
   methods: {
     getInfo: function getInfo() {var _this3 = this;
-      this.http.get('/api/v1/Common/getCustomerLists', {
+      this.http.post('/api/v1/Common/getCustomerLists', {
         page: this.page,
-        keyword: this.keyword },
+        keyword: this.keywordValue },
       true).then(function (res) {
         if (res.code == 1000) {
           if (_this3.list.length == 0) {

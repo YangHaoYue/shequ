@@ -8,7 +8,11 @@
 		</u-sticky>
 		<!-- 列表 -->
 		<block v-for="(item,i) in goodList" :key="i">
-			<good-list :item="item" :index="i" :length="goodList.length"></good-list>
+			<good-list :item="item" :index="i" :length="goodList.length">
+				<view slot="price">
+					<view class="text-bold u-font-36" style="color: #FE8702;">￥{{item.cost_price}}</view>
+				</view>
+			</good-list>
 		</block>
 		
 		<!-- 底部tab -->
