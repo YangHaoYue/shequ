@@ -63,6 +63,7 @@
 		<view class="u-m-t-20 u-m-b-20" v-if="!(goodList.length<10&&status=='nomore')">
 			<u-loadmore :status="status"/>
 		</view>
+		<u-toast ref="uToast"></u-toast>
 		<u-mask :show="status=='loading'" :custom-style="{background:'rgba(0, 0, 0, 0)'}"></u-mask>
 		<!-- 入库时间 -->
 		<u-calendar v-model="showDate" btn-type="warning" active-bg-color="#FE8702" mode="range" @change="dateChange"></u-calendar>
@@ -197,6 +198,12 @@
 						if(this.page >= this.last_page) this.status = 'nomore';
 						else this.status = 'loadmore';
 						this.show=false;
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error",
+							back:true
+						})
 					}
 				})
 			},

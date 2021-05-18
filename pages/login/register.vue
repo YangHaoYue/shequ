@@ -52,7 +52,7 @@ export default {
 		let that = this;
 		return {
 			labelStyle:{fontSize: '28rpx'},
-			action: 'https://shequ.0831.run/api/v1/Common/fileUploader',
+			action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
 			/* header:{'Authorization':'Bearer '+ this.http.getToken()}, */
 			model: {
 				logo:'',
@@ -224,7 +224,7 @@ export default {
 		submit() {
 			this.$refs.uForm.validate(valid => {
 				if (valid) {
-					this.http.get('/api/v1/Apply/save',{
+					this.http.post('/api/v1/Apply/save',{
 						logo:this.logoLists[0]&&this.logoLists[0].response.data.path||'',
 						pay_img:this.payLists[0]&&this.payLists[0].response.data.path||'',
 						store_name:this.model.storeName,

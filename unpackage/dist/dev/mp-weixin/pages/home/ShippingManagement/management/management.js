@@ -440,6 +440,12 @@ __webpack_require__.r(__webpack_exports__);
           if (_this5.page >= _this5.last_page) _this5.status = 'nomore';else
           _this5.status = 'loadmore';
           _this5.show = false;
+        } else {
+          _this5.$refs.uToast.show({
+            title: res.msg,
+            type: "error",
+            back: true });
+
         }
       });
     },

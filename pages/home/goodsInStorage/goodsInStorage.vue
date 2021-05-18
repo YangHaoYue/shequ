@@ -7,7 +7,7 @@
 				<view class="text-sm text-gray">(默认第一张为商品主图，点击切换主图)</view>
 			</view>
 			<u-upload :before-remove="beforeRemove" ref="uUpload" :action="action" :file-list="fileList" :show-progress="true" :header="header"
-			 :preview-full-image="false" @on-preview="preview" :deletable="true" height="170rpx" :max-count="99" @on-list-change="onListChange">
+			 :preview-full-image="true" @on-preview="preview" :deletable="true" height="170rpx" :max-count="99" @on-list-change="onListChange">
 			</u-upload>
 		</view>
 		<!-- 上传隐私图片 -->
@@ -189,7 +189,7 @@
 				type_for:'',
 				/* 今天 */
 				toDay:'',
-				action: 'https://shequ.0831.run/api/v1/Common/fileUploader',
+				action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
 				header:{'Authorization':'Bearer '+ this.http.getToken()},
 				// 预置上传列表
 				fileList: [],
@@ -290,8 +290,8 @@
 							this.fileList=res.data.img.map(v=>{
 								return this._formatImg(v)
 							});
-							res.data.pri_video?this.videoList.push({tempFilePath:this.http.resourceUrl() + res.data.pri_video}):''
-							res.data.pri_video?this.resource=res.data.pri_video:''
+							res.data.pri_video&&res.data.pri_video!='[]'?this.videoList.push({tempFilePath:this.http.resourceUrl() + res.data.pri_video}):''
+							res.data.pri_video&&res.data.pri_video!='[]'?this.resource=res.data.pri_video:''
 							this.fromList[0].value=res.data.good_name;
 							this.fromList[1].value=res.data.brand_fill_arr.brand_name;
 							this.fromList[1].id=res.data.brand_fill_arr.brand_id;
@@ -507,16 +507,16 @@
 				this.lists.map(item=>{
 					if(item.response&&item.response.code==1000){
 						img.push(item.response.data.path);
-					}else if(!item.error){
-						img.push(item.url)
+					}else if(!item.error&&item.progress==100){
+						img.push(item.url);
 					}
 				});
 				let scimg=[]
 				this.sclists.map(item=>{
 					if(item.response&&item.response.code==1000){
 						scimg.push(item.response.data.path);
-					}else if(!item.error){
-						scimg.push(item.url)
+					}else if(!item.error&&item.progress==100){
+						scimg.push(item.url);
 					}
 				});
 				this.http.post('/api/v1/Storage/goodSto',{

@@ -340,7 +340,7 @@
 			getInfo(){
 				this.http.get('/api/v1/Index/getGoodDetail',{
 					good_id:this.goodId
-				}).then((res)=>{
+				},true).then((res)=>{
 					if(res.code==1000){
 						this.goodDetail.name=res.data.title;
 						this.goodDetail.code=res.data.store_no;
@@ -374,7 +374,7 @@
 							return v=this.http.resourceUrl()+v
 						});
 						
-						this.videoResource=res.data.pri_video?this.http.resourceUrl()+res.data.pri_video:''
+						this.videoResource=res.data.pri_video&&res.data.pri_video!='[]'?this.http.resourceUrl()+res.data.pri_video:''
 						
 						if(res.data.pri_img_arr.is_show)
 						this.scimgList=res.data.pri_img_arr.pri_img.map(v=>{

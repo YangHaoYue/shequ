@@ -108,7 +108,7 @@
 		<u-select v-model="showSettleList" confirmColor="#FE8702" value-name="id" label-name="val" mode="single-column" :list="settleList" @confirm="chooseSettle"></u-select>
 		<u-select v-model="showSalesChannelsList" confirmColor="#FE8702" value-name="id" label-name="val" mode="single-column" :list="salesChannelsList" @confirm="chooseChannelsList"></u-select>
 		<u-select v-model="showDeliveryList" confirmColor="#FE8702" value-name="id" label-name="val" mode="single-column" :list="deliveryList" @confirm="choosedDelivery"></u-select>
-		<u-calendar v-model="showDate" btn-type="warning" active-bg-color="#FE8702" mode="date" @change="dateChange" :min-date="toDay" max-date="2050-12-31"></u-calendar>
+		<u-calendar v-model="showDate" btn-type="warning" active-bg-color="#FE8702" mode="date" @change="dateChange" min-date="1950-12-31" max-date="2050-12-31"></u-calendar>
 	</view>
 </template>
 
@@ -197,7 +197,7 @@
 				showDeliveryList:false,
 				deliveryList:[],
 				/* 快递单号 */
-				action: 'https://shequ.0831.run/api/v1/Common/fileUploader',
+				action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
 				header:{'Authorization':'Bearer '+ this.http.getToken()},
 				// 预置上传列表
 				fileList: [],

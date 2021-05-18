@@ -120,7 +120,7 @@ var _default =
       });
     },
     save: function save() {var _this2 = this;
-      this.http.get('/api/v1/Index/setGoodTimeUp', {
+      this.http.post('/api/v1/Index/setGoodTimeUp', {
         sto_new_goods: this.list[0].value,
         custo_recovery: this.list[1].value,
         custo_consign: this.list[2].value,

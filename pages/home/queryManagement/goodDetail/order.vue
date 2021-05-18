@@ -21,7 +21,7 @@
 		</view>
 		<!-- 提示 -->
 		<view class="u-p-30 text-sm text-gray">
-			提示:商品预定后，将锁定对应库存知道转为销售单
+			提示:商品预定后，将锁定对应库存直到转为销售单
 		</view>
 		
 		<u-toast ref="uToast"></u-toast>

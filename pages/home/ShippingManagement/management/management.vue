@@ -204,6 +204,12 @@
 						if(this.page >= this.last_page) this.status = 'nomore';
 						else this.status = 'loadmore';
 						this.show=false;
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error",
+							back:true
+						})
 					}
 				})
 			},

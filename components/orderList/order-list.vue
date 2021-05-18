@@ -17,7 +17,7 @@
 				<view class="text-gray">共{{item.buy_num}}件 合计：<text class="u-type-error">￥{{item.price}}</text></view>
 			</view>
 			<view class="u-p-20 u-flex u-row-between u-font-12">
-				<view class="text-gray">{{item.customer_name}} {{item.customer_type}}</view>
+				<view class="text-gray">{{item.staff_name}} {{item.customer_name}}</view>
 			</view>
 		</view>
 		<u-gap height="10" bg-color="#F5F5F5"></u-gap>

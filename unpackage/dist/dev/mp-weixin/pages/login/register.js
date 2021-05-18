@@ -250,7 +250,7 @@ var _default =
     var that = this;
     return {
       labelStyle: { fontSize: '28rpx' },
-      action: 'https://shequ.0831.run/api/v1/Common/fileUploader',
+      action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
       /* header:{'Authorization':'Bearer '+ this.http.getToken()}, */
       model: {
         logo: '',
@@ -422,7 +422,7 @@ var _default =
     submit: function submit() {var _this2 = this;
       this.$refs.uForm.validate(function (valid) {
         if (valid) {
-          _this2.http.get('/api/v1/Apply/save', {
+          _this2.http.post('/api/v1/Apply/save', {
             logo: _this2.logoLists[0] && _this2.logoLists[0].response.data.path || '',
             pay_img: _this2.payLists[0] && _this2.payLists[0].response.data.path || '',
             store_name: _this2.model.storeName,

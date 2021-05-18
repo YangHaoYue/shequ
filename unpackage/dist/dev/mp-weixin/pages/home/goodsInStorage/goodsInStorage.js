@@ -393,7 +393,7 @@ __webpack_require__.r(__webpack_exports__);
       type_for: '',
       /* 今天 */
       toDay: '',
-      action: 'https://shequ.0831.run/api/v1/Common/fileUploader',
+      action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
       header: { 'Authorization': 'Bearer ' + this.http.getToken() },
       // 预置上传列表
       fileList: [],
@@ -494,8 +494,8 @@ __webpack_require__.r(__webpack_exports__);
             _this4.fileList = res.data.img.map(function (v) {
               return _this4._formatImg(v);
             });
-            res.data.pri_video ? _this4.videoList.push({ tempFilePath: _this4.http.resourceUrl() + res.data.pri_video }) : '';
-            res.data.pri_video ? _this4.resource = res.data.pri_video : '';
+            res.data.pri_video && res.data.pri_video != '[]' ? _this4.videoList.push({ tempFilePath: _this4.http.resourceUrl() + res.data.pri_video }) : '';
+            res.data.pri_video && res.data.pri_video != '[]' ? _this4.resource = res.data.pri_video : '';
             _this4.fromList[0].value = res.data.good_name;
             _this4.fromList[1].value = res.data.brand_fill_arr.brand_name;
             _this4.fromList[1].id = res.data.brand_fill_arr.brand_id;
@@ -717,7 +717,7 @@ __webpack_require__.r(__webpack_exports__);
       this.lists.map(function (item) {
         if (item.response && item.response.code == 1000) {
           img.push(item.response.data.path);
-        } else if (!item.error) {
+        } else if (!item.error && item.progress == 100) {
           img.push(item.url);
         }
       });
@@ -725,7 +725,7 @@ __webpack_require__.r(__webpack_exports__);
       this.sclists.map(function (item) {
         if (item.response && item.response.code == 1000) {
           scimg.push(item.response.data.path);
-        } else if (!item.error) {
+        } else if (!item.error && item.progress == 100) {
           scimg.push(item.url);
         }
       });

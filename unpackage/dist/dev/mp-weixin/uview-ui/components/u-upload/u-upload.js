@@ -677,16 +677,19 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('on-list-change', this.lists, this.index);
       }
     },
-    // 预览图片(业务需求将图片设置为主图)
-    doPreviewImage: function doPreviewImage(url, index) {var _this5 = this;
+    //业务需求将图片设置为主图
+    setMainImg: function setMainImg(url, index) {
       this.$emit('on-preview', url, this.lists, index);
+    },
+    // 预览图片
+    doPreviewImage: function doPreviewImage(url, index) {
       if (!this.previewFullImage) return;
       var images = this.lists.map(function (item) {return item.url || item.path;});
       uni.previewImage({
         urls: images,
         current: url,
         success: function success() {
-          _this5.$emit('on-preview', url, _this5.lists, _this5.index);
+          /* this.$emit('on-preview', url, this.lists, this.index); */
         },
         fail: function fail() {
           uni.showToast({

@@ -6,7 +6,7 @@
 const tui = {
 	//接口地址
 	interfaceUrl: function() {
-		return 'https://shequ.0831.run'
+		return 'https://wx.searchfun.com.cn'
 	},
 	//资源地址
 	resourceUrl:function(){

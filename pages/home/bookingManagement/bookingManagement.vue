@@ -54,7 +54,7 @@
 				<u-gap height="10" bg-color="#F5F5F5"></u-gap>
 				<good-list :item="item" :index="i" :length="orderList.length" :idType="true">
 					<view slot="price" class="text-bold u-font-24" style="color: #FE8702;">定金:￥{{item.book_money}}</view>
-					<u-tag slot="tag" :text="item.customer_type+'/'+item.customer_name" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
+					<u-tag slot="tag" :text="item.staff_name+'/'+item.customer_name" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
 				</good-list>
 				<view class="u-flex u-row-between u-p-10 u-p-l-20 u-p-r-20 solid-top" v-if="screen.currentIndex==0">
 					<u-checkbox v-model="item.checked" active-color="#FE8702" @change="book($event,item,i)">合并开单</u-checkbox>

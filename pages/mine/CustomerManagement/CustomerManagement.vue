@@ -61,7 +61,7 @@
 			<!-- 按钮 -->
 			<view class="u-flex u-abso popupUi">
 				<view class="u-flex-1 u-text-center u-p-20 reset" hover-class="none" @click="reset">重置</view>
-				<view class="u-flex-1 u-text-center u-p-20 msure" hover-class="none" @click="getInfo">确定</view>
+				<view class="u-flex-1 u-text-center u-p-20 msure" hover-class="none" @click="clearGoodList">确定</view>
 			</view>
 		</u-popup>
 		<!-- 列表 -->

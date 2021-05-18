@@ -1943,7 +1943,7 @@ function normalizeComponent (
 var tui = {
   //接口地址
   interfaceUrl: function interfaceUrl() {
-    return 'https://shequ.0831.run';
+    return 'https://wx.searchfun.com.cn';
   },
   //资源地址
   resourceUrl: function resourceUrl() {

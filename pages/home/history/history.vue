@@ -78,6 +78,8 @@
 			</view>
 		</scroll-view>
 		<u-mask :show="status=='loading'" :custom-style="{background:'rgba(0, 0, 0, 0)'}"></u-mask>
+		
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -246,6 +248,12 @@
 						}
 						if(this.page >= this.last_page) this.status = 'nomore';
 						else this.status = 'loadmore';
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error",
+							back:true
+						})
 					}
 				})
 			},

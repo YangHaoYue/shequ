@@ -414,7 +414,7 @@ var _default =
       showDeliveryList: false,
       deliveryList: [],
       /* 快递单号 */
-      action: 'https://shequ.0831.run/api/v1/Common/fileUploader',
+      action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
       header: { 'Authorization': 'Bearer ' + this.http.getToken() },
       // 预置上传列表
       fileList: [],

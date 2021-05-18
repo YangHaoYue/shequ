@@ -225,6 +225,12 @@ __webpack_require__.r(__webpack_exports__);
           }
           if (_this2.page >= _this2.last_page) _this2.status = 'nomore';else
           _this2.status = 'loadmore';
+        } else {
+          _this2.$refs.uToast.show({
+            title: res.msg,
+            type: "error",
+            back: true });
+
         }
       });
     },
@@ -234,8 +240,8 @@ __webpack_require__.r(__webpack_exports__);
         id: e.id,
         message: [
         { title: '全部', value: e.delivery_data.total_num, url: '/pages/home/ShippingManagement/management/management?type=0&id=' + e.id, colorchange: true },
-        { title: '已发货', value: e.delivery_data.total_delivered, url: '/pages/home/ShippingManagement/management/management?type=0&id=' + e.id, colorchange: true },
-        { title: '未发货', value: e.delivery_data.total_undelivered, url: '/pages/home/ShippingManagement/management/management?type=1&id=' + e.id, colorchange: true }] };
+        { title: '已发货', value: e.delivery_data.total_delivered, url: '/pages/home/ShippingManagement/management/management?type=1&id=' + e.id, colorchange: true },
+        { title: '未发货', value: e.delivery_data.total_undelivered, url: '/pages/home/ShippingManagement/management/management?type=0&id=' + e.id, colorchange: true }] };
 
 
     },

@@ -662,8 +662,8 @@ var _default =
   methods: {
     getInfo: function getInfo() {var _this = this;
       this.http.get('/api/v1/Index/getGoodDetail', {
-        good_id: this.goodId }).
-      then(function (res) {
+        good_id: this.goodId },
+      true).then(function (res) {
         if (res.code == 1000) {
           _this.goodDetail.name = res.data.title;
           _this.goodDetail.code = res.data.store_no;
@@ -697,7 +697,7 @@ var _default =
             return v = _this.http.resourceUrl() + v;
           });
 
-          _this.videoResource = res.data.pri_video ? _this.http.resourceUrl() + res.data.pri_video : '';
+          _this.videoResource = res.data.pri_video && res.data.pri_video != '[]' ? _this.http.resourceUrl() + res.data.pri_video : '';
 
           if (res.data.pri_img_arr.is_show)
           _this.scimgList = res.data.pri_img_arr.pri_img.map(function (v) {
