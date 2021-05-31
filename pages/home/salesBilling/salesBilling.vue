@@ -48,7 +48,7 @@
 							<view class="u-flex u-row-between u-m-t-20 text-black">
 								<view class="text-bold u-font-36 u-flex">
 									<text>￥</text>
-									<u-input v-model="item.cost_price" :disabled="edit_good_data==0" placeholder="请输入价格" style="width: 200rpx;" height="80rpx" type="digit" border></u-input>
+									<u-input v-model="item.sell_price" :disabled="edit_good_data==0" placeholder="请输入价格" style="width: 200rpx;" height="80rpx" type="digit" border></u-input>
 								</view>
 								<u-number-box v-model="item.number" :disabled="edit_good_data==0"></u-number-box>
 							</view>
@@ -122,7 +122,7 @@
 			this.order_id=e.order_id||0;
 			var ti= new Date();
 			this.toDay=this.http.dateFormat("YYYY-mm-dd",ti);
-			this.date=this.toDay
+			/* this.date=this.toDay */
 			this.getInfo();
 		},
 		onShow() {
@@ -146,7 +146,7 @@
 			totalPrice() {
 				let total = 0;
 				this.goodsList.forEach((item)=>{
-					total+=item.cost_price*100000000*item.number
+					total+=item.sell_price*100000000*item.number
 				})
 				return total/100000000
 			},
@@ -231,6 +231,8 @@
 					order_id:this.order_id||0
 				},true).then((res)=>{
 					if(res.code==1000){
+						this.date=res.data.date;
+						
 						this.settleList=res.data.type_pay;
 						this.salesmanList=res.data.seller;
 						this.salesChannelsList=res.data.type_sale;
@@ -296,7 +298,7 @@
 					title:e.good_name,
 					num_now:e.num_now,
 					id:e.id,
-					cost_price:e.sell_price,
+					sell_price:e.sell_price,
 					date_in:e.created_at,
 					store_no:e.store_no,
 					number:e.buy_num||1
@@ -347,7 +349,7 @@
 				return{
 					good_id:e.id,
 					buy_num:e.number,
-					sale_price:e.cost_price
+					sale_price:e.sell_price
 				}
 			},
 			/* 显示testarea，并获取焦点 */

@@ -277,7 +277,9 @@ __webpack_require__.r(__webpack_exports__);
       showModal: false,
       stock_check_detail_id: '',
       good_id: '',
-      number: '',
+      number: 1,
+      //是否一直使用扫码盘点
+      isUseScan: false,
       /* 加载更多 */
       status: 'loading',
       iconType: 'flower',
@@ -334,7 +336,7 @@ __webpack_require__.r(__webpack_exports__);
       this.good_id = good_id;
     },
     cancel: function cancel() {
-      this.number = '';
+      this.number = 1;
       this.good_id = '';
       this.showModal = false;
     },
@@ -350,7 +352,10 @@ __webpack_require__.r(__webpack_exports__);
             type: "success",
             duration: 1000 });
 
-          setTimeout(function () {_this3.clearGoodList();}, 1000);
+          setTimeout(function () {
+            _this3.clearGoodList();
+            if (_this3.isUseScan) _this3.scan();
+          }, 1000);
           _this3.cancel();
         } else {
           _this3.$refs.uToast.show({
@@ -366,6 +371,7 @@ __webpack_require__.r(__webpack_exports__);
         onlyFromCamera: true,
         success: function success(res) {
           console.log(res);
+          _this4.isUseScan = true;
           _this4.showM(res.result);
           // this.http.get('/api/v1/StockCheck/stoCheck',{
           // 	stock_check_id:res.stock_check_id,
@@ -383,6 +389,10 @@ __webpack_require__.r(__webpack_exports__);
           // 		})
           // 	}
           // })
+        },
+        fail: function fail(ref) {
+          console.log(ref);
+          _this4.isUseScan = false;
         } });
 
     } } };exports.default = _default;

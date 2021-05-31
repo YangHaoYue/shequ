@@ -4,7 +4,7 @@
  * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
  */
 .container {
-  background-image: url(https://7368-shemei-6guz7hz29cfb1643-1304922154.tcb.qcloud.la/bg.png?sign=11aac08839b1fbd4f952e0ddfa4b7949&t=1612402858);
+  background-image: url(https://oss.searchfun.com.cn/files/111.png);
   height: 100vh;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -25,8 +25,7 @@
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
           justify-content: space-between;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .container .tui-page-title {
   width: 100%;
@@ -35,16 +34,14 @@
   color: #FFFFFF;
   line-height: 42rpx;
   padding: 40rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .container .tui-form {
   padding-top: 0rpx;
 }
 .container .tui-form .tui-view-input {
   width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0 40rpx;
 }
 .container .tui-form .tui-view-input .tui-cell-input {
@@ -71,8 +68,7 @@
 .container .tui-form .tui-cell-text {
   width: 100%;
   padding: 24rpx 30rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 24rpx;
   color: #999;
   display: -webkit-box;
@@ -91,8 +87,7 @@
 .container .tui-form .tui-btn-box {
   width: 100%;
   padding: 0 30rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: 80rpx;
 }
 .container .tui-login-way {

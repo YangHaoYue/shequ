@@ -1,8 +1,7 @@
 
 .addIcon.data-v-3b040018{
 	background-color: #FE8702;
-	-webkit-border-radius: 15rpx;
-	        border-radius: 15rpx;
+	border-radius: 15rpx;
 	height: 42rpx;
 	width: 42rpx;
 }

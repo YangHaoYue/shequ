@@ -104,7 +104,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = _vm.showError("border-bottom")
+  var m0 = _vm.validateState === "error" && _vm.showError("border-bottom")
   var s0 =
     _vm.required || _vm.leftIcon || _vm.label
       ? _vm.__get_style([
@@ -119,9 +119,9 @@ var render = function() {
           }
         ])
       : null
-  var m1 = _vm.showError("message")
+  var m1 = _vm.validateState === "error" && _vm.showError("message")
   var g0 =
-    _vm.validateState === "error" && m1 && _vm.elLabelPosition == "left"
+    m1 && _vm.elLabelPosition == "left"
       ? _vm.$u.addUnit(_vm.elLabelWidth)
       : null
   _vm.$mp.data = Object.assign(

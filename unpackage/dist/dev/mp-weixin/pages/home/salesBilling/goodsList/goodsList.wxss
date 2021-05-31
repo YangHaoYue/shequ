@@ -22,8 +22,7 @@
   height: 70rpx;
   background: #F5F5F5;
   color: #333333;
-  -webkit-border-radius: 5rpx;
-          border-radius: 5rpx;
+  border-radius: 5rpx;
 }
 .brand-hover.data-v-0ef01cc0 {
   background: #FFFFFF;

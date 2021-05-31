@@ -131,7 +131,7 @@ export default {
 
 <style lang="scss">
 .container {
-	background-image: url(https://7368-shemei-6guz7hz29cfb1643-1304922154.tcb.qcloud.la/bg.png?sign=11aac08839b1fbd4f952e0ddfa4b7949&t=1612402858);
+	background-image: url(https://oss.searchfun.com.cn/files/111.png);
 	height: 100vh;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;

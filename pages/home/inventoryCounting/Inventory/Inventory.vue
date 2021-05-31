@@ -21,7 +21,7 @@
 					<u-tag :text="item.store_house_name+'/'+item.customer_name+'/'+item.type_from" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
 					<view class="u-flex u-row-between u-m-t-40">
 						<view class="text-bold u-font-24">库存{{item.num_now}}<text v-if="navList.currentIndex!=0">|已盘{{item.num_check}}</text></view>
-						<u-button type="warning" size="mini" v-if="navList.currentIndex==0&&can_check" @click="showM(item.good_id)">盘点</u-button>
+						<u-button :type="item.num_check>0?'info':'warning'" size="mini" v-if="navList.currentIndex==0&&can_check" @click="showM(item.good_id)">盘点</u-button>
 						<view v-if="navList.currentIndex!=0&&!can_check"></view>
 					</view>
 				</view>
@@ -86,7 +86,9 @@
 				showModal:false,
 				stock_check_detail_id:'',
 				good_id:'',
-				number:'',
+				number:1,
+				//是否一直使用扫码盘点
+				isUseScan:false,
 				/* 加载更多 */
 				status: 'loading',
 				iconType: 'flower',
@@ -143,7 +145,7 @@
 				this.good_id=good_id;
 			},
 			cancel(){
-				this.number='';
+				this.number=1;
 				this.good_id='';
 				this.showModal=false;
 			},
@@ -159,7 +161,10 @@
 							type:"success",
 							duration:1000
 						});
-						setTimeout(()=>{this.clearGoodList()},1000)
+						setTimeout(()=>{
+							this.clearGoodList();
+							if(this.isUseScan) this.scan();
+						},1000)
 						this.cancel();
 					}else{
 						this.$refs.uToast.show({
@@ -175,6 +180,7 @@
 					onlyFromCamera:true,
 					success: (res) => {
 						console.log(res);
+						this.isUseScan = true;
 						this.showM(res.result)
 						// this.http.get('/api/v1/StockCheck/stoCheck',{
 						// 	stock_check_id:res.stock_check_id,
@@ -192,6 +198,10 @@
 						// 		})
 						// 	}
 						// })
+					},
+					fail:(ref)=> {
+						console.log(ref);
+						this.isUseScan = false;
 					}
 				})
 			}
