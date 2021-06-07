@@ -6,7 +6,7 @@
 				<view class="u-m-r-20">商品图片</view>
 				<view class="text-sm text-gray">(默认第一张为商品主图，点击切换主图)</view>
 			</view>
-			<u-upload :before-remove="beforeRemove" ref="uUpload" :action="action" :file-list="fileList" :show-progress="true" :header="header"
+			<u-upload :before-remove="beforeRemove" ref="uUpload" image-mode="center" :action="http.interfaceUrl()+action" :file-list="fileList" :show-progress="true" :header="header"
 			 :preview-full-image="true" @on-preview="preview" :deletable="true" height="170rpx" :max-count="99" @on-list-change="onListChange">
 			</u-upload>
 		</view>
@@ -15,7 +15,7 @@
 			<view class="u-flex u-p-b-20">
 				<view class="u-m-r-20">隐私图片</view>
 			</view>
-			<u-upload ref="uUpload" :action="action" :file-list="scfileList" :show-progress="true" :header="header"
+			<u-upload ref="uUpload" :action="http.interfaceUrl()+action" :file-list="scfileList" :show-progress="true" :header="header"
 			:deletable="true" height="170rpx" :max-count="99" @on-list-change="onscListChange">
 			</u-upload>
 		</view>
@@ -189,7 +189,7 @@
 				type_for:'',
 				/* 今天 */
 				toDay:'',
-				action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
+				action: '/api/v1/Common/fileUploader',
 				header:{'Authorization':'Bearer '+ this.http.getToken()},
 				// 预置上传列表
 				fileList: [],

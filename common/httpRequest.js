@@ -2,15 +2,23 @@
  * 常用方法封装 请求，文件上传等
  * @author echo. 
  **/
-
+/*
+	各个wx小程序的appid
+	奢趣：wx6e19e615bf2433a5
+			接口地址：https://wx.searchfun.com.cn；
+			资源地址：https://oss.searchfun.com.cn/
+	木鱼：wxc777150bd966963b
+			接口地址：https://wx.muyushepin.com；
+			资源地址：https://oss.muyushepin.com/
+*/
 const tui = {
 	//接口地址
 	interfaceUrl: function() {
-		return 'https://wx.searchfun.com.cn'
+		return 'https://wx.muyushepin.com'
 	},
 	//资源地址
 	resourceUrl:function(){
-		return 'https://oss.searchfun.com.cn/'
+		return 'https://oss.muyushepin.com/'
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({
@@ -107,10 +115,6 @@ const tui = {
 					if (loadding && !hideLoading) {
 						uni.hideLoading()
 					}
-					/* if(res.data.code==2000){
-						tui.toast(res.data.msg);
-						setTimeout(()=>{uni.navigateBack({delta: 1});},1000)
-					} */
 					if (res.data.code == 401) {
 						uni.clearStorageSync()
 						tui.modal("","登录信息已失效，请重新登录", false, () => {

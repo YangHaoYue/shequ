@@ -667,6 +667,34 @@
             }
             
         }
+        ,{
+            "path" : "pages/login/agreement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "协议详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/edition/edition",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "版本说明",
+                "enablePullDownRefresh": false,
+				"onReachBottomDistance": 50
+            }
+            
+        }
+        ,{
+            "path" : "pages/mine/edition/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "版本详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

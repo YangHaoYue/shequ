@@ -96,19 +96,19 @@ var components
 try {
   components = {
     uUpload: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-upload/u-upload.vue */ 703))
+      return Promise.all(/*! import() | uview-ui/components/u-upload/u-upload */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-upload/u-upload")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-upload/u-upload.vue */ 723))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 675))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 695))
     },
     uInput: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 463))
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 483))
     },
     formList: function() {
-      return __webpack_require__.e(/*! import() | components/form-list/form-list */ "components/form-list/form-list").then(__webpack_require__.bind(null, /*! @/components/form-list/form-list.vue */ 597))
+      return __webpack_require__.e(/*! import() | components/form-list/form-list */ "components/form-list/form-list").then(__webpack_require__.bind(null, /*! @/components/form-list/form-list.vue */ 617))
     },
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 492))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 505))
     }
   }
 } catch (e) {
@@ -132,31 +132,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.http.interfaceUrl()
+  var g1 = _vm.showPri_img ? _vm.http.interfaceUrl() : null
+
   var l0 = _vm.__map(_vm.tagList, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var g0 = _vm.tagSelectedList.indexOf(item.id)
-    var g1 = _vm.tagSelectedList.indexOf(item.id)
     var g2 = _vm.tagSelectedList.indexOf(item.id)
+    var g3 = _vm.tagSelectedList.indexOf(item.id)
+    var g4 = _vm.tagSelectedList.indexOf(item.id)
     return {
       $orig: $orig,
-      g0: g0,
-      g1: g1,
-      g2: g2
+      g2: g2,
+      g3: g3,
+      g4: g4
     }
   })
 
   var l1 = _vm.__map(_vm.attachmentList, function(item, j) {
     var $orig = _vm.__get_orig(item)
 
-    var g3 = _vm.attachmentSelectedList.indexOf(item.id)
-    var g4 = _vm.attachmentSelectedList.indexOf(item.id)
     var g5 = _vm.attachmentSelectedList.indexOf(item.id)
+    var g6 = _vm.attachmentSelectedList.indexOf(item.id)
+    var g7 = _vm.attachmentSelectedList.indexOf(item.id)
     return {
       $orig: $orig,
-      g3: g3,
-      g4: g4,
-      g5: g5
+      g5: g5,
+      g6: g6,
+      g7: g7
     }
   })
 
@@ -164,6 +167,8 @@ var render = function() {
     {},
     {
       $root: {
+        g0: g0,
+        g1: g1,
         l0: l0,
         l1: l1
       }
@@ -202,7 +207,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var formList = function formList() {__webpack_require__.e(/*! require.ensure | components/form-list/form-list */ "components/form-list/form-list").then((function () {return resolve(__webpack_require__(/*! @/components/form-list/form-list.vue */ 597));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var formList = function formList() {__webpack_require__.e(/*! require.ensure | components/form-list/form-list */ "components/form-list/form-list").then((function () {return resolve(__webpack_require__(/*! @/components/form-list/form-list.vue */ 617));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -393,7 +398,7 @@ __webpack_require__.r(__webpack_exports__);
       type_for: '',
       /* 今天 */
       toDay: '',
-      action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
+      action: '/api/v1/Common/fileUploader',
       header: { 'Authorization': 'Bearer ' + this.http.getToken() },
       // 预置上传列表
       fileList: [],

@@ -70,7 +70,15 @@
 					img:'../../../static/uiImg/xgmm.png',
 					url:'/pages/mine/editPwd/editPwd',
 					permission:''
-				}],
+				},
+				//奢趣独有功能
+				/* {
+					name:'版本说明',
+					img:'../../../static/uiImg/bbsm.png',
+					url:'/pages/mine/edition/edition',
+					permission:''
+				} */
+				],
 				Permissions:''
 			}
 		},

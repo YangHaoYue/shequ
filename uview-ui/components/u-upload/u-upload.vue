@@ -28,7 +28,9 @@
 				:percent="item.progress"
 			></u-line-progress>
 			<view @tap.stop="retry(index)" v-if="item.error" class="u-error-btn">点击重试</view>
-			<image @longpress.stop="setMainImg(item.url || item.path, index)" @tap.stop="doPreviewImage(item.url || item.path, index)" class="u-preview-image" v-if="!item.isImage" :src="item.url || item.path" :mode="imageMode"></image>
+			<view @longpress.stop="setMainImg(item.url || item.path, index)" @tap.stop="doPreviewImage(item.url || item.path, index)" class="u-preview-image" v-if="!item.isImage" :style="'background-image: url('+item.url || item.path+');'"></view>
+			<!-- 暂时修改了图片组件，在微信小程序中图片过多渲染会出现白屏的情况 -->
+			<!-- <image @longpress.stop="setMainImg(item.url || item.path, index)" @tap.stop="doPreviewImage(item.url || item.path, index)" class="u-preview-image" v-if="!item.isImage" :src="item.url || item.path" :mode="imageMode"></image> -->
 		</view>
 		<slot name="file" :file="lists"></slot>
 		<view style="display: inline-block;" @tap="selectFile" v-if="maxCount > lists.length">
@@ -611,6 +613,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	border-radius: 10rpx;
+	background-size: 100% 100%;
 }
 
 .u-delete-icon {

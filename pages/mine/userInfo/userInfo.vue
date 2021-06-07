@@ -58,6 +58,10 @@
 			<view>开启积分抵扣</view>
 			<u-switch v-model="checked2" active-color="#FE8702" active-value="1" inactive-value="0" size="40"></u-switch>
 		</view>
+		<view class="bg-white u-p-20 u-flex u-row-between solid-bottom">
+			<view>是否展示给其他商家</view>
+			<u-switch v-model="checked3" active-color="#FE8702" active-value="1" inactive-value="0" size="40"></u-switch>
+		</view>
 		
 		<u-toast ref="uToast"></u-toast>
 		
@@ -87,7 +91,8 @@
 				],
 				showArea:false,
 				checked1:false,
-				checked2:false
+				checked2:false,
+				checked3:false
 			}
 		},
 		methods: {
@@ -97,6 +102,7 @@
 						this.storeInfo=res.data;
 						this.checked1=res.data.get_on==1?true:false;
 						this.checked2=res.data.deduct_on==1?true:false;
+						this.checked3=res.data.deduct_on==1?true:false;
 						this.typeList.map(v=>{
 							if(v.value==res.data.store_type)
 							this.$set(this.storeInfo,'storeType',v.label)

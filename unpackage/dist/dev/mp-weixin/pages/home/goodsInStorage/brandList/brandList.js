@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uIndexList: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-list/u-index-list */ "uview-ui/components/u-index-list/u-index-list").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-list/u-index-list.vue */ 689))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-list/u-index-list */ "uview-ui/components/u-index-list/u-index-list").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-list/u-index-list.vue */ 709))
     },
     uIndexAnchor: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-anchor/u-index-anchor */ "uview-ui/components/u-index-anchor/u-index-anchor").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-anchor/u-index-anchor.vue */ 696))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-index-anchor/u-index-anchor */ "uview-ui/components/u-index-anchor/u-index-anchor").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-anchor/u-index-anchor.vue */ 716))
     }
   }
 } catch (e) {

@@ -15,7 +15,7 @@
 			<view class="u-flex u-p-b-20">
 				<view class="u-m-r-20">快递面单照</view>
 			</view>
-			<u-upload ref="uUpload" :action="action" :file-list="fileList" :show-progress="true" :header="header"
+			<u-upload ref="uUpload" :action="http.interfaceUrl()+action" :file-list="fileList" :show-progress="true" :header="header"
 			:deletable="true" height="170rpx" :max-count="1" @on-list-change="onListChange">
 			</u-upload>
 		</view>
@@ -197,7 +197,7 @@
 				showDeliveryList:false,
 				deliveryList:[],
 				/* 快递单号 */
-				action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
+				action: '/api/v1/Common/fileUploader',
 				header:{'Authorization':'Bearer '+ this.http.getToken()},
 				// 预置上传列表
 				fileList: [],

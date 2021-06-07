@@ -59,7 +59,10 @@
     "pages/mine/helpCenter/detail",
     "pages/home/imgDetail/imgDetail",
     "pages/home/queryManagement/storeList/storeList",
-    "pages/login/register"
+    "pages/login/register",
+    "pages/login/agreement",
+    "pages/mine/edition/edition",
+    "pages/mine/edition/detail"
   ],
   "subPackages": [],
   "window": {

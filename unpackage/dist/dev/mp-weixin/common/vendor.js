@@ -2011,15 +2011,23 @@ function normalizeComponent (
                                                                                                       * 常用方法封装 请求，文件上传等
                                                                                                       * @author echo. 
                                                                                                       **/
-
+/*
+                                                                                                          	各个wx小程序的appid
+                                                                                                          	奢趣：wx6e19e615bf2433a5
+                                                                                                          			接口地址：https://wx.searchfun.com.cn；
+                                                                                                          			资源地址：https://oss.searchfun.com.cn/
+                                                                                                          	木鱼：wxc777150bd966963b
+                                                                                                          			接口地址：https://wx.muyushepin.com；
+                                                                                                          			资源地址：https://oss.muyushepin.com/
+                                                                                                          */
 var tui = {
   //接口地址
   interfaceUrl: function interfaceUrl() {
-    return 'https://wx.searchfun.com.cn';
+    return 'https://wx.muyushepin.com';
   },
   //资源地址
   resourceUrl: function resourceUrl() {
-    return 'https://oss.searchfun.com.cn/';
+    return 'https://oss.muyushepin.com/';
   },
   toast: function toast(text, duration, success) {
     uni.showToast({
@@ -2116,10 +2124,6 @@ var tui = {
           if (loadding && !hideLoading) {
             uni.hideLoading();
           }
-          /* if(res.data.code==2000){
-            	tui.toast(res.data.msg);
-            	setTimeout(()=>{uni.navigateBack({delta: 1});},1000)
-            } */
           if (res.data.code == 401) {
             uni.clearStorageSync();
             tui.modal("", "登录信息已失效，请重新登录", false, function () {
@@ -10822,7 +10826,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 468:
+/***/ 488:
 /*!********************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************************/
@@ -10882,7 +10886,7 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
-/***/ 663:
+/***/ 683:
 /*!*********************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/province.js ***!
   \*********************************************************************************************/
@@ -10894,7 +10898,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 664:
+/***/ 684:
 /*!*****************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/city.js ***!
   \*****************************************************************************************/
@@ -10906,7 +10910,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 665:
+/***/ 685:
 /*!*****************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/area.js ***!
   \*****************************************************************************************/
@@ -10918,7 +10922,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 769:
+/***/ 789:
 /*!****************************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/async-validator.js ***!
   \****************************************************************************************************/
@@ -12281,11 +12285,11 @@ Schema.warning = warning;
 Schema.messages = messages;var _default =
 
 Schema;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 770)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 790)))
 
 /***/ }),
 
-/***/ 770:
+/***/ 790:
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -12316,7 +12320,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 771);
+        if (!path) path = __webpack_require__(/*! path */ 791);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -12330,7 +12334,7 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 771:
+/***/ 791:
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
@@ -12640,7 +12644,7 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 770)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 790)))
 
 /***/ })
 

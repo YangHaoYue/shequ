@@ -2,7 +2,7 @@
 	<view class="wrap">
 		<u-form :model="model" :rules="rules" ref="uForm" :errorType="errorType">
 			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺logo" prop="photo" label-width="150">
-				<u-upload width="160" ref="uUpload" height="160" :action="action" @on-list-change="onLogoChange" :max-count="1"></u-upload>
+				<u-upload width="160" ref="uUpload" height="160" :action="http.interfaceUrl()+action" @on-list-change="onLogoChange" :max-count="1"></u-upload>
 			</u-form-item>
 			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺名称" prop="storeName">
 				<u-input type="text" :border="border" placeholder="请填写店铺名称" v-model="model.storeName" />
@@ -52,7 +52,7 @@ export default {
 		let that = this;
 		return {
 			labelStyle:{fontSize: '28rpx'},
-			action: 'https://wx.searchfun.com.cn/api/v1/Common/fileUploader',
+			action: '/api/v1/Common/fileUploader',
 			/* header:{'Authorization':'Bearer '+ this.http.getToken()}, */
 			model: {
 				logo:'',

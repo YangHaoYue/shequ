@@ -16,10 +16,17 @@
 				</view>
 			</view>
 			<view class="tui-btn-box"><u-button type="warning" :loading="islogin" :disabled="disabled" :shadow="true" @click="login">登录</u-button></view>
-			<navigator open-type="navigate" hover-class="none" url="/pages/login/register">
+			<!-- 只有奢趣拥有入驻功能 -->
+			<!-- <navigator open-type="navigate" hover-class="none" url="/pages/login/register">
 				<view class="text-white u-flex u-m-t-50 u-row-center u-font-30">我是店主，想要申请入驻<u-icon name="arrow-right" color="#eeeeee"></u-icon></view>
-			</navigator>
+			</navigator> -->
 		</view>
+		<!-- 只有奢趣拥有协议功能 -->
+		<!-- <view class="u-abso u-flex u-row-center u-col-bottom u-p-10 text-white" style="bottom: 20rpx;right: 0;left: 0;">
+			登陆即表示同意
+			<navigator style="text-decoration: underline;" hover-class="none" animation-type="navigateTo" url="/pages/login/agreement?type=0">《用户服务协议》</navigator>及
+			<navigator style="text-decoration: underline;" hover-class="none" animation-type="navigateTo" url="/pages/login/agreement?type=1">《隐私协议》</navigator>
+		</view> -->
 		
 		<u-modal v-model="show" title="请求授权" content="请授权用户信息,拒绝授权可能无法接收到每日营收数据!" confirm-color="#FE8702">
 			<button open-type="getUserInfo" class="u-reset-button" slot="confirm-button" @getuserinfo="getUserInfo">授权</button>
