@@ -9,7 +9,7 @@
 			</view>
 			<view class="u-p-20 u-p-t-30 u-p-b-30 solid u-flex u-flex-wrap u-row-left">
 				<block v-for="(son,i) in item.goods" :key="i">
-					<u-image class="u-m-r-10" :src="http.resourceUrl()+son.good_pic" width="159rpx" height="159rpx"></u-image>
+					<u-image class="u-m-r-10" :src="http.resourceUrl()+son.good_pic+'?x-oss-process=sm_200X200'" width="159rpx" height="159rpx"></u-image>
 				</block>
 			</view>
 			<view class="u-p-20 u-flex u-row-between u-font-12 solid-bottom">

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="bg-white u-p-20 u-flex u-col-top solid-bottom">
-			<u-image :src="http.resourceUrl()+goodDetail.img" width="226rpx" height="226rpx" ></u-image>
+			<u-image :src="http.resourceUrl()+goodDetail.img+'?x-oss-process=sm_200X200'" width="226rpx" height="226rpx" ></u-image>
 			<view class="u-m-l-20">
 				<view class="u-line-3 text-bold text-black u-font-30">{{goodDetail.name}}</view>
 				<view class="u-line-1 text-gray u-font-22 u-m-t-20">{{goodDetail.code}}<text class="u-m-l-10">{{goodDetail.storeName}}</text></view>

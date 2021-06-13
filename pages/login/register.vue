@@ -35,7 +35,7 @@
 				<u-input type="text" :border="border" placeholder="请填写其他付款方式" v-model="model.other" v-if="model.payType=='其他'" />
 			</u-form-item>
 			<u-form-item :label-style="labelStyle" :label-position="labelPosition" label="转账截图" prop="photo" label-width="150">
-				<u-upload width="160" height="160" :action="action" :header="header" :max-count="1" @on-list-change="onPayChange"></u-upload>
+				<u-upload width="160" height="160" :action="http.interfaceUrl()+action" :header="header" :max-count="1" @on-list-change="onPayChange"></u-upload>
 			</u-form-item>
 		</u-form>
 		<u-button @click="submit">提交</u-button>
@@ -53,7 +53,7 @@ export default {
 		return {
 			labelStyle:{fontSize: '28rpx'},
 			action: '/api/v1/Common/fileUploader',
-			/* header:{'Authorization':'Bearer '+ this.http.getToken()}, */
+			header:{'Authorization':'Bearer '+ this.http.getToken()},
 			model: {
 				logo:'',
 				storeName:'',

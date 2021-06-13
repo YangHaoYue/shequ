@@ -9,7 +9,7 @@
 		<block v-for="(item,i) in good_lists" :key="i">
 			<navigator :url="`/pages/home/queryManagement/goodDetail/goodDetail?id=${item.id}`" open-type="navigate" hover-class="none">
 				<view class="bg-white u-p-30 u-flex u-col-top solid-bottom">
-					<u-image :src="http.resourceUrl()+item.pic" width="159rpx" height="159rpx" ></u-image>
+					<u-image :src="http.resourceUrl()+item.pic+'?x-oss-process=sm_200X200'" width="159rpx" height="159rpx" ></u-image>
 					<view class="u-m-l-20" style="width: 511rpx;">
 						<view class="u-line-1 text-bold text-black u-font-30">{{item.title}}</view>
 						<view class="u-line-1 text-gray u-font-22 u-m-t-20">{{item.store_no}}</view>
@@ -28,7 +28,7 @@
 		<view class="u-p-30 solid-bottom bg-white" v-if="img_delivery">
 			<view class="u-flex u-m-b-10 u-flex-1" style="color: #A5A5A5;">快递面单照</view>
 			<view class="u-flex u-flex-wrap u-row-left">
-				<u-image show-menu-by-longpress @click="showImgDelivery" :src="http.resourceUrl()+img_delivery" height="159rpx" width="159rpx" class="u-m-b-15 u-m-r-10"></u-image>
+				<u-image show-menu-by-longpress @click="showImgDelivery" :src="http.resourceUrl()+img_delivery+'?x-oss-process=sm_200X200'" height="159rpx" width="159rpx" class="u-m-b-15 u-m-r-10"></u-image>
 			</view>
 		</view>
 		<block v-for="(item,index) in priceList" :key="index">

@@ -69,7 +69,7 @@
 				<u-gap height="20" bg-color="#f5f5f5"></u-gap>
 				<u-checkbox class="u-flex u-m-l-20" v-model="item.checked" :name="item.id" shape="circle" active-color="#FE8702">
 					<view class="bg-white u-p-20 u-flex u-col-top" style="line-height: 1.2;">
-						<u-image :src="http.resourceUrl()+item.pic" width="199rpx" height="199rpx" ></u-image>
+						<u-image :src="http.resourceUrl()+item.pic+'?x-oss-process=sm_200X200'" width="199rpx" height="199rpx" ></u-image>
 						<view class="u-m-l-20 flex" style="flex-direction: column;width: 430rpx;">
 							<view class="u-line-1 text-bold text-black u-font-30 u-m-b-10">{{item.title}}</view>
 							<view class="u-line-1 text-gray u-font-22 u-m-b-10">{{item.store_no}}</view>
@@ -183,7 +183,7 @@
 			this.page = ++ this.page;
 			setTimeout(() => {
 				this.getInfo()
-			}, 1000)
+			}, 100)
 		},
 		data() {
 			return {

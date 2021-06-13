@@ -1,9 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "u-gap": "/uview-ui/components/u-gap/u-gap",
-    "u-image": "/uview-ui/components/u-image/u-image",
-    "u-tag": "/uview-ui/components/u-tag/u-tag",
-    "u-button": "/uview-ui/components/u-button/u-button"
-  }
-}

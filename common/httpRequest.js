@@ -5,20 +5,23 @@
 /*
 	各个wx小程序的appid
 	奢趣：wx6e19e615bf2433a5
-			接口地址：https://wx.searchfun.com.cn；
+			接口地址：https://wx.searchfun.com.cn
 			资源地址：https://oss.searchfun.com.cn/
 	木鱼：wxc777150bd966963b
-			接口地址：https://wx.muyushepin.com；
+			接口地址：https://wx.muyushepin.com
 			资源地址：https://oss.muyushepin.com/
+	吉嘉人：wxb229c38025f64684
+			接口地址：https://wx.jijiaren.top
+			资源地址：https://oss.jijiaren.top/
 */
 const tui = {
 	//接口地址
 	interfaceUrl: function() {
-		return 'https://wx.muyushepin.com'
+		return 'https://wx.jijiaren.top'
 	},
 	//资源地址
 	resourceUrl:function(){
-		return 'https://oss.muyushepin.com/'
+		return 'https://oss.jijiaren.top/'
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({

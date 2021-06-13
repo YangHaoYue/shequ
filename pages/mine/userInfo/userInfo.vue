@@ -59,7 +59,7 @@
 			<u-switch v-model="checked2" active-color="#FE8702" active-value="1" inactive-value="0" size="40"></u-switch>
 		</view>
 		<view class="bg-white u-p-20 u-flex u-row-between solid-bottom">
-			<view>是否展示给其他商家</view>
+			<view>是否向其他店铺展示商品</view>
 			<u-switch v-model="checked3" active-color="#FE8702" active-value="1" inactive-value="0" size="40"></u-switch>
 		</view>
 		
@@ -102,7 +102,7 @@
 						this.storeInfo=res.data;
 						this.checked1=res.data.get_on==1?true:false;
 						this.checked2=res.data.deduct_on==1?true:false;
-						this.checked3=res.data.deduct_on==1?true:false;
+						this.checked3=res.data.is_show==0?true:false;
 						this.typeList.map(v=>{
 							if(v.value==res.data.store_type)
 							this.$set(this.storeInfo,'storeType',v.label)
@@ -152,7 +152,8 @@
 					integral_deduction_per_yuan:this.storeInfo.integral_deduction_per_yuan,
 					integral_per_yuan:this.storeInfo.integral_per_yuan,
 					get_on:this.checked1?1:0,
-					deduct_on:this.checked2?1:0
+					deduct_on:this.checked2?1:0,
+					is_show:this.checked3?0:1
 				}).then((res)=>{
 					if(res.code==1000){
 						this.$refs.uToast.show({

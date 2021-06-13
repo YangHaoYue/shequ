@@ -126,7 +126,7 @@
 			this.page = ++ this.page;
 			setTimeout(() => {
 				this.getInfo();
-			}, 500)
+			}, 100)
 		},
 		onPullDownRefresh() {
 			this.clearGoodList();

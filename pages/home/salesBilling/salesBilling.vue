@@ -41,7 +41,7 @@
 				<view class="cu-item" style="height: 100% !important;" :class="modalName=='move-box-'+ index?'move-cur':''" v-for="(item,index) in goodsList" :key="index" v-if="goodsList.length!=0"
 				 @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd" :data-target="'move-box-' + index">
 					<view class="bg-white u-p-t-20 u-p-b-20 u-flex u-col-top solid-bottom">
-						<u-image :src="http.resourceUrl()+item.pic" width="159rpx" height="159rpx" ></u-image>
+						<u-image :src="http.resourceUrl()+item.pic+'?x-oss-process=sm_200X200'" width="159rpx" height="159rpx" ></u-image>
 						<view class="u-m-l-20 flex" style="flex-direction: column;width: 510rpx;">
 							<view class="u-line-1 text-bold text-black u-font-30 u-m-b-20">{{item.title}}</view>
 							<view class="u-line-1 text-gray u-font-22" style="margin-bottom: auto;">{{item.store_no}} / {{item.date_in}}</view>

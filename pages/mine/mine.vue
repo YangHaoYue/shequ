@@ -6,7 +6,10 @@
 		<!-- 头像 -->
 		<navigator class="u-flex u-p-t-20 u-p-b-20 u-p-l-20 mine_bg" hover-class='none' url="/pages/mine/userInfo/userInfo" navigateTo>
 			<u-avatar :src="avaterUrl" size="124"></u-avatar>
-			<text class="nickname">{{nickname}}</text>
+			<view>
+				<view class="nickname">{{nickname}}</view>
+				<view class="nickname" style="font-size: 30rpx;">{{expire_at}}</view>
+			</view>
 		</navigator>
 		<!-- 列表 -->
 		<u-cell-group>
@@ -35,6 +38,7 @@
 			return {
 				avaterUrl: '',
 				nickname:'',
+				expire_at:'',
 				cellList:[{
 					name:'客户管理',
 					img:'../../../static/uiImg/khglicon.png',
@@ -71,13 +75,13 @@
 					url:'/pages/mine/editPwd/editPwd',
 					permission:''
 				},
-				//奢趣独有功能
-				/* {
+				//奢趣/吉嘉人独有功能
+				{
 					name:'版本说明',
 					img:'../../../static/uiImg/bbsm.png',
 					url:'/pages/mine/edition/edition',
 					permission:''
-				} */
+				}
 				],
 				Permissions:''
 			}
@@ -88,6 +92,7 @@
 					if(res.code==1000){
 						this.avaterUrl=this.http.resourceUrl()+res.data.logo;
 						this.nickname=res.data.manager_name+'('+res.data.store_name+')'
+						this.expire_at=res.data.expire_at
 					}
 				})
 			},

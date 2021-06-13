@@ -41,6 +41,13 @@
 				<u-switch v-model="item.value" active-color="#FE8702" active-value="1" inactive-value="0" size="40"></u-switch>
 			</view>
 		</block>
+		<block v-else-if="item.type=='timePicker'">
+			<view :class="formPadding" class="bg-white u-flex u-row-between solid-bottom" @click="showTime=true">
+				<view class="u-flex u-m-b-10 u-m-r-20">{{item.name}}<text class="u-type-error" v-if="item.isImport">*</text></view>
+				<view>{{item.value}}</view>
+			</view>
+			<u-picker mode="time" v-model="showTime" start-year="2021" :default-time="item.value" :params="params" confirm-color="#FE8702" @confirm="timeChange"></u-picker>
+		</block>
 	</view>
 </template>
 
@@ -58,13 +65,27 @@
 		data() {
 			return {
 				showDate: false,
-				showPayList:false
+				showPayList:false,
+				showTime:false,
+				params: {
+					year: true,
+					month: true,
+					day: true,
+					hour: true,
+					minute: true,
+					second: true
+				},
 			};
 		},
 		methods:{
 			/* 日期 */
 			dateChange(e){
 				this.$emit('change',{value:e.result,index:this.index})
+			},
+			/* 时间 */
+			timeChange(e){
+				console.log(e);
+				this.$emit('timeChange',{value:e.year+'-'+e.month+'-'+e.day+'  '+e.hour+':'+e.minute+':'+e.second,index:this.index})
 			},
 			/* 支付 */
 			choosePay(e){

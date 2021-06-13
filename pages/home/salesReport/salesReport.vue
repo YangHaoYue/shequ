@@ -318,7 +318,7 @@
 				this.page = ++ this.page;
 				setTimeout(() => {
 					this.getInfo();
-				}, 500)
+				}, 50)
 			},
 			/* 初始化数据 */
 			clearGoodList(){

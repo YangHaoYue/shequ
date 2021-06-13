@@ -14,7 +14,7 @@
 		<block v-for="(item,i) in list" :key="i">
 			<u-gap height="10" bg-color="#F5F5F5"></u-gap>
 			<view class="bg-white u-p-20 u-flex u-col-top" :class="index==0?'':'solid-top'" @click="navigateTo(item.good_id)">
-				<u-image :src="http.resourceUrl()+item.pic" width="199rpx" height="199rpx" :fade="false" :lazy-load="false" mode="scaleToFill"></u-image>
+				<u-image :src="http.resourceUrl()+item.pic+'?x-oss-process=sm_200X200'" width="199rpx" height="199rpx" :fade="false" :lazy-load="false" mode="scaleToFill"></u-image>
 				<view class="u-m-l-20 flex" style="flex-direction: column;width: 490rpx;">
 					<view class="u-line-1 text-bold text-black u-font-30 u-m-b-10">{{item.title||item.good_name}}</view>
 					<view class="u-line-1 text-gray u-font-22 u-m-b-10">{{item.store_no}}</view>
@@ -63,7 +63,7 @@
 			this.page = ++ this.page;
 			setTimeout(() => {
 				this.getInfo()
-			}, 1000)
+			}, 100)
 		},
 		data() {
 			return {
@@ -103,7 +103,8 @@
 			getInfo(){
 				this.http.get('/api/v1/StockCheck/getStockCheckDetailLists',{
 					stock_check_id:this.stock_check_id,
-					type:this.navList.currentIndex
+					type:this.navList.currentIndex,
+					page:this.page
 				},true).then((res)=>{
 					if(res.code==1000){
 						if(this.list.length==0){

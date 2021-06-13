@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="bg-white u-p-20 u-flex u-col-top solid-bottom">
-			<u-image :src="http.resourceUrl()+goodDetail.img" width="226rpx" height="226rpx" ></u-image>
+			<u-image :src="goodDetail.img?http.resourceUrl()+goodDetail.img+'?x-oss-process=sm_200X200':''" :fade="false" width="226rpx" height="226rpx" mode="scaleToFill"></u-image>
 			<view class="u-m-l-20" style="width: 464rpx;">
 				<view class="u-line-3 text-bold text-black u-font-28">{{goodDetail.name}}</view>
 				<view class="u-line-1 text-gray u-font-22 u-m-t-20" @tap="copy(goodDetail.code)">{{goodDetail.code}}<text class="u-m-l-10">{{goodDetail.storeName}}</text></view>
@@ -71,7 +71,7 @@
 				</view>
 				<view class="u-flex u-flex-wrap u-row-left">
 					<block v-for="(item,v) in imgList" :key="v">
-						<u-image @click="showImg(0,v)" show-menu-by-longpress :src="item" height="159rpx" width="159rpx" class="u-m-b-15 u-m-r-10"></u-image>
+						<u-image mode="scaleToFill" @click="showImg(0,v)" :fade="false" show-menu-by-longpress :src="item" height="159rpx" width="159rpx" class="u-m-b-15 u-m-r-10"></u-image>
 					</block>
 				</view>
 			</view>
@@ -83,7 +83,7 @@
 				</view>
 				<view class="u-flex u-flex-wrap u-row-left">
 					<block v-for="(item,s) in scimgList" :key="s">
-						<u-image @click="showImg(1,s)" show-menu-by-longpress :src="item" height="159rpx" width="159rpx" class="u-m-b-15 u-m-r-10"></u-image>
+						<u-image mode="scaleToFill" @click="showImg(1,s)"  :fade="false" show-menu-by-longpress :src="item" height="159rpx" width="159rpx" class="u-m-b-15 u-m-r-10"></u-image>
 					</block>
 				</view>
 			</view>

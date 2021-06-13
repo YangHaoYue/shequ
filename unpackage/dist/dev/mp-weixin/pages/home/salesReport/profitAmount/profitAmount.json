@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "利润数据详情",
-  "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#FE8702",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-    "u-count-to": "/uview-ui/components/u-count-to/u-count-to"
-  }
-}

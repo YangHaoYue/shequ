@@ -58,7 +58,7 @@
 			this.page = ++ this.page;
 			setTimeout(() => {
 				this.getInfo();
-			}, 1000)
+			}, 100)
 		},
 		methods: {
 			getInfo(){

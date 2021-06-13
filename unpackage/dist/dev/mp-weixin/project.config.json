@@ -9,23 +9,19 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxc777150bd966963b",
+  "appid": "wxb229c38025f64684",
   "projectname": "uView-demo",
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "game": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": []
     }
   }
