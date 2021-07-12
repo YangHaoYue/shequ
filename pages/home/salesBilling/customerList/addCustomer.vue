@@ -127,8 +127,8 @@
 				/* 隐私和公共 */
 				showPrivacyList:false,
 				privacyList:[
-					{value: 0,label: '自管客户'},
-					{value: 1,label: '公共客户'},
+					{value: 0,label: '公共客户'},
+					{value: 1,label: '自管客户'},
 				],
 				/* 类型 */
 				showTypeList:false,

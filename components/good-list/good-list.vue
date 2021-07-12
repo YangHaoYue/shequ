@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="bg-white u-p-20 u-flex u-col-top" :class="index==0?'':'solid-top'" @tap="navigateTo">
-			<view style="width: 199rpx;height: 199rpx;background-size: 100% 100%;" :style="'background-image: url('+http.resourceUrl()+item.pic+');'">
+			<view style="width: 199rpx;height: 199rpx;background-size: 100% 100%;" :style="img">
 				<view v-if="item.type_sell===1" class="imageType">已下架</view>
 				<view v-if="item.type_sell===2" class="imageType">已预定</view>
 				<view v-if="item.type_sell===3" class="imageType">已售罄</view>
@@ -38,6 +38,11 @@
 			idType:{
 				type:Boolean,
 				default:false
+			}
+		},
+		data() {
+			return {
+				img:this.item.pic?'background-image: url('+this.http.resourceUrl()+this.item.pic+');':''
 			}
 		},
 		methods:{

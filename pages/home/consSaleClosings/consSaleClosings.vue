@@ -122,10 +122,10 @@
 				this.fromList[0].id=data.item.id;
 				uni.$off('chooseCustomer')
 			});
-			uni.$on('chooseEmployees1',(data)=>{
+			uni.$on('chooseEmployees2',(data)=>{
 				this.fromList[1].value=data.item.name;
 				this.fromList[1].id=data.item.id;
-				uni.$off('chooseEmployees1')
+				uni.$off('chooseEmployees2')
 			});
 			uni.$on('back',()=>{
 				setTimeout(()=>{
@@ -175,7 +175,7 @@
 				/* from表单 */
 				fromList:[
 					{type:'picker',name:'寄卖人',value:'',id:'',url:'/pages/home/salesBilling/customerList/customerList',isImport:false},
-					{type:'picker',name:'入库人',value:'',id:'',url:'/pages/home/goodsInStorage/Employees/Employees?type=1',isImport:false}
+					{type:'picker',name:'入库人',value:'',id:'',url:'/pages/home/goodsInStorage/Employees/Employees?type=2',isImport:false}
 				],
 				
 				/* 列表 */

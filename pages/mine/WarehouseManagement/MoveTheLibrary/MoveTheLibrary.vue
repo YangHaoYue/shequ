@@ -17,7 +17,8 @@
 						<u-row gutter="24" justify="between">
 							<block v-for="(son,j) in item.list" :key="j">
 								<u-col span="4" @click="choose(item,son,v)">
-									<view class="demo-layout u-m-b-10 u-p-20 u-p-l-10 u-p-r-10 u-line-1 u-font-26 u-text-center" :class="item.selected==son.id?'brand-hover':''">{{son.label}}</view>
+									<view class="demo-layout u-m-b-10 u-p-20 u-p-l-10 u-p-r-10 u-line-1 u-font-26 u-text-center"
+									 :class="judge(item.selected,son.id)? 'brand-hover' : '' ">{{son.cate_name||son.brand_name||son.val}}</view>
 								</u-col>
 							</block>
 							<u-col span="4" v-if="item.isBrand">
@@ -30,7 +31,7 @@
 					<u-line color="#F5F5F5"></u-line>
 				</block>
 				<block v-for="(item,k) in fromList" :key="k">
-					<form-list :item="item" :index="k" formPadding="u-p-20"></form-list>
+					<form-list :item="item" :index="k" formPadding="u-p-20" @input="input"></form-list>
 				</block>
 				<card headTitle="入库时间" :headBorderBottom="false" :headTitleWeight="false">
 					<u-row gutter="24" justify="between">
@@ -59,15 +60,15 @@
 			</scroll-view>
 			<!-- 按钮 -->
 			<view class="u-flex u-abso popupUi">
-				<view class="u-flex-1 u-text-center u-p-20 reset" hover-class="popupTouch" @click="reset">重置</view>
-				<view class="u-flex-1 u-text-center u-p-20 msure" hover-class="popupTouch" @click="clearGoodList">确定</view>
+				<view class="u-flex-1 u-text-center u-p-20 reset" hover-class="none" @click="reset">重置</view>
+				<view class="u-flex-1 u-text-center u-p-20 msure" hover-class="none" @click="clearGoodList">确定</view>
 			</view>
 		</u-popup>
 		<!-- 商品列表 -->
 		<u-checkbox-group @change="checkboxGroupChange" shape="circle" active-color="#FE8702">
 			<label v-for="(item,i) in list" :key="i">
 				<u-gap height="20" bg-color="#f5f5f5"></u-gap>
-				<u-checkbox class="u-flex u-m-l-20" v-model="item.checked" :name="item.id" shape="circle" active-color="#FE8702">
+				<u-checkbox class="u-flex u-m-l-20" v-model="item.checked" :name="item.id" shape="circle" active-color="#FE8702" @change="checkboxChange" >
 					<view class="bg-white u-p-20 u-flex u-col-top" style="line-height: 1.2;">
 						<u-image :src="http.resourceUrl()+item.pic+'?x-oss-process=sm_200X200'" width="199rpx" height="199rpx" ></u-image>
 						<view class="u-m-l-20 flex" style="flex-direction: column;width: 430rpx;">
@@ -131,6 +132,16 @@
 			this.getInfo();
 		},
 		onShow() {
+			uni.$on('chooseBrand',(data)=>{
+				var bool=this.popupList[0].list.some(v=>{
+					return v.id === data.item.id
+				})
+				if(!bool){
+					this.popupList[0].list.push(data.item);
+				}
+				this.popupList[0].selected=data.item.id;
+				uni.$off('chooseBrand')
+			});
 			uni.$on('chooseWarehouse',(data)=>{
 				this.fromList[0].value=data.item.store_house_name;
 				this.fromList[0].id=data.item.id
@@ -155,18 +166,22 @@
 		computed: {
 			allNumber() {
 				let total = 0;
-				this.list.forEach((item)=>{
-					if(this.selectedList.indexOf(item.id)!=-1)
-					total+=item.num_now
-				})
+				if(this.selectedList.length>0){
+					this.list.forEach((item)=>{
+						if(this.selectedList.indexOf(item.id)!=-1)
+						total+=item.num_now
+					})
+				}
 				return total 
 			},
 			totalPrice() {
 				let total = 0;
-				this.list.forEach((item)=>{
-					if(this.selectedList.indexOf(item.id)!=-1)
-					total+=item.cost_price*item.num_now
-				})
+				if(this.selectedList.length>0){
+					this.list.forEach((item)=>{
+						if(this.selectedList.indexOf(item.id)!=-1)
+						total+=item.cost_price*item.num_now
+					})
+				}
 				return total.toFixed(2)
 			},
 			isSelectedAll:{
@@ -230,7 +245,8 @@
 					nomore: '实在没有了'
 				},
 				/* 是否全选 */
-				selectedList:[]
+				selectedList:[],
+				goodDataList:[]
 			}
 		},
 		methods: {
@@ -268,7 +284,7 @@
 					time_up:this.popupList[3].selected||2,
 					type_from:this.popupList[4].selected||6,
 					type_condition:this.popupList[5].selected||3,
-					type_sell:this.popupList[6].selected||2,
+					type_sell:this.popupList[6].selected||4,
 					customer_id:this.fromList[0].id,
 					sto_user_id:this.fromList[1].id,
 					recovery_id:this.fromList[2].id,
@@ -291,17 +307,22 @@
 								return this.$set(v,'checked',false)
 							});
 						}else{
-							let dataList=res.data.page_data.good_data.map(v=>{
-								this.$set(v,'checked',false)
-							});
-							this.list=this.list.concat(dataList)
+							let dataList=res.data.page_data.good_data;
+							dataList.map(v=>{
+								return this.$set(v,'checked',false)
+							})
+							dataList.forEach(v=>{
+								this.list.push(v)
+							})
 						}
-						console.log(this.list);
 						if(this.page >= this.last_page) this.status = 'nomore';
 						else this.status = 'loadmore';
 						this.show=false;
 					}
 				})
+			},
+			judge(v1,v2){
+				return v1 === v2;
 			},
 			/* 选择筛选 */
 			choose(item,son,v){
@@ -311,10 +332,11 @@
 					this.popupList[2].list=[];
 					this.popupList[2].selected="";
 				}
-				if(item.selected==son.id||item.selected==son){
+				if(item.selected===son.id){
 					item.selected="";
 				}else{
-					this.$set(item,'selected',son.id||son);
+					this.$set(item,'selected',son.id);
+					console.log(item.selected.toString()||6);
 				}
 			},
 			/* 入库时间选择 */
@@ -328,7 +350,7 @@
 				this.show=false;
 				this.page=1;
 				this.last_page=1;
-				this.goodList=[];
+				this.list=[];
 				this.status='loading';
 				this.getInfo();
 			},
@@ -342,15 +364,38 @@
 					item.value='';
 					item.id='';
 				})
-				this.start='最早时间';
-				this.end='最晚时间';
+				this.start='';
+				this.end='';
 				this.min='';
 				this.max='';
 				this.clearGoodList()
 			},
 			// 选中某个复选框时，由checkbox时触发
 			checkboxGroupChange(e) {
-				this.selectedList=e;
+				/* this.selectedList=e; */
+				console.log(e);
+			},
+			checkboxChange(e) {
+				if(e.value){
+					this.selectedList.push(e.name);
+					this.goodDataList.push(this.list.map(v=>{if(v.id == e.name) return v;})[0])
+				}else{
+					let index = ''
+					this.goodDataList.forEach((v,i)=>{
+						if(v.id == e.name){
+							index = i
+						}
+					})
+					this.goodDataList.splice(index,1)
+					this.selectedList.forEach((v,i)=>{
+						if(v == e.name){
+							index = i
+						}
+					})
+					this.selectedList.splice(index,1)
+				}
+				console.log(this.goodDataList);
+				console.log(e);
 			},
 			doSelectedAll(){
 				this.isSelectedAll ? this.unCheckedAll() :this.checkedAll()
@@ -361,21 +406,26 @@
 					val.checked = true;
 					return val.id;
 				})
+				this.goodDataList = this.list.filter(v=>{
+					return this.selectedList.indexOf(v.id) != -1
+				});
+				console.log(this.goodDataList);
 			},
 			//取消全选
 			unCheckedAll(){
 				this.list.forEach(v=>{
 					v.checked=false;
 				});
-				this.selectedList=[];
+				this.selectedList = [];
+				this.goodDataList = [];
 			},
 			submit(){
 				if(this.selectedList.length==0) return this.http.toast('请选择要移库的商品！');
-				let goodsList=this.list.filter(v=>{
+				let goodsList = this.list.filter(v=>{
 					return this.selectedList.indexOf(v.id) != -1
 				})
 				let data={
-					list:goodsList,
+					list:this.goodDataList,
 					selectedList:this.selectedList,
 					warehouseName:this.warehouseName,
 					store_house_id:this.store_house_id,

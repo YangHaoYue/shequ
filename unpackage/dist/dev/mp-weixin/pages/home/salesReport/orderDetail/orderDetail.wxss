@@ -1,0 +1,15 @@
+
+page{
+	height: 100vh;
+	background-color: #F5F5F5;
+}
+.addTabBtn{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	-webkit-box-shadow: -5px 0px 3px #F5F5F5 ;
+	        box-shadow: -5px 0px 3px #F5F5F5 ;
+}
+

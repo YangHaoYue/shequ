@@ -13,6 +13,9 @@
 	吉嘉人：wxb229c38025f64684
 			接口地址：https://wx.jijiaren.top
 			资源地址：https://oss.jijiaren.top/
+	来来奢侈品管理系统：wx393720670cdedeeb
+			接口地址：https://wx.qianlailai.net
+			资源地址：https://oss.qianlailai.net/
 */
 const tui = {
 	//接口地址

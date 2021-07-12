@@ -2,7 +2,7 @@
 	<view class="wrap">
 		<u-form :model="model" :rules="rules" ref="uForm" :errorType="errorType">
 			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺logo" prop="photo" label-width="150">
-				<u-upload width="160" ref="uUpload" height="160" :action="http.interfaceUrl()+action" @on-list-change="onLogoChange" :max-count="1"></u-upload>
+				<u-upload width="160" ref="uUpload" height="160" :action="http.interfaceUrl()+action" @on-list-change="onLogoChange" :max-count="1" :isImage="true"></u-upload>
 			</u-form-item>
 			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺名称" prop="storeName">
 				<u-input type="text" :border="border" placeholder="请填写店铺名称" v-model="model.storeName" />
@@ -28,14 +28,14 @@
 			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="店铺/工作室地址" prop="address">
 				<u-input type="text" :border="border" placeholder="请填写店铺/工作室地址" v-model="model.address" />
 			</u-form-item>
-			<u-form-item :label-style="labelStyle" :label-position="labelPosition" label="付款方式" prop="payType" label-width="150">
+			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="付款方式" prop="payType" label-width="150">
 				<u-radio-group v-model="radio" @change="radioGroupChange" :width="radioCheckWidth" :wrap="radioCheckWrap">
 					<u-radio shape="circle" v-for="(item, index) in radioList" :key="index" :name="item.name">{{ item.name }}</u-radio>
 				</u-radio-group>
 				<u-input type="text" :border="border" placeholder="请填写其他付款方式" v-model="model.other" v-if="model.payType=='其他'" />
 			</u-form-item>
-			<u-form-item :label-style="labelStyle" :label-position="labelPosition" label="转账截图" prop="photo" label-width="150">
-				<u-upload width="160" height="160" :action="http.interfaceUrl()+action" :header="header" :max-count="1" @on-list-change="onPayChange"></u-upload>
+			<u-form-item :label-style="labelStyle" :required="true" :label-position="labelPosition" label="转账截图" prop="photo" label-width="150">
+				<u-upload width="160" height="160" :action="http.interfaceUrl()+action" :header="header" :max-count="1" @on-list-change="onPayChange" :isImage="true"></u-upload>
 			</u-form-item>
 		</u-form>
 		<u-button @click="submit">提交</u-button>

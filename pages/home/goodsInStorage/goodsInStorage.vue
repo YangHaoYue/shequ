@@ -7,7 +7,7 @@
 				<view class="text-sm text-gray">(默认第一张为商品主图，点击切换主图)</view>
 			</view>
 			<u-upload :before-remove="beforeRemove" ref="uUpload" image-mode="center" :action="http.interfaceUrl()+action" :file-list="fileList" :show-progress="true" :header="header"
-			 :preview-full-image="true" @on-preview="preview" :deletable="true" height="170rpx" :max-count="99" @on-list-change="onListChange">
+			 :preview-full-image="true" @on-preview="preview" :deletable="true" height="170rpx" :max-count="99" @on-list-change="onListChange" imageMode="aspectFit">
 			</u-upload>
 		</view>
 		<!-- 上传隐私图片 -->

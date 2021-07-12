@@ -12,7 +12,7 @@
 			</inventory-list>
 			<view class="u-flex u-row-right u-p-10 solid-top">
 				<u-button class="u-m-r-15" :plain="false" type="info" size="mini" @click="setting(item.id)"><text class="u-p-l-20 u-p-r-20">编辑</text></u-button>
-				<u-button class="u-m-l-15" type="warning" size="mini" @click="delet"><text class="u-p-l-20 u-p-r-20">删除</text></u-button>
+				<u-button class="u-m-l-15" type="warning" size="mini" @click="delet(item.id)"><text class="u-p-l-20 u-p-r-20">删除</text></u-button>
 			</view>
 		</block>
 		<!-- 加载更多 -->
@@ -25,6 +25,8 @@
 		<navigator open-type="navigate" url="/pages/mine/RoleManagement/addRole/addRole" hover-class="none">
 			<view class="saveBtn bg-white solid-top u-p-30 u-text-center">+创建角色</view>
 		</navigator>
+		
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
@@ -77,9 +79,26 @@
 				uni.navigateTo({url: `/pages/mine/RoleManagement/addRole/addRole?role_id=${id}`});
 			},
 			/* 删除 */
-			delet(){
-				this.http.modal('提示','确认要删除该客户客户吗?',true,(e)=>{
-					console.log(e);
+			delet(role_id){
+				this.http.modal('提示','确认要删除该角色吗?',true,(e)=>{
+					this.http.post('/api/v1/Role/deleteRole',{
+						role_id:role_id
+					}).then(res=>{
+						if(res.code == 1000){
+							this.$refs.uToast.show({
+								title:res.msg,
+								type:"success"
+							})
+							setTimeout(()=>{
+								this.getInfo();
+							},1500)
+						}else{
+							this.$refs.uToast.show({
+								title:res.msg,
+								type:'error'
+							})
+						}
+					})
 				},'#FE8702')
 			}
 		}
