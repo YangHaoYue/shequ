@@ -39,7 +39,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.list-cell {
 		display: flex;
 		box-sizing: border-box;

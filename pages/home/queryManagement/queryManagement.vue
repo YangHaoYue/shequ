@@ -128,6 +128,11 @@
 			if(e.store_house_id){
 				this.fromList[0].id=e.store_house_id;
 				this.fromList[0].value=e.store_house_name;
+				if(e.time){
+					let now = new Date();
+					this.start = `${now.getFullYear()}-${now.getMonth() + 1}-01`
+					this.end = `${now.getFullYear()}-${now.getMonth() + 1}-${this.getMonthLastDateFn()}`;
+				}
 			}
 			if(e.customer_id){
 				this.fromList[1].id=e.customer_id;
@@ -434,6 +439,13 @@
 				this.min='';
 				this.max='';
 				this.clearGoodList();
+			},
+			//月份最后一天
+			getMonthLastDateFn(dateStr){
+				let today = new Date()
+				let dateObj = new Date(today.getFullYear(),today.getMonth()+1,0);  //注意：这里传入月份取值范围是1-12
+				let theMonthDay = dateObj.getDate();
+				return theMonthDay;
 			}
 		}
 	}

@@ -3,29 +3,29 @@
  * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
  * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
  */
-.topSearch.data-v-22215410 {
+.topSearch {
   height: 220rpx;
   background-color: #FE8702;
 }
-.popupUi.data-v-22215410 {
+.popupUi {
   bottom: 0;
   width: 100%;
   z-index: 999;
 }
-.popupUi .reset.data-v-22215410 {
+.popupUi .reset {
   background-color: #EEEEEE;
 }
-.popupUi .msure.data-v-22215410 {
+.popupUi .msure {
   color: #FFFFFF;
   background-color: #FE8702;
 }
-.demo-layout.data-v-22215410 {
+.demo-layout {
   height: 70rpx;
   background: #F5F5F5;
   color: #333333;
   border-radius: 5rpx;
 }
-.brand-hover.data-v-22215410 {
+.brand-hover {
   background: #FFFFFF;
   border: solid 2rpx #FE8702;
 }

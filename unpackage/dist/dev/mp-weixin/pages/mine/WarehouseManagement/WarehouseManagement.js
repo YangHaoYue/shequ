@@ -232,20 +232,24 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     inventoryList: inventoryList },
 
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     this.clearGoodList();
   },
-  onBackPress: function onBackPress(options) {
-    if (options.from === 'navigateBack') {
-      return this.clearGoodList();
-    }
+  onShow: function onShow() {var _this = this;
+    uni.$on('whBack', function (data) {
+      _this.clearGoodList();
+      uni.$off('whBack');
+    });
   },
-  onReachBottom: function onReachBottom() {var _this = this;
+  beforeDestroy: function beforeDestroy() {
+    uni.$off('whBack');
+  },
+  onReachBottom: function onReachBottom() {var _this2 = this;
     if (this.page >= this.last_page) return;
     this.status = 'loading';
     this.page = ++this.page;
     setTimeout(function () {
-      _this.getInfo();
+      _this2.getInfo();
     }, 100);
   },
   data: function data() {
@@ -273,7 +277,7 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    getInfo: function getInfo() {var _this2 = this;
+    getInfo: function getInfo() {var _this3 = this;
       this.http.get('/api/v1/StoreHouse/listsPage', {
         stock_num_order: this.screen.list[0].status,
         stock_num_month_order: this.screen.list[1].status,
@@ -281,19 +285,19 @@ __webpack_require__.r(__webpack_exports__);
         page: this.page },
       true).then(function (res) {
         if (res.code == 1000) {
-          if (_this2.list.length == 0) {
-            _this2.list = res.data.page_data.store_house_data.map(function (v) {
-              return _this2._formatList(v);
+          if (_this3.list.length == 0) {
+            _this3.list = res.data.page_data.store_house_data.map(function (v) {
+              return _this3._formatList(v);
             });
-            _this2.last_page = res.data.page_data.last_page;
+            _this3.last_page = res.data.page_data.last_page;
           } else {
             var dataList = res.data.page_data.store_house_data.map(function (v) {
-              return _this2._formatList(v);
+              return _this3._formatList(v);
             });
-            _this2.list = _this2.list.concat(dataList);
+            _this3.list = _this3.list.concat(dataList);
           }
-          if (_this2.page >= _this2.last_page) _this2.status = 'nomore';else
-          _this2.status = 'loadmore';
+          if (_this3.page >= _this3.last_page) _this3.status = 'nomore';else
+          _this3.status = 'loadmore';
         }
       });
     },
@@ -304,7 +308,7 @@ __webpack_require__.r(__webpack_exports__);
         id: e.id,
         message: [
         { title: '库存', value: e.stock_count, url: "/pages/home/queryManagement/queryManagement?store_house_id=".concat(e.id, "&store_house_name=").concat(e.name) },
-        { title: '本月入库', value: e.stock_this_month, url: "/pages/home/queryManagement/queryManagement?store_house_id=".concat(e.id, "&store_house_name=").concat(e.name) },
+        { title: '本月入库', value: e.stock_this_month, url: "/pages/home/queryManagement/queryManagement?store_house_id=".concat(e.id, "&store_house_name=").concat(e.name, "&time=").concat(this.http.isShen()) },
         { title: '总成本', value: e.total_value + '元', url: "/pages/home/queryManagement/queryManagement?store_house_id=".concat(e.id) }],
 
         remark: e.remark };
@@ -356,20 +360,20 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     /* 删除仓库 */
-    delet: function delet(id) {var _this3 = this;
+    delet: function delet(id) {var _this4 = this;
       this.http.modal('提示', '确认要删除此仓库吗?', true, function (e) {
         if (e) {
-          _this3.http.get('/api/v1/StoreHouse/deleteStoHouse', {
+          _this4.http.get('/api/v1/StoreHouse/deleteStoHouse', {
             store_house_id: id }).
           then(function (res) {
             if (res.code == 1000) {
-              _this3.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "success" });
 
-              _this3.clearGoodList();
+              _this4.clearGoodList();
             } else {
-              _this3.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "error" });
 

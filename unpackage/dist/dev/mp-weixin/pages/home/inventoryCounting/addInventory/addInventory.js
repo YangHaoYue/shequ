@@ -151,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -192,6 +192,7 @@ var _default =
             store_house_id: item.id }).
           then(function (res) {
             if (res.code == 1000) {
+              uni.$emit('icBack', true);
               _this2.$refs.uToast.show({
                 title: res.msg,
                 type: "success",
@@ -207,6 +208,7 @@ var _default =
         }
       }, '#FE8702');
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

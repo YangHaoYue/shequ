@@ -112,7 +112,7 @@
 			uni.$on('chooseSeller',(data)=>{
 				this.fromList[1].value=data.item.name;
 				this.fromList[1].id=data.item.id;
-				uni.$off('chooseEmployees1')
+				uni.$off('chooseSeller')
 			});
 			uni.$on('back',(data)=>{
 				setTimeout(()=>{
@@ -120,6 +120,11 @@
 				},2000)
 				uni.$off('back')
 			});
+		},
+		beforeDestroy() {
+			uni.$off('chooseCustomer');
+			uni.$off('chooseSeller');
+			uni.$off('back');
 		},
 		computed: {
 			isShowTab() {
@@ -384,7 +389,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.topSearch{
 		height: 220rpx;
 		background-color: #FE8702;

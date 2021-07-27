@@ -32,6 +32,9 @@
 				uni.$off('chooseEmployees1')
 			});
 		},
+		beforeDestroy() {
+			uni.$off('chooseEmployees1');
+		},
 		data() {
 			return {
 				/* 今天 */

@@ -26,7 +26,9 @@
 			formList
 		},
 		onLoad(e) {
-			this.store_house_id=e.store_house_id;
+			if(e.store_house_id){
+				this.store_house_id = e.store_house_id;
+			}
 			this.StoCreateInfo();
 		},
 		data() {
@@ -35,6 +37,8 @@
 				/* from表单 */
 				list:[
 					{type:'input',name:'仓库名',value:'',id:'',placeholder:'请输入仓库名',inputType:'text',isImport:true},
+					/* 沈哥后台管理系统 */
+					{type:'input',name:'仓库编码',value:'',id:'',placeholder:'请输入仓库编码',inputType:'text',isImport:true},
 					{type:'payPicker',name:'状态',value:'普通仓库',id:0,isImport:true,list:[{value: 0,label: '普通仓库'},{value: 1,label: '隐私仓库'}]},
 				],
 				textAreaValue:'',
@@ -42,23 +46,31 @@
 			}
 		},
 		methods: {
-			getInfo(){
-				this.http.get('')
-			},
 			StoCreateInfo(){
 				this.http.get('/api/v1/StoreHouse/StoCreateInfo',{
 					store_house_id:this.store_house_id
 				},true).then((res)=>{
 					if(res.code==1000){
 						this.info=res.data.info;
-						this.list[0].value=res.data.store_house_data[0].store_house_name;
-						this.list[1].list.forEach(v=>{
+						this.list[0].value=res.data.store_house_data[0]&&res.data.store_house_data[0].store_house_name || '';
+						//沈哥后台管理系统
+						this.list[1].value=res.data.store_house_data[0].storehouse_code;
+						this.list[2].list.forEach(v=>{
 							if(v.value==res.data.store_house_data[0].type_store_house){
+								this.list[2].value=v.label;
+								this.list[2].id=v.value;
+							}
+						})
+						
+						//其他端口 
+						/* this.list[1].list.forEach(v=>{
+							if(v.value==res.data.store_house_data[0]&&res.data.store_house_data[0].type_store_house){
 								this.list[1].value=v.label;
 								this.list[1].id=v.value;
 							}
-						})
-						this.textAreaValue=res.data.store_house_data[0].remark;
+						 }) */
+						
+						this.textAreaValue = res.data.store_house_data[0] && res.data.store_house_data[0].remark;
 					}
 				})
 			},
@@ -77,10 +89,14 @@
 				this.http.get('/api/v1/StoreHouse/createStoreHouse',{
 					store_house_id:this.store_house_id||0,
 					store_house_name:this.list[0].value,
-					type:this.list[1].id,
+					/* 沈哥后台管理系统 */
+					storehouse_code:this.list[1].value, 
+					type:this.list[2].id,
+					/* type:this.list[1].id, */
 					remark:this.textAreaValue
 				}).then((res)=>{
 					if(res.code==1000){
+						uni.$emit('whBack',true)
 						this.$refs.uToast.show({
 							title:res.msg,
 							type:"success",

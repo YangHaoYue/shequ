@@ -104,6 +104,7 @@
 				}
 				this.http.post('/api/v1/Staff/createOrUpdateUser',data).then((res)=>{
 					if(res.code==1000){
+						uni.$emit('emBack',true)
 						this.$refs.uToast.show({
 							title:res.msg,
 							type:"success",

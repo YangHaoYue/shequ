@@ -39,6 +39,7 @@
 							store_house_id:item.id
 						}).then((res)=>{
 							if(res.code==1000){
+								uni.$emit('icBack',true)
 								this.$refs.uToast.show({
 									title:res.msg,
 									type:"success",

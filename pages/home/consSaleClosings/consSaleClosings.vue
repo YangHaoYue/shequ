@@ -134,6 +134,12 @@
 				uni.$off('back')
 			})
 		},
+		beforeDestroy() {
+			uni.$off('chooseBrand')
+			uni.$off('chooseCustomer');
+			uni.$off('chooseEmployees2')
+			uni.$off('back');
+		},
 		onPullDownRefresh() {
 			this.clearGoodList();
 		},
@@ -307,7 +313,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.topSearch{
 		height: 220rpx;
 		background-color: #FE8702;

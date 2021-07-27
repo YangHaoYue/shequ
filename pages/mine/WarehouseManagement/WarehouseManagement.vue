@@ -59,14 +59,18 @@
 		components:{
 			inventoryList
 		},
-		onShow() {
-			this.clearGoodList();
+		onLoad() {
+			this.clearGoodList()
 		},
-		 onBackPress(options) {  
-			if (options.from === 'navigateBack') {  
-				return this.clearGoodList();  
-			}  
-		}, 
+		onShow() {
+			uni.$on('whBack',(data)=>{
+				this.clearGoodList();
+				uni.$off('whBack')
+			})
+		},
+		beforeDestroy () {
+		    uni.$off('whBack');
+		},
 		onReachBottom() {
 			if(this.page >= this.last_page) return ;
 			this.status = 'loading';
@@ -131,7 +135,7 @@
 					id:e.id,
 					message:[
 						{title:'库存',value:e.stock_count,url:`/pages/home/queryManagement/queryManagement?store_house_id=${e.id}&store_house_name=${e.name}`},
-						{title:'本月入库',value:e.stock_this_month,url:`/pages/home/queryManagement/queryManagement?store_house_id=${e.id}&store_house_name=${e.name}`},
+						{title:'本月入库',value:e.stock_this_month,url:`/pages/home/queryManagement/queryManagement?store_house_id=${e.id}&store_house_name=${e.name}&time=${this.http.isShen()}`},
 						{title:'总成本',value:e.total_value+'元',url:`/pages/home/queryManagement/queryManagement?store_house_id=${e.id}`},
 					],
 					remark:e.remark

@@ -2085,15 +2085,22 @@ function normalizeComponent (
                                                                                                           	来来奢侈品管理系统：wx393720670cdedeeb
                                                                                                           			接口地址：https://wx.qianlailai.net
                                                                                                           			资源地址：https://oss.qianlailai.net/
+                                                                                                          	沈哥后台管理系统：wxa70bf56d682e3c53
+                                                                                                          			接口地址：https://wx.dinghaoshepin.com
+                                                                                                          			资源地址：https://oss.dinghaoshepin.com/
                                                                                                           */
 var tui = {
   //接口地址
   interfaceUrl: function interfaceUrl() {
-    return 'https://wx.jijiaren.top';
+    return 'https://wx.dinghaoshepin.com';
   },
   //资源地址
   resourceUrl: function resourceUrl() {
-    return 'https://oss.jijiaren.top/';
+    return 'https://oss.dinghaoshepin.com/';
+  },
+  //沈哥单独每月库存管理
+  isShen: function isShen() {
+    return true;
   },
   toast: function toast(text, duration, success) {
     uni.showToast({
@@ -2319,7 +2326,6 @@ var tui = {
     };
     return fmt;
   } };var _default =
-
 
 tui;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

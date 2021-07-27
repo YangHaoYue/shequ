@@ -62,12 +62,17 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxb229c38025f64684",
+        "appid" : "wxa70bf56d682e3c53",
         "setting" : {
             "urlCheck" : true,
-            "minified" : true
+            "minified" : true,
+            "es6" : true,
+            "checkSiteMap" : false //关闭小程序索引提示
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        // 去掉重复文件
+        "sitemapLocation" : "sitemap.json",
+        "permission" : {}
     },
     "mp-alipay" : {
         "usingComponents" : true

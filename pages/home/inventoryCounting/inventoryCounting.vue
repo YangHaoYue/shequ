@@ -23,8 +23,17 @@
 		components:{
 			inventoryList
 		},
-		onShow() {
+		onLoad() {
 			this.clearGoodList();
+		},
+		onShow() {
+			uni.$on('icBack',(data)=>{
+				console.log('tim');
+				setTimeout(()=>{
+					this.clearGoodList();
+				},1500)
+				uni.$off('icBack')
+			})
 		},
 		onPullDownRefresh() {
 			this.clearGoodList();

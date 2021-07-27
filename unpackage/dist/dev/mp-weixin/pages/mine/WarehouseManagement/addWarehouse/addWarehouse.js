@@ -157,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var formList = function formList() {__webpack_require__.e(/*! require.ensure | components/form-list/form-list */ "components/form-list/form-list").then((function () {return resolve(__webpack_require__(/*! @/components/form-list/form-list.vue */ 617));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var formList = function formList() {__webpack_require__.e(/*! require.ensure | components/form-list/form-list */ "components/form-list/form-list").then((function () {return resolve(__webpack_require__(/*! @/components/form-list/form-list.vue */ 617));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -185,7 +185,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     formList: formList },
 
   onLoad: function onLoad(e) {
-    this.store_house_id = e.store_house_id;
+    if (e.store_house_id) {
+      this.store_house_id = e.store_house_id;
+    }
     this.StoCreateInfo();
   },
   data: function data() {
@@ -194,6 +196,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       /* from表单 */
       list: [
       { type: 'input', name: '仓库名', value: '', id: '', placeholder: '请输入仓库名', inputType: 'text', isImport: true },
+      /* 沈哥后台管理系统 */
+      { type: 'input', name: '仓库编码', value: '', id: '', placeholder: '请输入仓库编码', inputType: 'text', isImport: true },
       { type: 'payPicker', name: '状态', value: '普通仓库', id: 0, isImport: true, list: [{ value: 0, label: '普通仓库' }, { value: 1, label: '隐私仓库' }] }],
 
       textAreaValue: '',
@@ -201,23 +205,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   },
   methods: {
-    getInfo: function getInfo() {
-      this.http.get('');
-    },
     StoCreateInfo: function StoCreateInfo() {var _this = this;
       this.http.get('/api/v1/StoreHouse/StoCreateInfo', {
         store_house_id: this.store_house_id },
       true).then(function (res) {
         if (res.code == 1000) {
           _this.info = res.data.info;
-          _this.list[0].value = res.data.store_house_data[0].store_house_name;
-          _this.list[1].list.forEach(function (v) {
+          _this.list[0].value = res.data.store_house_data[0] && res.data.store_house_data[0].store_house_name || '';
+          //沈哥后台管理系统
+          _this.list[1].value = res.data.store_house_data[0].storehouse_code;
+          _this.list[2].list.forEach(function (v) {
             if (v.value == res.data.store_house_data[0].type_store_house) {
-              _this.list[1].value = v.label;
-              _this.list[1].id = v.value;
+              _this.list[2].value = v.label;
+              _this.list[2].id = v.value;
             }
           });
-          _this.textAreaValue = res.data.store_house_data[0].remark;
+
+          //其他端口 
+          /* this.list[1].list.forEach(v=>{
+          	if(v.value==res.data.store_house_data[0]&&res.data.store_house_data[0].type_store_house){
+          		this.list[1].value=v.label;
+          		this.list[1].id=v.value;
+          	}
+           }) */
+
+          _this.textAreaValue = res.data.store_house_data[0] && res.data.store_house_data[0].remark;
         }
       });
     },
@@ -236,10 +248,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.http.get('/api/v1/StoreHouse/createStoreHouse', {
         store_house_id: this.store_house_id || 0,
         store_house_name: this.list[0].value,
-        type: this.list[1].id,
+        /* 沈哥后台管理系统 */
+        storehouse_code: this.list[1].value,
+        type: this.list[2].id,
+        /* type:this.list[1].id, */
         remark: this.textAreaValue }).
       then(function (res) {
         if (res.code == 1000) {
+          uni.$emit('whBack', true);
           _this2.$refs.uToast.show({
             title: res.msg,
             type: "success",
@@ -253,6 +269,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         }
       });
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

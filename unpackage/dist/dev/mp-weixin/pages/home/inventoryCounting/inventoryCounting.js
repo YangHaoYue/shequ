@@ -185,18 +185,27 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     inventoryList: inventoryList },
 
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     this.clearGoodList();
+  },
+  onShow: function onShow() {var _this = this;
+    uni.$on('icBack', function (data) {
+      console.log('tim');
+      setTimeout(function () {
+        _this.clearGoodList();
+      }, 1500);
+      uni.$off('icBack');
+    });
   },
   onPullDownRefresh: function onPullDownRefresh() {
     this.clearGoodList();
   },
-  onReachBottom: function onReachBottom() {var _this = this;
+  onReachBottom: function onReachBottom() {var _this2 = this;
     if (this.page >= this.last_page) return;
     this.status = 'loading';
     this.page = ++this.page;
     setTimeout(function () {
-      _this.getInfo();
+      _this2.getInfo();
     }, 100);
   },
   data: function data() {
@@ -215,23 +224,23 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    getInfo: function getInfo() {var _this2 = this;
+    getInfo: function getInfo() {var _this3 = this;
       this.http.get('/api/v1/StockCheck/getStockCheckLists', {}, true).then(function (res) {
         if (res.code == 1000) {
-          if (_this2.list.length == 0) {
+          if (_this3.list.length == 0) {
             var listData = res.data.stock_check_data.map(function (v) {
-              return _this2._formatData(v);
+              return _this3._formatData(v);
             });
-            _this2.list = listData;
-            _this2.last_page = res.data.last_page;
+            _this3.list = listData;
+            _this3.last_page = res.data.last_page;
           } else {
             var _listData = res.data.stock_check_data.map(function (v) {
-              return _this2._formatData(v);
+              return _this3._formatData(v);
             });
-            _this2.list = _this2.list.concat(_listData);
+            _this3.list = _this3.list.concat(_listData);
           }
-          if (_this2.page >= _this2.last_page) _this2.status = 'nomore';else
-          _this2.status = 'loadmore';
+          if (_this3.page >= _this3.last_page) _this3.status = 'nomore';else
+          _this3.status = 'loadmore';
         }
       });
     },
@@ -262,18 +271,18 @@ __webpack_require__.r(__webpack_exports__);
       this.getInfo();
       uni.stopPullDownRefresh();
     },
-    end: function end(e) {var _this3 = this;
+    end: function end(e) {var _this4 = this;
       this.http.get('/api/v1/StockCheck/closeCheck', {
         stock_check_id: e.id }).
       then(function (res) {
         if (res.code == 1000) {
-          _this3.$refs.uToast.show({
+          _this4.$refs.uToast.show({
             title: res.msg,
             type: "success" });
 
-          _this3.clearGoodList();
+          _this4.clearGoodList();
         } else {
-          _this3.$refs.uToast.show({
+          _this4.$refs.uToast.show({
             title: res.msg,
             type: "error" });
 

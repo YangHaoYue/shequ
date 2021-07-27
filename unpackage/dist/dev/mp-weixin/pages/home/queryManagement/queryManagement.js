@@ -372,6 +372,11 @@ __webpack_require__.r(__webpack_exports__);
     if (e.store_house_id) {
       this.fromList[0].id = e.store_house_id;
       this.fromList[0].value = e.store_house_name;
+      if (e.time) {
+        var now = new Date();
+        this.start = "".concat(now.getFullYear(), "-").concat(now.getMonth() + 1, "-01");
+        this.end = "".concat(now.getFullYear(), "-").concat(now.getMonth() + 1, "-").concat(this.getMonthLastDateFn());
+      }
     }
     if (e.customer_id) {
       this.fromList[1].id = e.customer_id;
@@ -678,6 +683,13 @@ __webpack_require__.r(__webpack_exports__);
       this.min = '';
       this.max = '';
       this.clearGoodList();
+    },
+    //月份最后一天
+    getMonthLastDateFn: function getMonthLastDateFn(dateStr) {
+      var today = new Date();
+      var dateObj = new Date(today.getFullYear(), today.getMonth() + 1, 0); //注意：这里传入月份取值范围是1-12
+      var theMonthDay = dateObj.getDate();
+      return theMonthDay;
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

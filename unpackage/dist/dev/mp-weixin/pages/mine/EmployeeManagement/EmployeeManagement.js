@@ -225,15 +225,27 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     inventoryList: inventoryList },
 
-  onShow: function onShow() {
+  onLoad: function onLoad() {
     this.clearGoodList();
   },
-  onReachBottom: function onReachBottom() {var _this = this;
+  onShow: function onShow() {var _this = this;
+    uni.$on('emBack', function (data) {
+      console.log('emback');
+      setTimeout(function () {
+        _this.clearGoodList();
+      }, 1500);
+      uni.$off('emBack');
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    uni.$off('emBack');
+  },
+  onReachBottom: function onReachBottom() {var _this2 = this;
     if (this.page >= this.last_page) return;
     this.status = 'loading';
     this.page = ++this.page;
     setTimeout(function () {
-      _this.getInfo();
+      _this2.getInfo();
     }, 100);
   },
   data: function data() {
@@ -261,27 +273,28 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    getInfo: function getInfo() {var _this2 = this;
+    getInfo: function getInfo() {var _this3 = this;
       this.http.get('/api/v1/Staff/listsPage', {
         order_num_order: this.screen.list[0].status,
         rec_order: this.screen.list[1].status,
-        cons_order: this.screen.list[2].status },
+        cons_order: this.screen.list[2].status,
+        page: this.page },
       true).then(function (res) {
         if (res.code == 1000) {
-          if (_this2.list.length == 0) {
+          if (_this3.list.length == 0) {
             var listData = res.data.user_data.map(function (v) {
-              return _this2._formatData(v);
+              return _this3._formatData(v);
             });
-            _this2.list = listData;
-            _this2.last_page = res.data.last_page || 1;
+            _this3.list = listData;
+            _this3.last_page = res.data.last_page || 1;
           } else {
             var _listData = res.data.user_data.map(function (v) {
-              return _this2._formatData(v);
+              return _this3._formatData(v);
             });
-            _this2.list = _this2.list.concat(_listData);
+            _this3.list = _this3.list.concat(_listData);
           }
-          if (_this2.page >= _this2.last_page) _this2.status = 'nomore';else
-          _this2.status = 'loadmore';
+          if (_this3.page >= _this3.last_page) _this3.status = 'nomore';else
+          _this3.status = 'loadmore';
         }
       });
     },
@@ -341,20 +354,20 @@ __webpack_require__.r(__webpack_exports__);
       uni.navigateTo({ url: "/pages/mine/EmployeeManagement/addEmployee/addEmployee?user_id=".concat(id) });
     },
     /* 删除 */
-    delet: function delet(id) {var _this3 = this;
+    delet: function delet(id) {var _this4 = this;
       this.http.modal('提示', '确认要删除该员工吗?', true, function (e) {
         if (e) {
-          _this3.http.post('/api/v1/Staff/deleteUser', {
+          _this4.http.post('/api/v1/Staff/deleteUser', {
             user_id: id },
           true).then(function (res) {
             if (res.code == 1000) {
-              _this3.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "success" });
 
-              _this3.clearGoodList();
+              _this4.clearGoodList();
             } else {
-              _this3.$refs.uToast.show({
+              _this4.$refs.uToast.show({
                 title: res.msg,
                 type: "error" });
 

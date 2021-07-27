@@ -191,6 +191,9 @@ __webpack_require__.r(__webpack_exports__);
       uni.$off('chooseEmployees1');
     });
   },
+  beforeDestroy: function beforeDestroy() {
+    uni.$off('chooseEmployees1');
+  },
   data: function data() {
     return {
       /* 今天 */

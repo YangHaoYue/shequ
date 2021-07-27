@@ -16,15 +16,22 @@
 	来来奢侈品管理系统：wx393720670cdedeeb
 			接口地址：https://wx.qianlailai.net
 			资源地址：https://oss.qianlailai.net/
+	沈哥后台管理系统：wxa70bf56d682e3c53
+			接口地址：https://wx.dinghaoshepin.com
+			资源地址：https://oss.dinghaoshepin.com/
 */
 const tui = {
 	//接口地址
 	interfaceUrl: function() {
-		return 'https://wx.jijiaren.top'
+		return 'https://wx.dinghaoshepin.com'
 	},
 	//资源地址
 	resourceUrl:function(){
-		return 'https://oss.jijiaren.top/'
+		return 'https://oss.dinghaoshepin.com/'
+	},
+	//沈哥单独每月库存管理
+	isShen:function(){
+		return true
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({
@@ -251,5 +258,4 @@ const tui = {
 	    return fmt;
 	}
 }
-
 export default tui

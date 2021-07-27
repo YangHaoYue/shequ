@@ -51,8 +51,20 @@
 		components:{
 			inventoryList
 		},
-		onShow() {
+		onLoad() {
 			this.clearGoodList();
+		},
+		onShow() {
+			uni.$on('emBack',(data)=>{
+				console.log('emback');
+				setTimeout(()=>{
+					this.clearGoodList();
+				},1500)
+				uni.$off('emBack')
+			})
+		},
+		beforeDestroy () {
+		    uni.$off('emBack');
 		},
 		onReachBottom() {
 			if(this.page >= this.last_page) return ;
@@ -91,7 +103,8 @@
 				this.http.get('/api/v1/Staff/listsPage',{
 					order_num_order:this.screen.list[0].status,
 					rec_order:this.screen.list[1].status,
-					cons_order:this.screen.list[2].status
+					cons_order:this.screen.list[2].status,
+					page:this.page
 				},true).then((res)=>{
 					if(res.code==1000){
 						if(this.list.length==0){
