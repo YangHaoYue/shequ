@@ -63,7 +63,9 @@
 		},
 		methods: {
 			getInfo(){
-				this.http.get('/api/v1/StockCheck/getStockCheckLists',{},true).then((res)=>{
+				this.http.get('/api/v1/StockCheck/getStockCheckLists',{
+					page:this.page
+				},true).then((res)=>{
 					if(res.code==1000){
 						if(this.list.length==0){
 							let listData=res.data.stock_check_data.map(v=>{

@@ -163,7 +163,7 @@
 							duration:1000
 						});
 						setTimeout(()=>{
-							this.clearGoodList();
+							/* this.clearGoodList(); */
 							if(this.isUseScan) this.scan();
 						},1000)
 						this.cancel();

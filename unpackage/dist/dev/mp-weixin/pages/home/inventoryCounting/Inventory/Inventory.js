@@ -354,7 +354,7 @@ __webpack_require__.r(__webpack_exports__);
             duration: 1000 });
 
           setTimeout(function () {
-            _this3.clearGoodList();
+            /* this.clearGoodList(); */
             if (_this3.isUseScan) _this3.scan();
           }, 1000);
           _this3.cancel();

@@ -225,7 +225,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getInfo: function getInfo() {var _this3 = this;
-      this.http.get('/api/v1/StockCheck/getStockCheckLists', {}, true).then(function (res) {
+      this.http.get('/api/v1/StockCheck/getStockCheckLists', {
+        page: this.page },
+      true).then(function (res) {
         if (res.code == 1000) {
           if (_this3.list.length == 0) {
             var listData = res.data.stock_check_data.map(function (v) {
