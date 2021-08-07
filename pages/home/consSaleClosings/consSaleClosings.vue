@@ -64,6 +64,9 @@
 						<view class="u-font-28 u-m-l-10">成本价:￥{{item.cost_price}}</view>
 					</view>
 				</good-list>
+				<view class="u-p-20 u-flex u-font-12 solid-bottom" v-if="item.order_at">
+					<view class="text-gray">开单时间：{{item.order_at}}</view>
+				</view>
 				<view class="u-flex u-row-between u-p-10 solid-top" v-if="screen.currentIndex==0">
 					<view class="u-m-l-10">买家:{{item.customer_name}}</view>
 					<view class="u-flex u-row-right">

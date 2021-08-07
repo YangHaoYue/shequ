@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "商品预定",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "form-list": "/components/form-list/form-list",
+    "u-input": "/uview-ui/components/u-input/u-input",
+    "u-toast": "/uview-ui/components/u-toast/u-toast",
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

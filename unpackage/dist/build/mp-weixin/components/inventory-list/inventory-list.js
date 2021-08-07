@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/inventory-list/inventory-list"],{"05a7":function(n,t,u){"use strict";u.r(t);var e=u("4129"),i=u.n(e);for(var o in e)"default"!==o&&function(n){u.d(t,n,(function(){return e[n]}))}(o);t["default"]=i.a},4129:function(n,t,u){"use strict";(function(n){Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var u={props:{item:Object,index:Number,topImg:{type:String,default:"/static/uiImg/wddp.png"},colorchange:Boolean},data:function(){return{}},methods:{end:function(){this.$emit("end",{id:this.item.id})},compare:function(n,t){return n===t},navigateUrl:function(t){n.navigateTo({url:t})}}};t.default=u}).call(this,u("543d")["default"])},5433:function(n,t,u){"use strict";u.d(t,"b",(function(){return i})),u.d(t,"c",(function(){return o})),u.d(t,"a",(function(){return e}));var e={uGap:function(){return u.e("uview-ui/components/u-gap/u-gap").then(u.bind(null,"3be9"))},uImage:function(){return u.e("uview-ui/components/u-image/u-image").then(u.bind(null,"0e5c"))},uTag:function(){return u.e("uview-ui/components/u-tag/u-tag").then(u.bind(null,"5cea"))},uButton:function(){return u.e("uview-ui/components/u-button/u-button").then(u.bind(null,"4d2a"))}},i=function(){var n=this,t=n.$createElement;n._self._c},o=[]},"61cd":function(n,t,u){"use strict";var e=u("f4d5"),i=u.n(e);i.a},f045:function(n,t,u){"use strict";u.r(t);var e=u("5433"),i=u("05a7");for(var o in i)"default"!==o&&function(n){u.d(t,n,(function(){return i[n]}))}(o);u("61cd");var a,r=u("f0c5"),c=Object(r["a"])(i["default"],e["b"],e["c"],!1,null,"030f9689",null,!1,e["a"],a);t["default"]=c.exports},f4d5:function(n,t,u){}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/inventory-list/inventory-list-create-component',
+    {
+        'components/inventory-list/inventory-list-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("f045"))
+        })
+    },
+    [['components/inventory-list/inventory-list-create-component']]
+]);

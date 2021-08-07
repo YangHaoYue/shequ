@@ -2092,15 +2092,15 @@ function normalizeComponent (
 var tui = {
   //接口地址
   interfaceUrl: function interfaceUrl() {
-    return 'https://wx.dinghaoshepin.com';
+    return 'https://wx.qianlailai.net';
   },
   //资源地址
   resourceUrl: function resourceUrl() {
-    return 'https://oss.dinghaoshepin.com/';
+    return 'https://oss.qianlailai.net/';
   },
   //沈哥单独每月库存管理
   isShen: function isShen() {
-    return true;
+    return false;
   },
   toast: function toast(text, duration, success) {
     uni.showToast({
@@ -2325,6 +2325,12 @@ var tui = {
       };
     };
     return fmt;
+  },
+  //获取今天日期
+  getToday: function getToday() {
+    var now = new Date();
+    var today = "".concat(now.getFullYear(), "-").concat(now.getMonth() + 1, "-").concat(now.getDate());
+    return today;
   } };var _default =
 
 tui;exports.default = _default;
@@ -10899,7 +10905,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 488:
+/***/ 490:
 /*!********************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************************/
@@ -10959,7 +10965,7 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
-/***/ 683:
+/***/ 685:
 /*!*********************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/province.js ***!
   \*********************************************************************************************/
@@ -10971,7 +10977,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 684:
+/***/ 686:
 /*!*****************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/city.js ***!
   \*****************************************************************************************/
@@ -10983,7 +10989,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 685:
+/***/ 687:
 /*!*****************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/area.js ***!
   \*****************************************************************************************/
@@ -10995,7 +11001,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 789:
+/***/ 791:
 /*!****************************************************************************************************!*\
   !*** C:/Users/DELL/Documents/HBuilderProjects/uView_default/uview-ui/libs/util/async-validator.js ***!
   \****************************************************************************************************/
@@ -12358,11 +12364,11 @@ Schema.warning = warning;
 Schema.messages = messages;var _default =
 
 Schema;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 790)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/node-libs-browser/mock/process.js */ 792)))
 
 /***/ }),
 
-/***/ 790:
+/***/ 792:
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -12393,7 +12399,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 791);
+        if (!path) path = __webpack_require__(/*! path */ 793);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -12407,7 +12413,7 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 791:
+/***/ 793:
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
@@ -12717,7 +12723,7 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 790)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 792)))
 
 /***/ })
 

@@ -93,17 +93,26 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uIcon: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 500))
+    },
     inventoryList: function() {
-      return __webpack_require__.e(/*! import() | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then(__webpack_require__.bind(null, /*! @/components/inventory-list/inventory-list.vue */ 749))
+      return __webpack_require__.e(/*! import() | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then(__webpack_require__.bind(null, /*! @/components/inventory-list/inventory-list.vue */ 751))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 643))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 645))
     },
     uMask: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 650))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 652))
     },
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 512))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 514))
+    },
+    uCalendar: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-calendar/u-calendar */ "uview-ui/components/u-calendar/u-calendar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-calendar/u-calendar.vue */ 666))
+    },
+    uSelect: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-select/u-select */ "uview-ui/components/u-select/u-select").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-select/u-select.vue */ 659))
     }
   }
 } catch (e) {
@@ -127,6 +136,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      _vm.showStoreList = true
+    }
+
+    _vm.e1 = function($event) {
+      _vm.showDate = true
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -160,7 +178,29 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var inventoryList = function inventoryList() {__webpack_require__.e(/*! require.ensure | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then((function () {return resolve(__webpack_require__(/*! @/components/inventory-list/inventory-list.vue */ 749));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var inventoryList = function inventoryList() {__webpack_require__.e(/*! require.ensure | components/inventory-list/inventory-list */ "components/inventory-list/inventory-list").then((function () {return resolve(__webpack_require__(/*! @/components/inventory-list/inventory-list.vue */ 751));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -186,6 +226,9 @@ __webpack_require__.r(__webpack_exports__);
     inventoryList: inventoryList },
 
   onLoad: function onLoad() {
+    this.start = this.http.getToday();
+    this.end = this.http.getToday();
+    this.getStoHouseLists();
     this.clearGoodList();
   },
   onShow: function onShow() {var _this = this;
@@ -210,6 +253,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      /* 排序 */
+      storeName: '全部仓库',
+      showStoreList: false,
+      storeId: 0,
+      storeList: [
+      { id: 0, store_house_name: "全部仓库" }],
+
+      //显示日期
+      showDate: false,
+      start: '',
+      end: '',
+
       page: 1,
       last_page: '',
       list: [],
@@ -226,6 +281,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getInfo: function getInfo() {var _this3 = this;
       this.http.get('/api/v1/StockCheck/getStockCheckLists', {
+        store_house_id: this.storeId,
+        date_min: this.start,
+        date_max: this.end,
         page: this.page },
       true).then(function (res) {
         if (res.code == 1000) {
@@ -246,6 +304,21 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    getStoHouseLists: function getStoHouseLists() {var _this4 = this;
+      this.http.get('/api/v1/StockCheck/getStoHouseLists', {}, true).then(function (res) {
+        if (res.code == 1000) {
+          res.data.map(function (v) {
+            _this4.storeList.push(v);
+          });
+        }
+      });
+    },
+    //选择仓库
+    chooseStore: function chooseStore(e) {
+      this.storeId = e[0].value;
+      this.storeName = e[0].label;
+      this.clearGoodList();
+    },
     _formatData: function _formatData(e) {
       return {
         warehouseName: e.store_house_name,
@@ -264,6 +337,36 @@ __webpack_require__.r(__webpack_exports__);
     }, navigateUrl: function navigateUrl(Link) {
       uni.navigateTo({ url: Link });
     },
+    debounce: function debounce(index) {
+      this.$u.debounce(this.changeScreen(index), 500);
+    },
+    /* 排序 */
+    changeScreen: function changeScreen(index) {
+      this.status = 'loading'; //设置loadmore，让蒙层mask显示
+      var oldIndex = this.screen.currentIndex;
+      if (oldIndex == -1) {
+        var _newItem = this.screen.list[index];
+        this.screen.currentIndex = index;
+        _newItem.status = -1;
+        this.clearGoodList();
+        return;
+      }
+      var oldItem = this.screen.list[oldIndex];
+      if (oldIndex === index) {
+        oldItem.status = oldItem.status === 1 ? -1 : 1;
+        return this.clearGoodList();
+      }
+      var newItem = this.screen.list[index];
+      oldItem.status = 0;
+      this.screen.currentIndex = index;
+      newItem.status = -1;
+      this.clearGoodList();
+    },
+    dateChange: function dateChange(e) {
+      this.start = e.startDate;
+      this.end = e.endDate;
+      this.clearGoodList();
+    },
     /* 初始化数据 */
     clearGoodList: function clearGoodList() {
       this.page = 1;
@@ -273,23 +376,27 @@ __webpack_require__.r(__webpack_exports__);
       this.getInfo();
       uni.stopPullDownRefresh();
     },
-    end: function end(e) {var _this4 = this;
-      this.http.get('/api/v1/StockCheck/closeCheck', {
-        stock_check_id: e.id }).
-      then(function (res) {
-        if (res.code == 1000) {
-          _this4.$refs.uToast.show({
-            title: res.msg,
-            type: "success" });
+    close: function close(e) {var _this5 = this;
+      this.http.modal('提示', '是否结束本次盘点？', true, function (confirm) {
+        if (confirm) {
+          _this5.http.get('/api/v1/StockCheck/closeCheck', {
+            stock_check_id: e.id }).
+          then(function (res) {
+            if (res.code == 1000) {
+              _this5.$refs.uToast.show({
+                title: res.msg,
+                type: "success" });
 
-          _this4.clearGoodList();
-        } else {
-          _this4.$refs.uToast.show({
-            title: res.msg,
-            type: "error" });
+              _this5.clearGoodList();
+            } else {
+              _this5.$refs.uToast.show({
+                title: res.msg,
+                type: "error" });
 
+            }
+          });
         }
-      });
+      }, '#FE8702');
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

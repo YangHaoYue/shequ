@@ -1,0 +1,26 @@
+{
+  "navigationBarTitleText": "查询管理",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "top-nav": "/components/top-nav/top-nav",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "card": "/components/card/card",
+    "u-row": "/uview-ui/components/u-row/u-row",
+    "u-col": "/uview-ui/components/u-col/u-col",
+    "u-line": "/uview-ui/components/u-line/u-line",
+    "form-list": "/components/form-list/form-list",
+    "good-list": "/components/good-list/good-list",
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "u-empty": "/uview-ui/components/u-empty/u-empty",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "u-mask": "/uview-ui/components/u-mask/u-mask",
+    "u-select": "/uview-ui/components/u-select/u-select",
+    "u-calendar": "/uview-ui/components/u-calendar/u-calendar"
+  }
+}

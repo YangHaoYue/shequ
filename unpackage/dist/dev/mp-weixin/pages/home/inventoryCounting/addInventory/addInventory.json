@@ -4,6 +4,7 @@
   "navigationBarBackgroundColor": "#FE8702",
   "navigationBarTextStyle": "white",
   "usingComponents": {
+    "u-checkbox": "/uview-ui/components/u-checkbox/u-checkbox",
     "u-toast": "/uview-ui/components/u-toast/u-toast"
   }
 }

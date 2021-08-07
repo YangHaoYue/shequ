@@ -96,34 +96,34 @@ var components
 try {
   components = {
     uSticky: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-sticky/u-sticky */ "uview-ui/components/u-sticky/u-sticky").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-sticky/u-sticky.vue */ 730))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-sticky/u-sticky */ "uview-ui/components/u-sticky/u-sticky").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-sticky/u-sticky.vue */ 732))
     },
     uGap: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 629))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-gap/u-gap */ "uview-ui/components/u-gap/u-gap").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-gap/u-gap.vue */ 631))
     },
     uImage: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-image/u-image */ "uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-image/u-image.vue */ 476))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-image/u-image */ "uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-image/u-image.vue */ 478))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 695))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 697))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 491))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 493))
     },
     uModal: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-modal/u-modal */ "uview-ui/components/u-modal/u-modal").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-modal/u-modal.vue */ 505))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-modal/u-modal */ "uview-ui/components/u-modal/u-modal").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-modal/u-modal.vue */ 507))
     },
     uInput: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 483))
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 485))
     },
     uToast: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 512))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-toast/u-toast */ "uview-ui/components/u-toast/u-toast").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-toast/u-toast.vue */ 514))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 643))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 645))
     },
     uMask: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 650))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-mask/u-mask */ "uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-mask/u-mask.vue */ 652))
     }
   }
 } catch (e) {
@@ -189,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var goodList = function goodList() {__webpack_require__.e(/*! require.ensure | components/good-list/good-list */ "components/good-list/good-list").then((function () {return resolve(__webpack_require__(/*! @/components/good-list/good-list.vue */ 622));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var goodList = function goodList() {__webpack_require__.e(/*! require.ensure | components/good-list/good-list */ "components/good-list/good-list").then((function () {return resolve(__webpack_require__(/*! @/components/good-list/good-list.vue */ 624));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -274,6 +274,7 @@ __webpack_require__.r(__webpack_exports__);
       page: 1,
       list: [],
       /* 盘点Modal */
+      isModify: false,
       showModal: false,
       stock_check_detail_id: '',
       good_id: '',
@@ -332,16 +333,25 @@ __webpack_require__.r(__webpack_exports__);
       uni.navigateTo({ url: "/pages/home/queryManagement/goodDetail/goodDetail?id=".concat(good_id) });
     },
     /* 盘点 */
-    showM: function showM(good_id) {
+    showM: function showM(good_id, isModify) {
       this.showModal = true;
       this.good_id = good_id;
+      this.isModify = isModify;
     },
     cancel: function cancel() {
       this.number = 1;
       this.good_id = '';
       this.showModal = false;
     },
-    confirm: function confirm(e) {var _this3 = this;
+    confirm: function confirm(e) {
+      if (!this.isModify) {
+        this.stoManualCheck();
+      } else {
+        this.editCheck();
+      }
+    },
+    /* 盘点 */
+    stoManualCheck: function stoManualCheck() {var _this3 = this;
       this.http.post('/api/v1/StockCheck/stoManualCheck', {
         stock_check_detail_id: this.stock_check_id,
         good_id: this.good_id,
@@ -353,11 +363,10 @@ __webpack_require__.r(__webpack_exports__);
             type: "success",
             duration: 1000 });
 
+          _this3.update(res);
           setTimeout(function () {
-            /* this.clearGoodList(); */
             if (_this3.isUseScan) _this3.scan();
-          }, 1000);
-          _this3.cancel();
+          }, 500);
         } else {
           _this3.$refs.uToast.show({
             title: res.msg,
@@ -367,13 +376,54 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    scan: function scan() {var _this4 = this;
+    /* 修改盘点 */
+    editCheck: function editCheck() {var _this4 = this;
+      this.http.post('/api/v1/StockCheck/editCheck', {
+        stock_check_detail_id: this.good_id,
+        num: Number(this.number) }).
+      then(function (res) {
+        if (res.code == 1000) {
+          _this4.$refs.uToast.show({
+            title: res.msg,
+            type: "success",
+            duration: 1000 });
+
+          _this4.update(res);
+        } else {
+          _this4.$refs.uToast.show({
+            title: res.msg,
+            type: "error" });
+
+          _this4.cancel();
+        }
+      });
+    },
+    update: function update(res) {var _this5 = this;
+      this.navList.list[0].value = res.data.top.num_should;
+      this.navList.list[1].value = res.data.top.num_checked;
+      this.navList.list[2].value = res.data.top.num_win;
+      this.navList.list[3].value = res.data.top.num_lose;
+      this.list.map(function (v) {
+        if (!_this5.isModify) {
+          if (v.good_id == _this5.good_id) {
+            console.log('1');
+            _this5.$set(v, 'num_check', _this5.number);
+          }
+        } else {
+          if (v.id == _this5.good_id) {
+            console.log('1');
+            _this5.$set(v, 'num_check', _this5.number);
+          }
+        }
+      });
+    },
+    scan: function scan() {var _this6 = this;
       uni.scanCode({
         onlyFromCamera: true,
         success: function success(res) {
           console.log(res);
-          _this4.isUseScan = true;
-          _this4.showM(res.result);
+          _this6.isUseScan = true;
+          _this6.showM(res.result, false);
           // this.http.get('/api/v1/StockCheck/stoCheck',{
           // 	stock_check_id:res.stock_check_id,
           // 	good_id:res.good_id,
@@ -393,7 +443,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         fail: function fail(ref) {
           console.log(ref);
-          _this4.isUseScan = false;
+          _this6.isUseScan = false;
         } });
 
     } } };exports.default = _default;

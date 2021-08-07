@@ -286,8 +286,8 @@ radio.orange[checked] .wx-radio-input,
 switch.orange.checked .uni-switch-input,
 checkbox.orange.checked .uni-checkbox-input,
 radio.orange.checked .uni-radio-input {
-	background-color: #f37b1d !important;
-	border-color: #f37b1d !important;
+	background-color: #FE8702 !important;
+	border-color: #FE8702 !important;
 	color: #ffffff !important;
 }
 switch.yellow[checked] .wx-switch-input,
@@ -3238,7 +3238,7 @@ scroll-view.cu-steps .cu-item {
 	color: #ffffff;
 }
 .bg-orange {
-	background-color: #f37b1d;
+	background-color: #FE8702;
 	color: #ffffff;
 }
 .bg-yellow {

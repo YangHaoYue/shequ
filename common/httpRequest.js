@@ -23,15 +23,15 @@
 const tui = {
 	//接口地址
 	interfaceUrl: function() {
-		return 'https://wx.dinghaoshepin.com'
+		return 'https://wx.qianlailai.net'
 	},
 	//资源地址
 	resourceUrl:function(){
-		return 'https://oss.dinghaoshepin.com/'
+		return 'https://oss.qianlailai.net/'
 	},
 	//沈哥单独每月库存管理
 	isShen:function(){
-		return true
+		return false
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({
@@ -256,6 +256,12 @@ const tui = {
 	        };
 	    };
 	    return fmt;
+	},
+	//获取今天日期
+	getToday:function(){
+		let now = new Date();
+		let today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+		return today
 	}
 }
 export default tui

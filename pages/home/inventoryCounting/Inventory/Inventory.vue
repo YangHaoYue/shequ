@@ -20,9 +20,9 @@
 					<view class="u-line-1 text-gray u-font-22 u-m-b-10">{{item.store_no}}</view>
 					<u-tag :text="item.store_house_name+'/'+item.customer_name+'/'+item.type_from" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
 					<view class="u-flex u-row-between u-m-t-40">
-						<view class="text-bold u-font-24">库存{{item.num_now}}<text v-if="navList.currentIndex!=0">|已盘{{item.num_check}}</text></view>
-						<u-button :type="item.num_check>0?'info':'warning'" size="mini" v-if="navList.currentIndex==0&&can_check" @click="showM(item.good_id)">盘点</u-button>
-						<view v-if="navList.currentIndex!=0&&!can_check"></view>
+						<view class="text-bold u-font-24">库存{{item.num_now}}<text v-if="item.num_check>0">|已盘{{item.num_check}}</text></view>
+						<u-button type="warning" size="mini" v-if="navList.currentIndex==0&&can_check&&item.num_check==0" @click="showM(item.good_id,false)">盘点</u-button>
+						<u-button type="warning" size="mini" v-if="navList.currentIndex==1" @click="showM(item.id,true)">修改盘点</u-button>
 					</view>
 				</view>
 			</view>
@@ -83,6 +83,7 @@
 				page:1,
 				list:[],
 				/* 盘点Modal */
+				isModify:false,
 				showModal:false,
 				stock_check_detail_id:'',
 				good_id:'',
@@ -141,9 +142,10 @@
 				uni.navigateTo({url: `/pages/home/queryManagement/goodDetail/goodDetail?id=${good_id}`});
 			},
 			/* 盘点 */
-			showM(good_id){
+			showM(good_id,isModify){
 				this.showModal=true;
 				this.good_id=good_id;
+				this.isModify = isModify;
 			},
 			cancel(){
 				this.number=1;
@@ -151,6 +153,14 @@
 				this.showModal=false;
 			},
 			confirm(e){
+				if(!this.isModify){
+					this.stoManualCheck()
+				}else{
+					this.editCheck()
+				}
+			},
+			/* 盘点 */
+			stoManualCheck(){
 				this.http.post('/api/v1/StockCheck/stoManualCheck',{
 					stock_check_detail_id:this.stock_check_id,
 					good_id:this.good_id,
@@ -162,11 +172,10 @@
 							type:"success",
 							duration:1000
 						});
+						this.update(res)
 						setTimeout(()=>{
-							/* this.clearGoodList(); */
 							if(this.isUseScan) this.scan();
-						},1000)
-						this.cancel();
+						},500)
 					}else{
 						this.$refs.uToast.show({
 							title:res.msg,
@@ -176,13 +185,54 @@
 					}
 				})
 			},
+			/* 修改盘点 */
+			editCheck(){
+				this.http.post('/api/v1/StockCheck/editCheck',{
+					stock_check_detail_id:this.good_id,
+					num:Number(this.number)
+				}).then((res)=>{
+					if(res.code==1000){
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"success",
+							duration:1000
+						});
+						this.update(res);
+					}else{
+						this.$refs.uToast.show({
+							title:res.msg,
+							type:"error"
+						});
+						this.cancel();
+					}
+				})
+			},
+			update(res){
+				this.navList.list[0].value = res.data.top.num_should;
+				this.navList.list[1].value = res.data.top.num_checked;
+				this.navList.list[2].value = res.data.top.num_win;
+				this.navList.list[3].value = res.data.top.num_lose;
+				this.list.map(v=>{
+					if(!this.isModify){
+						if(v.good_id == this.good_id){
+							console.log('1');
+							this.$set(v,'num_check',this.number)
+						}
+					}else{
+						if(v.id == this.good_id){
+							console.log('1');
+							this.$set(v,'num_check',this.number)
+						}
+					}
+				})
+			},
 			scan(){
 				uni.scanCode({
 					onlyFromCamera:true,
 					success: (res) => {
 						console.log(res);
 						this.isUseScan = true;
-						this.showM(res.result)
+						this.showM(res.result,false)
 						// this.http.get('/api/v1/StockCheck/stoCheck',{
 						// 	stock_check_id:res.stock_check_id,
 						// 	good_id:res.good_id,

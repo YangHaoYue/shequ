@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "员工添加",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#FE8702",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "form-list": "/components/form-list/form-list",
+    "u-toast": "/uview-ui/components/u-toast/u-toast"
+  }
+}
