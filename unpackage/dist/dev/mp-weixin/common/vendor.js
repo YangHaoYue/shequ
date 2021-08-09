@@ -2092,15 +2092,15 @@ function normalizeComponent (
 var tui = {
   //接口地址
   interfaceUrl: function interfaceUrl() {
-    return 'https://wx.qianlailai.net';
+    return 'https://wx.dinghaoshepin.com';
   },
   //资源地址
   resourceUrl: function resourceUrl() {
-    return 'https://oss.qianlailai.net/';
+    return 'https://oss.dinghaoshepin.com/';
   },
   //沈哥单独每月库存管理
   isShen: function isShen() {
-    return false;
+    return true;
   },
   toast: function toast(text, duration, success) {
     uni.showToast({

@@ -186,6 +186,9 @@ __webpack_require__.r(__webpack_exports__);
 
   onLoad: function onLoad(e) {
     if (e.store_house_id) {
+      uni.setNavigationBarTitle({
+        title: '编辑仓库' });
+
       this.store_house_id = e.store_house_id;
     }
     this.StoCreateInfo();
@@ -197,7 +200,7 @@ __webpack_require__.r(__webpack_exports__);
       list: [
       { type: 'input', name: '仓库名', value: '', id: '', placeholder: '请输入仓库名', inputType: 'text', isImport: true },
       /* 沈哥后台管理系统 */
-      // {type:'input',name:'仓库编码',value:'',id:'',placeholder:'请输入仓库编码',inputType:'text',isImport:true},
+      { type: 'input', name: '仓库编码', value: '', id: '', placeholder: '请输入仓库编码', inputType: 'text', isImport: true },
       { type: 'payPicker', name: '状态', value: '普通仓库', id: 0, isImport: true, list: [{ value: 0, label: '普通仓库' }, { value: 1, label: '隐私仓库' }] }],
 
       textAreaValue: '',
@@ -213,21 +216,21 @@ __webpack_require__.r(__webpack_exports__);
           _this.info = res.data.info;
           _this.list[0].value = res.data.store_house_data[0] && res.data.store_house_data[0].store_house_name || '';
           //沈哥后台管理系统
-          // this.list[1].value=res.data.store_house_data[0].storehouse_code;
-          // this.list[2].list.forEach(v=>{
-          // 	if(v.value==res.data.store_house_data[0].type_store_house){
-          // 		this.list[2].value=v.label;
-          // 		this.list[2].id=v.value;
-          // 	}
-          // })
-
-          //其他端口 
-          _this.list[1].list.forEach(function (v) {
-            if (v.value == res.data.store_house_data[0] && res.data.store_house_data[0].type_store_house) {
-              _this.list[1].value = v.label;
-              _this.list[1].id = v.value;
+          _this.list[1].value = res.data.store_house_data[0].storehouse_code;
+          _this.list[2].list.forEach(function (v) {
+            if (v.value == res.data.store_house_data[0].type_store_house) {
+              _this.list[2].value = v.label;
+              _this.list[2].id = v.value;
             }
           });
+
+          //其他端口 
+          // this.list[1].list.forEach(v=>{
+          // 	if(v.value == res.data.store_house_data[0].type_store_house){
+          // 		this.list[1].value=v.label;
+          // 		this.list[1].id=v.value;
+          // 	}
+          //  })
 
           _this.textAreaValue = res.data.store_house_data[0] && res.data.store_house_data[0].remark;
         }
@@ -245,13 +248,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     /* 提交 */
     submit: function submit() {var _this2 = this;
-      this.http.get('/api/v1/StoreHouse/createStoreHouse', {
+      this.http.post('/api/v1/StoreHouse/createStoreHouse', {
         store_house_id: this.store_house_id || 0,
         store_house_name: this.list[0].value,
         /* 沈哥后台管理系统 */
-        // storehouse_code:this.list[1].value, 
-        // type:this.list[2].id,
-        type: this.list[1].id,
+        storehouse_code: this.list[1].value,
+        type: this.list[2].id,
+        // type:this.list[1].id,
         remark: this.textAreaValue }).
       then(function (res) {
         if (res.code == 1000) {

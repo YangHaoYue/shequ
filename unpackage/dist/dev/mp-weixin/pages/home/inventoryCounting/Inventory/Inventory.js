@@ -239,6 +239,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 {
   components: {
     goodList: goodList },
@@ -309,7 +311,12 @@ __webpack_require__.r(__webpack_exports__);
             _this2.navList.list[2].value = res.data.top.top.num_win;
             _this2.navList.list[3].value = res.data.top.top.num_lose;
           } else {
-            _this2.list = _this2.list.concat(res.data.main.stock_check_detail_data);
+            res.data.main.stock_check_detail_data.map(function (k) {
+              var index = _this2.list.findIndex(function (v) {
+                return k.id === v.id;
+              });
+              if (index === -1) _this2.list.push(k);
+            });
           }
           if (_this2.page >= _this2.last_page) _this2.status = 'nomore';else
           _this2.status = 'loadmore';

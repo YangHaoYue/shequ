@@ -29,7 +29,7 @@
 			<input adjust-position="true" class="u-text-right" v-model="customerInfo.id_card" type="number" placeholder="请输入身份证号码" />
 		</view>
 		<view class="bg-white u-p-30 u-flex u-row-between solid-bottom">
-			<view>手机号吗</view>
+			<view>手机号码</view>
 			<input adjust-position="true" class="u-text-right" v-model="customerInfo.mobile" maxlength="11" type="number" placeholder="请输入手机号吗" />
 		</view>
 		<view class="bg-white u-p-30 u-flex u-row-between solid-bottom">

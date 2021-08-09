@@ -19,7 +19,9 @@
 					<view class="u-line-1 text-bold text-black u-font-30 u-m-b-10">{{item.title||item.good_name}}</view>
 					<view class="u-line-1 text-gray u-font-22 u-m-b-10">{{item.store_no}}</view>
 					<u-tag :text="item.store_house_name+'/'+item.customer_name+'/'+item.type_from" type="info" mode="light" :closeable="false" size="mini" color="#A0A0A0" />
-					<view class="u-flex u-row-between u-m-t-40">
+					<!-- 沈哥 -->
+					<view class="text-bold u-font-24 u-m-t-10" style="margin-bottom: auto;" v-if="navList.currentIndex != 0">已盘时间：{{item.updated_at}}</view>
+					<view class="u-flex u-row-between" :class="navList.currentIndex != 0?'':'u-m-t-40'">
 						<view class="text-bold u-font-24">库存{{item.num_now}}<text v-if="item.num_check>0">|已盘{{item.num_check}}</text></view>
 						<u-button type="warning" size="mini" v-if="navList.currentIndex==0&&can_check&&item.num_check==0" @click="showM(item.good_id,false)">盘点</u-button>
 						<u-button type="warning" size="mini" v-if="navList.currentIndex==1" @click="showM(item.id,true)">修改盘点</u-button>
@@ -118,7 +120,12 @@
 							this.navList.list[2].value=res.data.top.top.num_win;
 							this.navList.list[3].value=res.data.top.top.num_lose;
 						}else{
-							this.list=this.list.concat(res.data.main.stock_check_detail_data)
+							res.data.main.stock_check_detail_data.map(k=>{
+								let index = this.list.findIndex(v=>{
+									return k.id === v.id
+								})
+								if(index === -1) this.list.push(k)
+							})
 						}
 						if(this.page >= this.last_page) this.status = 'nomore';
 						else this.status = 'loadmore';
